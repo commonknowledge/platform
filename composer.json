@@ -23,6 +23,7 @@
     "roots/wordpress": "6.2",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.1.0",
+    "wpackagist-plugin/create-block-theme": "^1.8.2",
     "wpackagist-plugin/wordpress-importer": "^0.7.0",
     "wpackagist-plugin/wordfence": "^7.6",
     "wpackagist-plugin/safe-svg": "^2.0"

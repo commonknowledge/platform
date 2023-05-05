@@ -1,0 +1,139 @@
+/*
+Theme Name: Platform London
+Theme URI: 
+Author: Common Knowledge
+Author URI: 
+Description: 
+Requires at least: 5.8
+Tested up to: 6.2
+Requires PHP: 5.7
+Version: 0.0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: platformlondon
+Tags: full-site-editing, 
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Global WordPress Overrides
+ */
+
+ .wp-block-image.size-full>img {
+    @apply !w-full;
+}
+
+/*
+ * Components
+ */
+
+.btn-default {
+    @apply hover:!bg-dark-green hover:!text-white !py-2 !px-4 border border-dark-green rounded-full shadow-md;
+}
+
+/*
+ * Template Custom Styles
+ */
+
+/* Nav */
+.wp-block-pages-list__item__link {
+    @apply btn-default;
+}
+
+/* Query Loop */
+.wp-block-post-template {
+    @apply grid grid-cols-3 gap-4;
+}
+
+.wp-block-post {
+    @apply p-4 flex flex-col shadow-md;
+}
+
+.wp-block-post.category-energy {
+    @apply bg-orange;
+}
+
+.wp-block-post.category-community {
+    @apply bg-yellow;
+}
+
+.wp-block-post.category-culture {
+    @apply bg-light-green;
+}
+
+.wp-block-post.category-economy {
+    @apply bg-teal;
+}
+
+.wp-block-post.category-liberation {
+    @apply bg-pink;
+}
+
+.wp-block-post-title {
+    @apply mb-4 text-4xl uppercase;
+}
+
+.wp-block-post-featured-image {
+    @apply aspect-[4/3] mt-auto min-h-0;
+}
+
+.wp-block-post-featured-image a {
+    @apply h-full;
+}
+
+.wp-block-post-featured-image img {
+    @apply h-full object-cover;
+}
+
+.wp-block-read-more[href] {
+    @apply btn-default ml-auto -mt-5 mr-2 relative z-10;
+}
+
+.wp-block-post-terms a::before {
+    content: "\2022\20";
+}
+
+.wp-block-post.category-energy .wp-block-read-more[href] {
+    @apply bg-orange;
+}
+
+.wp-block-post.category-community .wp-block-read-more[href] {
+    @apply bg-yellow;
+}
+
+.wp-block-post.category-culture .wp-block-read-more[href] {
+    @apply bg-light-green;
+}
+
+.wp-block-post.category-economy .wp-block-read-more[href] {
+    @apply bg-teal;
+}
+
+.wp-block-post.category-liberation .wp-block-read-more[href] {
+    @apply bg-pink;
+}
+
+/* Platform Strapline */
+.platform-strapline .wp-block-heading {
+    @apply relative md:w-[calc(100%+5rem)] z-20;
+}
+
+.platform-strapline .wp-block-image {
+    @apply md:-mt-10 relative z-10;
+}
+
+/* Banner Link */
+.banner-link .wp-block-column:first-child h2 {
+    @apply uppercase;
+}
+
+.banner-link .wp-block-column:nth-child(2) {
+    @apply flex items-center justify-end;
+}
+
+.banner-link .wp-block-column:nth-child(2) a {
+    @apply btn-default;
+}
