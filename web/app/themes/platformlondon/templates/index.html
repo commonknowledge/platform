@@ -4,8 +4,8 @@
 
 <!-- wp:columns {"className":"banner-link"} -->
 <div class="wp-block-columns banner-link"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:heading {"style":{"typography":{"lineHeight":"1"}},"fontSize":"x-large"} -->
-<h2 class="wp-block-heading has-x-large-font-size" style="line-height:1">Highlights</h2>
+<div class="wp-block-column"><!-- wp:heading {"style":{"typography":{"lineHeight":"1"},"spacing":{"margin":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}},"fontSize":"x-large"} -->
+<h2 class="wp-block-heading has-x-large-font-size" style="margin-top:0;margin-right:0;margin-bottom:var(--wp--preset--spacing--30);margin-left:0;line-height:1">Highlights</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -20,10 +20,8 @@
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
-<!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:query {"queryId":20,"query":{"perPage":3,"pages":0,"offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]},"displayLayout":{"type":"list"}} -->
-<div class="wp-block-query"><!-- wp:post-template -->
+<!-- wp:query {"queryId":20,"query":{"perPage":"5","pages":"1","offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]},"displayLayout":{"type":"flex","columns":3},"className":"platform-stack"} -->
+<div class="wp-block-query platform-stack"><!-- wp:post-template -->
 <!-- wp:paragraph -->
 <p>[platform-dates]</p>
 <!-- /wp:paragraph -->
@@ -36,8 +34,58 @@
 
 <!-- wp:post-terms {"term":"category"} /-->
 <!-- /wp:post-template --></div>
-<!-- /wp:query --></div>
+<!-- /wp:query -->
+
+<!-- wp:template-part {"slug":"our-history"} /-->
+
+<!-- wp:columns {"className":"banner-link"} -->
+<div class="wp-block-columns banner-link"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|30"}},"typography":{"lineHeight":"1.5"}},"fontSize":"x-large"} -->
+<h2 class="wp-block-heading has-x-large-font-size" style="margin-bottom:var(--wp--preset--spacing--30);line-height:1.5">Blog</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Explore highlighted projects, browse the index or visit the timeline.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p><a href="http://localhost:8082/blog/" data-type="page">View all blogposts →</a></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
+
+<!-- wp:query {"queryId":14,"query":{"perPage":"8","pages":"0","offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"flex","columns":3}} -->
+<div class="wp-block-query"><!-- wp:post-template -->
+<!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide"><!-- wp:column {"width":"66.66%"} -->
+<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:post-featured-image {"isLink":true} /--></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"33.33%"} -->
+<div class="wp-block-column" style="flex-basis:33.33%"><!-- wp:post-title {"isLink":true,"style":{"typography":{"lineHeight":"1.2"}},"fontSize":"medium"} /-->
+
+<!-- wp:post-excerpt /-->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:post-terms {"term":"category"} /--></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:post-date {"format":"j M Y"} /--></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:post-author-name /--></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:post-terms {"term":"post_tag"} /--></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

@@ -97,6 +97,11 @@
 			"text": "var:preset|color|custom-dark-green"
 		},
 		"elements": {
+			"h6": {
+				"typography": {
+					"fontFamily": "var:preset|font-family|system-font"
+				}
+			},
 			"heading": {
 				"typography": {
 					"fontFamily": "var:preset|font-family|styrene-b-black-trial"

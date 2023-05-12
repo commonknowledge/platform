@@ -59,8 +59,8 @@ register_block_pattern(
         <div class="wp-block-columns banner-link">
             <!-- wp:column -->
             <div class="wp-block-column">
-                <!-- wp:heading {"style":{"typography":{"lineHeight":"1"}},"fontSize":"x-large"} -->
-                <h2 class="wp-block-heading has-x-large-font-size" style="line-height:1">TITLE</h2>
+                <!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|30"}},"typography":{"lineHeight":"1.5"}},"fontSize":"x-large"} -->
+                <h2 class="wp-block-heading has-x-large-font-size" style="margin-bottom:var(--wp--preset--spacing--30);line-height:1.5">TITLE</h2>
                 <!-- /wp:heading -->
         
                 <!-- wp:paragraph -->

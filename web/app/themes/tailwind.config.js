@@ -5,6 +5,7 @@ module.exports = {
   plugins: [],
   theme: {
     colors: {
+      cream: "#FFF7E5",
       teal: "#7AD7DB",
       yellow: "#FFEF56",
       orange: "#FFA81A",
@@ -13,6 +14,16 @@ module.exports = {
       "dark-green": "#185500",
       white: "#ffffff"
     },
-    extend: {},
+    extend: {
+      screens: {
+        'wp-md': '500px'
+      },
+      maxWidth: {
+        input: '320px',
+      },
+      zIndex: {
+        60: '60',
+      }
+    }
   }
 }
