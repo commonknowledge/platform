@@ -16,10 +16,25 @@ module.exports = {
     },
     extend: {
       screens: {
-        'wp-md': '500px'
+        masonry: 'calc(240px * 4 + 6rem)'
+      },
+      height: {
+        320: '320px',
+        440: '440px'
       },
       maxWidth: {
         input: '320px',
+        320: '320px',
+        440: '440px',
+        1024: '1024px'
+      },
+      minWidth: {
+        320: '320px',
+        440: '440px'
+      },
+      width: {
+        320: '320px',
+        440: '440px'
       },
       zIndex: {
         60: '60',

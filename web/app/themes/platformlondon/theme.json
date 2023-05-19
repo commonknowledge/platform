@@ -28,6 +28,16 @@
 					"color": "#ffa81a",
 					"name": "Orange",
 					"slug": "custom-orange"
+				},
+				{
+					"color": "#ffef56",
+					"name": "Yellow",
+					"slug": "custom-yellow"
+				},
+				{
+					"color": "#7ad7db",
+					"name": "Teal",
+					"slug": "custom-teal"
 				}
 			]
 		},

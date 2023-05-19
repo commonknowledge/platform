@@ -22,11 +22,23 @@ Tags: full-site-editing,
  * Global WordPress Overrides
  */
 
+.wp-block-image.size-full {
+    @apply !m-0 !max-w-none;
+}
+
 .wp-block-image.size-full>img {
     @apply !w-full;
 }
 
-/**
+.wp-block-image.size-large>img {
+    @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
+}
+
+.wp-block-separator {
+    @apply border-dark-green !border-t-0 border-b;
+}
+
+/*
  * HTML Elements
  */
 h1,
@@ -42,9 +54,18 @@ h6 {
  * Components
  */
 
-.btn-default {
-    @apply hover:!bg-dark-green hover:!text-white !py-2 !px-4 border border-dark-green rounded-full shadow-md truncate;
+.btn-default-no-padding {
+    @apply hover:!bg-dark-green hover:!text-white border border-dark-green rounded-full shadow-md truncate;
 }
+
+.btn-default {
+    @apply btn-default-no-padding !py-2 !px-4;
+}
+
+.btn-active {
+    @apply bg-dark-green !text-white;
+}
+
 
 /*
  * Template Custom Styles
@@ -54,6 +75,72 @@ h6 {
 /* Nav */
 .wp-block-navigation-item__content {
     @apply btn-default;
+}
+
+.current-menu-item .wp-block-navigation-item__content {
+    @apply btn-active;
+}
+
+/* Page */
+.page h1.wp-block-post-title {
+    @apply text-8xl mb-16;
+}
+
+/* Prevent double padding from query block and child items */
+.page .wp-block-query {
+    @apply !-ml-4 !-mr-4;
+}
+
+.page .wp-block-query-no-results {
+    @apply px-4;
+}
+
+.page .wp-block-query-pagination {
+    @apply p-4 mt-8;
+}
+
+.page .wp-block-query-pagination-numbers {
+    @apply m-auto;
+}
+
+.page .wp-block-query-pagination .page-numbers {
+    @apply btn-default-no-padding !rounded-full !px-[0.9rem] !py-2;
+}
+
+.page .wp-block-query-pagination .page-numbers.current {
+    @apply !bg-dark-green !text-white;
+}
+
+.page .wp-block-query-pagination .wp-block-query-pagination-previous {
+    @apply hidden;
+}
+
+.page .wp-block-query-pagination .wp-block-query-pagination-next {
+    @apply hidden;
+}
+
+.wp-block-post-content {
+    @apply mb-16;
+}
+
+.wp-block-post-content p {
+    @apply mb-4;
+}
+
+.wp-block-post-content ul {
+    @apply list-disc pl-4;
+}
+
+.wp-block-post-content ul.is-flex-container {
+    @apply !pl-0;
+}
+
+.wp-block-post-content li {
+    @apply mb-4;
+}
+
+.page .wp-site-blocks > hr {
+    @apply mx-4 mb-12;
 }
 
 /* Cover */
@@ -75,7 +162,7 @@ h6 {
 }
 
 .wp-block-post-title {
-    @apply mb-4 text-4xl;
+    @apply mb-4 text-2xl;
 }
 
 .wp-block-post-featured-image a {
@@ -86,79 +173,170 @@ h6 {
     @apply btn-default ml-auto -mt-5 mr-2 relative z-10;
 }
 
+.wp-block-post-terms {
+    @apply truncate;
+}
+
+.wp-block-post-terms a:not(:last-child) {
+    @apply mr-2;
+}
+
 .wp-block-post-terms a::before {
     content: "\2022\20";
 }
 
-/* Query Loop for Posts */
-.wp-block-post.type-post img {
-    height: 300px;
-    object-fit: cover;
+.wp-block-post-terms__separator {
+    @apply hidden;
 }
 
-.wp-block-post.type-post > .wp-block-columns {
-    @apply !flex-wrap;
+/* Query Loop always full width */
+.wp-block-query {
+    @apply !max-w-none;
 }
 
-.wp-block-post.type-post .wp-block-columns {
-    @apply !m-0 !px-0;
-}
+/* Query Loop for Posts and Resources */
+@each $type in post, pl_resource {
+    .wp-block-post.type-$(type) {
+        width: 100% !important;
+    }
 
-.wp-block-post.type-post > .wp-block-columns > .wp-block-column {
-    @apply !basis-full;
-}
-
-.wp-block-post.type-post .wp-block-post-terms a::before {
-    content: "";
-}
-
-@screen wp-md {
-    .wp-block-post.type-post img {
+    .wp-block-post.type-$(type) img {
         height: 300px;
+        object-fit: cover;
     }
 
-    .wp-block-post.type-post {
-        width: calc(50% - 1rem) !important;
+    .wp-block-post.type-$(type) > .wp-block-columns {
+        @apply !flex-wrap;
+    }
+
+    .wp-block-post.type-$(type) .wp-block-columns {
+        @apply !m-0 !px-0;
+    }
+
+    /* Force text to go under the image */
+    .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column {
+        @apply !basis-full;
+    }
+
+    @screen md {
+        /* On Blog/Resources page, first item is 100% width */
+        .page .wp-block-post.type-$(type):first-child {
+            width: 100% !important;
+        }
+
+        .page .wp-block-post.type-$(type):first-child .wp-block-post-title {
+            @apply text-4xl;
+        }
+
+        /* First item on Blog/Resources page can have side-by-side image and text at wp-md size */
+        .page .wp-block-post.type-$(type):first-child > .wp-block-columns {
+            flex-wrap: nowrap !important;
+        }
+
+        .page .wp-block-post.type-$(type):first-child  > .wp-block-columns > .wp-block-column:first-child {
+            flex-basis: initial !important;
+            flex-shrink: 0;
+            max-width: 50%;
+        }
+
+        .page .wp-block-post.type-$(type):first-child .wp-block-column:last-child {
+            display: flex;
+            flex-basis: initial !important;
+            flex-direction: column;
+        }
+
+        .wp-block-post.type-$(type) {
+            max-width: 50%;
+        }
+
+        /* Show image and text side-by-side */
+        .wp-block-post.type-$(type) > .wp-block-columns {
+            flex-wrap: nowrap !important;
+        }
+
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:first-child {
+            max-width: 50%;
+        }
+
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:last-child {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wp-block-post.type-$(type) img {
+            height: 324px;
+        }
+
+        .wp-block-post.type-$(type) .wp-block-post-title a {
+            min-height: 0;
+            @apply line-clamp-5;
+        }
+
+        .wp-block-post.type-$(type) .wp-block-post-excerpt__excerpt {
+            min-height: 0;
+            @apply line-clamp-5;
+        }
+    }
+
+    @screen masonry {
+        .wp-block-post.type-$(type) {
+            min-width: 520px;
+        }
+
+        /* First child should be 5/12 columns and not smaller than 480px */
+        .wp-block-post.type-$(type):nth-child(4n+1) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        /* Second child should take the rest of the space but not bigger than 7/12 columns */
+        .wp-block-post.type-$(type):nth-child(4n+2) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        /* Third child should be 5/12 columns and not smaller than 480px */
+        .wp-block-post.type-$(type):nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        /* Fourth child should take the rest of the space but not bigger than 7/12 columns */
+        .wp-block-post.type-$(type):nth-child(4n) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column {
+            min-width: 240px;
+        }
     }
 }
 
-@screen lg {
-    .wp-block-post.type-post > .wp-block-columns {
-        flex-wrap: nowrap !important;
-        height: 324px;
-    }
+/**
 
-    .wp-block-post.type-post > .wp-block-columns > .wp-block-column:first-child {
-        flex-basis: initial !important;
-        flex-shrink: 0;
-        max-width: 50%;
-    }
+*/
 
-    .wp-block-post.type-post .wp-block-column:last-child {
-        display: flex;
-        flex-basis: initial !important;
-        flex-direction: column;
-    }
+/* Post Details Block */
+.post-details {
+    @apply flex uppercase text-sm mt-auto pt-4;
+}
 
-    .wp-block-post.type-post .wp-block-post-excerpt {
-        flex-shrink: 1;
-    }
+.post-details > * {
+    @apply truncate;
+}
 
-    .wp-block-post-excerpt__excerpt {
-        min-height: 0;
-        @apply line-clamp-5;
-    }
-
-    .wp-block-post.type-post img {
-        height: 324px;
-        /* max-width: initial !important;
-        width: initial !important; */
-    }
+.post-details > *:not(:last-child) {
+    @apply mr-4;
 }
 
 /* Query Loop for Projects */
 .wp-block-post.type-pl_project {
     @apply shadow-md;
+}
+
+.wp-block-post.type-pl_project .wp-block-post-title {
+    @apply text-4xl;
 }
 
 .wp-block-post.type-pl_project.category-energy {
@@ -209,7 +387,20 @@ h6 {
     @apply bg-pink;
 }
 
-/** Platform Stacked Cards */
+/* Query Loop for Members */
+.wp-block-post.type-pl_member {
+    @apply lg:!w-[calc(25%-1rem)]
+}
+
+.wp-block-post.type-pl_member .wp-block-post-title {
+    @apply text-xl mb-2;
+}
+
+.wp-block-post.type-pl_member img {
+    @apply aspect-square object-cover;
+}
+
+/* Platform Stacked Cards */
 .platform-stack {
     box-sizing: border-box;
     display: block;
@@ -268,6 +459,10 @@ h6 {
     @apply md:-mt-10 relative z-10;
 }
 
+.platform-strapline hr {
+    @apply mx-4 mb-4;
+}
+
 /* Banner Link (pattern) */
 .banner-link .wp-block-column:last-child {
     @apply flex items-center justify-end;
@@ -279,7 +474,7 @@ h6 {
 
 /* Our History */
 .platform-history {
-    @apply relative;
+    @apply relative mb-8;
 }
 
 .platform-history .wp-block-navigation {
@@ -288,7 +483,11 @@ h6 {
 
 /* Footer */
 footer {
-    @apply py-4;
+    @apply mt-16 pb-4;
+}
+
+footer hr {
+    @apply mx-4 mb-8;
 }
 
 footer a {
@@ -296,7 +495,7 @@ footer a {
 }
 
 footer > .wp-block-columns {
-    @apply !px-4;
+    @apply !px-4 !mb-8;
 }
 
 footer .wp-block-columns {
@@ -350,4 +549,71 @@ footer .wp-block-navigation-item a {
 
 .gform_button {
     @apply btn-default w-full md:w-auto;
+}
+
+/* Category Cards */
+.platform-category-cards {
+    @apply p-0 !max-w-1024 mt-0 mb-12 !flex-wrap justify-center;
+}
+
+.platform-category-cards .wp-block-column {
+    @apply p-4 md:min-w-320 md:h-320 md:max-w-320 rounded shadow-md;
+}
+
+/* Tabs */
+nav.platform-tabs {
+    @apply border-b border-dark-green mb-16;
+}
+
+.platform-tabs ul {
+    @apply flex;
+}
+
+.platform-tabs button {
+    @apply rounded-tr-lg rounded-tl-lg hover:!bg-dark-green hover:!text-white !py-2 !px-4;
+}
+
+.platform-tabs button.active {
+    @apply bg-dark-green text-white;
+}
+
+.platform-about-final-buttons {
+    @apply px-4 mb-16 flex;
+}
+
+/* Post Filter on Blog/Resources Page */
+.post-filter {
+    @apply px-4 mb-8;
+}
+
+.post-filter__categories {
+    @apply flex flex-wrap mb-4;
+}
+
+.post-filter__categories li:not(:last-child) {
+    @apply mr-2;
+}
+
+.post-filter__categories .energy {
+    @apply bg-orange !border-0;;
+}
+
+.post-filter__categories .community {
+    @apply bg-yellow !border-0;;
+}
+
+.post-filter__categories .culture {
+    @apply bg-light-green !border-0;;
+}
+
+.post-filter__categories .economy {
+    @apply bg-teal !border-0;;
+}
+
+.post-filter__categories .liberation {
+    @apply bg-pink !border-0;;
+}
+
+.post-filter__categories .active {
+    @apply !bg-dark-green !text-white;
 }
