@@ -657,12 +657,19 @@ h6 {
 /* Page */
 .page h1.wp-block-post-title {
   margin-bottom: 4rem;
-  font-size: 6rem;
+  font-size: 3.75rem;
   line-height: 1;
+}
+@media (min-width: 768px) {
+
+  .page h1.wp-block-post-title {
+    font-size: 6rem;
+    line-height: 1;
+  }
 }
 
 /* Prevent double padding from query block and child items */
-.page .wp-block-query {
+.page .has-global-padding .wp-block-query {
   margin-left: -1rem !important;
   margin-right: -1rem !important;
 }
@@ -678,7 +685,7 @@ h6 {
 }
 
 .page .wp-block-query-pagination-numbers {
-  margin: auto;
+  margin: auto !important;
 }
 
 .page .wp-block-query-pagination .page-numbers {
@@ -862,6 +869,7 @@ h6 {
 @media (min-width: 768px) {
         /* On Blog/Resources page, first item is 100% width */
         .page .wp-block-post.type-post:first-child {
+            max-width: none !important;
             width: 100% !important;
         }
 
@@ -954,8 +962,30 @@ h6 {
             min-width: 41.67% !important;
         }
 
+        /* Min width for image and text colums */
         .wp-block-post.type-post > .wp-block-columns > .wp-block-column {
             min-width: 240px;
+        }
+
+        /* On pages, the first item is 100%, so the indexing here needs to be incremented */
+        .page .wp-block-post.type-post:nth-child(4n+2) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        .page .wp-block-post.type-post:nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-post:nth-child(4n) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-post:nth-child(4n+1):not(:first-child) {
+            width: 520px !important;
+            min-width: 41.67% !important;
         }
     }
 .wp-block-post.type-pl_resource {
@@ -981,6 +1011,7 @@ h6 {
 @media (min-width: 768px) {
         /* On Blog/Resources page, first item is 100% width */
         .page .wp-block-post.type-pl_resource:first-child {
+            max-width: none !important;
             width: 100% !important;
         }
 
@@ -1073,8 +1104,30 @@ h6 {
             min-width: 41.67% !important;
         }
 
+        /* Min width for image and text colums */
         .wp-block-post.type-pl_resource > .wp-block-columns > .wp-block-column {
             min-width: 240px;
+        }
+
+        /* On pages, the first item is 100%, so the indexing here needs to be incremented */
+        .page .wp-block-post.type-pl_resource:nth-child(4n+2) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        .page .wp-block-post.type-pl_resource:nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-pl_resource:nth-child(4n) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-pl_resource:nth-child(4n+1):not(:first-child) {
+            width: 520px !important;
+            min-width: 41.67% !important;
         }
     }
 
@@ -1532,11 +1585,27 @@ nav.platform-tabs {
 
 .platform-tabs ul {
   display: flex;
+  flex-wrap: wrap;
+  padding-left: 0.5rem;
+}
+
+.platform-tabs li {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+
+  .platform-tabs li {
+    margin-bottom: 0px;
+  }
+}
+
+.platform-tabs li:not(:last-child) {
+  margin-right: 0.5rem;
 }
 
 .platform-tabs button {
-  border-top-right-radius: 0.5rem;
-  border-top-left-radius: 0.5rem;
+  border-radius: 0.5rem;
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
   padding-left: 1rem !important;
@@ -1548,6 +1617,14 @@ nav.platform-tabs {
   background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
+@media (min-width: 768px) {
+
+  .platform-tabs button {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
 }
 
 .platform-tabs button.active {
@@ -1616,4 +1693,60 @@ nav.platform-tabs {
   background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
+.projects-carousel {
+  position: relative;
+}
+
+.projects-carousel .wp-block-navigation__container {
+  margin-bottom: 4rem;
+  display: none;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+
+  .projects-carousel .wp-block-navigation__container {
+    display: flex;
+  }
+}
+
+.projects-carousel .wp-block-navigation__container li {
+    transform: translateY(-3rem) rotate(-10deg);
+    margin-left: 28rem;
+}
+
+.projects-carousel .wp-block-query {
+    overflow: hidden;
+}
+
+.projects-carousel .wp-block-post-template {
+    flex-wrap: nowrap;
+    margin-left: 50%;
+    max-width: none;
+    /* 
+     * Start by displaying the second post. Transform left (negative) by the
+     * width of 1.5 cards and the width of the margin.
+     */
+    transform: translate3d(calc(-560px * 1.5 - (50vw - 560px)), 0, 0);
+    transition: transform 1.5s;
+}
+
+.projects-carousel .wp-block-post {
+    cursor: pointer;
+    margin-right: calc(50vw - 560px) !important;
+    max-width: 560px !important;
+    min-width: 560px !important;
+    transform: scale(1);
+    width: 560px !important;
+    transition: transform 1.5s;
+}
+
+.projects-carousel .wp-block-post:not(:nth-child(2)) {
+    transform: scale(0.8);
+}
+
+body {
+    background: linear-gradient(#000, #000) no-repeat center/2px 100%;
 }

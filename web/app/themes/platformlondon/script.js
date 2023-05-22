@@ -141,5 +141,30 @@ if (aboutContent) {
     displayTab(sectionTitles[0])
 }
 
+const LARGER_CARD_WIDTH = 560
+document.querySelectorAll(".projects-carousel").forEach((carousel) => {
+    const cardContainer = carousel.querySelector(".wp-block-post-template")
+    const cards = carousel.querySelectorAll(".wp-block-post")
+
+    const displayCard = (card, i) => {
+        console.log("displaying card", i, card)
+        cards.forEach((card) => {
+            card.style.transform = "scale(0.8)"
+        })
+        card.style.transform = "scale(1.0)"
+
+        const marginWidth = "(50vw - 560px)"
+        const transformX = `calc(-${LARGER_CARD_WIDTH}px * ${i}.5 - ${marginWidth} * ${i})`
+        console.log("transform", transformX)
+        cardContainer.style.transform = `translate3d(${transformX}, 0, 0)`
+    }
+
+    cards.forEach((card, i) => {
+        card.addEventListener("click", () => displayCard(card, i))
+    })
+
+    cardContainer.style.transform 
+})
+
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"

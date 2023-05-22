@@ -116,7 +116,7 @@ add_action('carbon_fields_register_fields', function () {
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
             $start_year = carbon_get_the_post_meta('start_year');
-            $end_year = carbon_get_the_post_meta('end_year') ?? "Ongoing";
+            $end_year = carbon_get_the_post_meta('end_year') ?: "Ongoing";
 
             if ($start_year) {
                 $content = "$start_year &mdash; $end_year";
