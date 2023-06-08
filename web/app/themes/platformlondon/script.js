@@ -141,29 +141,49 @@ if (aboutContent) {
     displayTab(sectionTitles[0])
 }
 
-const LARGER_CARD_WIDTH = 560
 document.querySelectorAll(".projects-carousel").forEach((carousel) => {
+    let currentIndex = 1
+
     const cardContainer = carousel.querySelector(".wp-block-post-template")
     const cards = carousel.querySelectorAll(".wp-block-post")
+    const buttons = carousel.querySelectorAll(".projects-carousel__button")
 
-    const displayCard = (card, i) => {
-        console.log("displaying card", i, card)
-        cards.forEach((card) => {
-            card.style.transform = "scale(0.8)"
+    const displayCard = (index) => {
+        if (index < 0) {
+            index = 0
+        }
+        if (index >= cards.length) {
+            index = cards.length - 1
+        }
+
+        const cardWidth = cards[0].clientWidth
+        cards.forEach((card, i) => {
+            card.style.transform = i === index ? "scale(1.0)" : "scale(0.8)"
         })
-        card.style.transform = "scale(1.0)"
 
-        const marginWidth = "(50vw - 560px)"
-        const transformX = `calc(-${LARGER_CARD_WIDTH}px * ${i}.5 - ${marginWidth} * ${i})`
-        console.log("transform", transformX)
+        const transformX = `calc(-${cardWidth}px * ${index}.5)`
         cardContainer.style.transform = `translate3d(${transformX}, 0, 0)`
+        currentIndex = index
     }
 
     cards.forEach((card, i) => {
-        card.addEventListener("click", () => displayCard(card, i))
+        card.addEventListener("click", () => displayCard(i))
     })
+    
+    buttons[0].addEventListener("click", () => displayCard(currentIndex - 1))
+    buttons[1].addEventListener("click", () => displayCard(currentIndex + 1))
 
     cardContainer.style.transform 
+})
+
+document.querySelectorAll('.platform-illustration svg').forEach(svg => {
+    svg.querySelectorAll("path").forEach(path => {
+        console.log("added event listener", path)
+        path.addEventListener("mouseenter", () => {
+            console.log("moving child")
+            svg.appendChild(path)
+        })
+    })
 })
 
 // Display content (hidden by pre-script.js)
