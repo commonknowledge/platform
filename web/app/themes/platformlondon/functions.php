@@ -106,6 +106,158 @@ add_action('carbon_fields_register_fields', function () {
             echo '</div>';
         });
 
+    Block::make(__('Search Results Count'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Search Results Count'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            global $wp_query;
+            $count = $wp_query->found_posts;
+            $plural = $count == 1 ? "" : "S";
+            ?>
+            <div class="search-results-count">
+                <h2><?= $count ?> RESULT<?= $plural ?></h2>
+            </div>
+            <?php
+        });
+
+    Block::make(__('Search Sort'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Search Sort'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $sort = $_GET["sort"] ?? "";
+            ?>
+            <div class="search-sort">
+                <!-- onchange handler is in script.js -->
+                <select>
+                    <option value="desc" <?= $sort !== "asc" ? "selected" : "" ?>>
+                        Sort: newest to oldest
+                    </option>
+                    <option value="asc" <?= $sort === "asc" ? "selected" : "" ?>>
+                        Sort: oldest to newest
+                    </option>
+                </select>
+            </div>
+            <?php
+        });
+
+    Block::make(__('Search Filter'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Search Filter'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $active_category = $_GET["category_name"] ?? "";
+            $active_content_type = $_GET["content-type"] ?? "";
+            $active_year = $_GET["year"] ?? "";
+            $active_author = $_GET["author"] ?? "";
+            $filter_sections = [];
+            $filter_sections[] = [
+                "title" => "Focus Areas",
+                "param" => "category_name",
+                "options" => array_map(function ($category) use ($active_category) {
+                    return [
+                        "name" => $category->name,
+                        "value" => $category->slug,
+                        "selected" => str_contains($active_category, $category->slug)
+                    ];
+                }, get_categories())
+            ];
+            $filter_sections[] = [
+                "title" => "Content Type",
+                "param" => "content-type",
+                "options" => array_map(function ($content_type) use ($active_content_type) {
+                    return [
+                        "name" => $content_type->name,
+                        "value" => $content_type->slug,
+                        "selected" => str_contains($active_content_type, $content_type->slug)
+                    ];
+                }, get_terms(["taxonomy" => "content-type"]))
+            ];
+
+            function get_year_options()
+            {
+                $loop = get_posts('numberposts=1&order=ASC');
+                $date = $loop[0]->post_date;
+                $year = (int) explode("-", $date)[0];
+                $current_year = (int) date("Y");
+                $years = [];
+                while ($year <= $current_year) {
+                    $years[] = $year;
+                    $year++;
+                }
+                return $years;
+            }
+
+            $filter_sections[] = [
+                "title" => "Year",
+                "param" => "year",
+                "options" => array_map(function ($year) use ($active_year) {
+                    return [
+                        "name" => $year,
+                        "value" => $year,
+                        "selected" => str_contains($active_year, $year)
+                    ];
+                }, get_year_options())
+            ];
+
+            $filter_sections[] = [
+                "title" => "Author",
+                "param" => "author",
+                "options" => array_map(function ($author) use ($active_author) {
+                    return [
+                        "name" => $author->display_name,
+                        "value" => $author->ID,
+                        "selected" => str_contains($active_author, $author->ID)
+                    ];
+                }, get_users())
+            ];
+
+            ?>
+            <div class="search-filter">
+                <?php foreach ($filter_sections as $section) : ?>
+                    <div class="search-filter__section">
+                        <h3><?= $section['title'] ?></h3>
+                        <ul>
+                            <?php foreach ($section['options'] as $option) {
+                                $id = "filter-" . $section['param'] . "-" . $option['value'];
+                                ?>
+                                <li>
+                                    <input 
+                                        id="<?= $id ?>" 
+                                        type="checkbox"
+                                        value="<?= $option['value'] ?>"
+                                        <?= $option['selected'] ? "checked" : "" ?>
+                                        data-param="<?= $section['param'] ?>"
+                                    >
+                                    <label for="<?= $id ?>"><?= $option['name'] ?></label>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <?php
+        });
+
+    /* Required because the built-in "No results" displays when there is one
+       result and it has a featured image */
+    Block::make(__('Search No Results'))
+        ->add_fields(array(
+            Field::make('text', 'no_results_text', __('No results text'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            global $wp_query;
+            if ($wp_query->found_posts > 0) {
+                return;
+            }
+            ?>
+            <div class="wp-block-query-no-results">
+                <p><?= $fields['no_results_text'] ?></p>
+            </div>
+            <?
+        });
+
     /* Post Fields and Blocks */
     function render_project_dates($display_active = false)
     {
@@ -263,6 +415,10 @@ add_action('pre_get_posts', function ($query) {
             return url_to_postid($slug);
         }, $slugs_to_exclude);
         $query->set("post__not_in", $ids_to_exclude);
+        $sort_order = $_GET["sort"] ?? "";
+        $query->set("orderby", [
+            'date' => strtoupper($sort_order),
+        ]);
     }
 });
 

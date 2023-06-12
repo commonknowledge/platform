@@ -141,6 +141,7 @@ if (aboutContent) {
     displayTab(sectionTitles[0])
 }
 
+/* Set up projects carousel */
 document.querySelectorAll(".projects-carousel").forEach((carousel) => {
     let currentIndex = 1
 
@@ -176,13 +177,50 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
     cardContainer.style.transform 
 })
 
+/* Bring illustration element to the top on mouseenter (can't be done in CSS) */
 document.querySelectorAll('.platform-illustration svg').forEach(svg => {
     svg.querySelectorAll("path").forEach(path => {
         console.log("added event listener", path)
         path.addEventListener("mouseenter", () => {
-            console.log("moving child")
             svg.appendChild(path)
         })
+    })
+})
+
+/* Set up search sort select */
+document.querySelectorAll('.search-sort select').forEach(select => {
+    select.addEventListener("change", () => {
+        const value = select.value
+        const path = location.pathname
+        const queryParams = new URLSearchParams(location.search)
+        queryParams.set("sort", value)
+        location.href = `${path}?${queryParams}`
+    })
+})
+
+/* Set up search filter checkboxes */
+document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbox => {
+    checkbox.addEventListener("change", () => {
+        const checked = checkbox.checked
+        const value = checkbox.value
+        const param = checkbox.getAttribute("data-param")
+
+        const path = location.pathname
+        const queryParams = new URLSearchParams(location.search)
+
+        const currentValue = queryParams.get(param) || ''
+        let currentValues = currentValue.split(",").filter(Boolean)
+        if (checked) {
+            currentValues.push(value)
+        } else {
+            currentValues = currentValues.filter(v => v !== value)
+        }
+        if (currentValues.length) {
+            queryParams.set(param, currentValues.join(","))
+        } else {
+            queryParams.delete(param)
+        }
+        location.href = `${path}?${queryParams}`
     })
 })
 
