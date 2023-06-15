@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: ["./**/*.html", "./**/*.php"],
   important: true,
   plugins: [],
   theme: {
     colors: {
+      transparent: "rgba(0, 0, 0, 0)",
       cream: "#FFF7E5",
       teal: "#7AD7DB",
       yellow: "#FFEF56",
@@ -12,6 +15,7 @@ module.exports = {
       pink: "#FEA9BE",
       "light-green": "#8AE167",
       "dark-green": "#185500",
+      "faded-green": "rgba(24, 85, 0, 0.2)",
       white: "#ffffff"
     },
     extend: {
@@ -40,6 +44,10 @@ module.exports = {
       zIndex: {
         60: '60',
       }
+    },
+    fontFamily: {
+      sans: ['pp-mori', ...defaultTheme.fontFamily.sans],
+      styrene:  ['styrene-b-trial', ...defaultTheme.fontFamily.sans]
     }
   }
 }

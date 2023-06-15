@@ -4,6 +4,25 @@ use Carbon_Fields\Block;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
+/* Util Functions */
+function render_project_dates($display_active = false)
+{
+    $start_year = carbon_get_the_post_meta('start_year');
+    $end_year = carbon_get_the_post_meta('end_year') ?: "Ongoing";
+
+    if ($start_year) {
+        $content = "$start_year &mdash; $end_year";
+    } else {
+        $content = $end_year;
+    }
+
+    if ($display_active && ($end_year === "Ongoing" || $end_year == date('Y'))) {
+        $content = "ACTIVE " . $content;
+    }
+
+    echo "<span class=\"project-dates text-right uppercase\">$content</span>";
+}
+
 add_action('carbon_fields_register_fields', function () {
     /* Page Fields and Blocks */
     Block::make(__('Platform Illustration'))
@@ -25,6 +44,35 @@ add_action('carbon_fields_register_fields', function () {
             <?php
         });
 
+    Block::make(__('Background Images'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Background Images'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $background_images = carbon_get_the_post_meta('background_images');
+            $count = count($background_images);
+            if (!$background_images) {
+                return;
+            }
+            ?>
+            <div class="background-images hidden md:block">
+                <?php foreach ($background_images as $i => $background_image) {
+                    $top = (100 * $i / $count) . '%';
+                    $even = $i % 2 === 0;
+                    $style = "position:absolute;z-index:0;top:$top;mix-blend-mode:multiply;";
+                    if ($even) {
+                        $style .= "left:0";
+                    } else {
+                        $style .= "right:0";
+                    }
+                    ?>
+                    <img style="<?= $style ?>" src="<?= $background_image["image"] ?>">
+                <?php } ?>
+            </div>
+            <?php
+        });
+
+    /* Index Page Blocks */
     Block::make(__('Post Filter'))
         ->add_fields(array(
             Field::make('separator', 'crb_separator', __('Post Filter'))
@@ -106,6 +154,7 @@ add_action('carbon_fields_register_fields', function () {
             echo '</div>';
         });
 
+    /* Search Page Blocks */
     Block::make(__('Search Results Count'))
         ->add_fields(array(
             Field::make('separator', 'crb_separator', __('Search Results Count'))
@@ -148,7 +197,6 @@ add_action('carbon_fields_register_fields', function () {
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
             $active_category = $_GET["category_name"] ?? "";
-            $active_content_type = $_GET["content-type"] ?? "";
             $active_year = $_GET["year"] ?? "";
             $active_author = $_GET["author"] ?? "";
             $filter_sections = [];
@@ -163,21 +211,25 @@ add_action('carbon_fields_register_fields', function () {
                     ];
                 }, get_categories())
             ];
-            $filter_sections[] = [
-                "title" => "Content Type",
-                "param" => "content-type",
-                "options" => array_map(function ($content_type) use ($active_content_type) {
-                    return [
-                        "name" => $content_type->name,
-                        "value" => $content_type->slug,
-                        "selected" => str_contains($active_content_type, $content_type->slug)
-                    ];
-                }, get_terms(["taxonomy" => "content-type"]))
-            ];
+            foreach (["content-type", "pl_post_type", "pl_project_type"] as $taxonomy) {
+                $active_term = $_GET[$taxonomy] ?? "";
+                $title = get_taxonomy($taxonomy)->labels->singular_name;
+                $filter_sections[] = [
+                    "title" => $title,
+                    "param" => $taxonomy,
+                    "options" => array_map(function ($term) use ($active_term) {
+                        return [
+                            "name" => $term->name,
+                            "value" => $term->slug,
+                            "selected" => str_contains($active_term, $term->slug)
+                        ];
+                    }, get_terms(["taxonomy" => $taxonomy]))
+                ];
+            }
 
             function get_year_options()
             {
-                $loop = get_posts('numberposts=1&order=ASC');
+                $loop = get_posts('numberposts=10&post_type=any&order=ASC');
                 $date = $loop[0]->post_date;
                 $year = (int) explode("-", $date)[0];
                 $current_year = (int) date("Y");
@@ -217,8 +269,8 @@ add_action('carbon_fields_register_fields', function () {
             <div class="search-filter">
                 <?php foreach ($filter_sections as $section) : ?>
                     <div class="search-filter__section">
-                        <h3><?= $section['title'] ?></h3>
-                        <ul>
+                        <button class="search-filter__expand"><?= $section['title'] ?></button>
+                        <ul class="search-filter__options">
                             <?php foreach ($section['options'] as $option) {
                                 $id = "filter-" . $section['param'] . "-" . $option['value'];
                                 ?>
@@ -240,8 +292,8 @@ add_action('carbon_fields_register_fields', function () {
             <?php
         });
 
-    /* Required because the built-in "No results" displays when there is one
-       result and it has a featured image */
+    /* Required for the search page because the built-in "No results"
+       displays when there is one result and it has a featured image */
     Block::make(__('Search No Results'))
         ->add_fields(array(
             Field::make('text', 'no_results_text', __('No results text'))
@@ -259,24 +311,6 @@ add_action('carbon_fields_register_fields', function () {
         });
 
     /* Post Fields and Blocks */
-    function render_project_dates($display_active = false)
-    {
-        $start_year = carbon_get_the_post_meta('start_year');
-        $end_year = carbon_get_the_post_meta('end_year') ?: "Ongoing";
-
-        if ($start_year) {
-            $content = "$start_year &mdash; $end_year";
-        } else {
-            $content = $end_year;
-        }
-
-        if ($display_active && ($end_year === "Ongoing" || $end_year == date('Y'))) {
-            $content = "ACTIVE " . $content;
-        }
-
-        echo "<span class=\"text-right mb-2 uppercase\">$content</span>";
-    }
-
     Block::make(__('Post Details'))
         ->add_fields(array(
             Field::make('separator', 'crb_separator', __('Post Details'))
@@ -294,23 +328,32 @@ add_action('carbon_fields_register_fields', function () {
                     $taxonomy = "content-type";
             }
             $content_types = get_the_terms($post, $taxonomy) ?: [];
-            $content_type = implode(", ", array_map(function ($term) {
-                return $term->name;
-            }, $content_types));
+            $first_content_type = array_pop($content_types);
             $post_date = get_the_date('j M Y');
             $author = get_the_author();
+            $author_id = get_the_author_meta('ID');
             $author = $author ? explode(" ", $author)[0] : "";
 
             ?>
             <div class="post-details">
-                <?php if ($content_type) :
-                    ?><span><?= $content_type ?></span><?php
-                endif; ?>
+                <?php if ($first_content_type) :?>
+                    <a href="/?s=&<?= $taxonomy ?>=<?= $first_content_type->slug ?>">
+                        <?= $first_content_type->name ?>
+                    </a>
+                <?php endif; ?>
+                <?php foreach ($content_types as $content_type) :?>
+                    ,&nbsp;
+                    <a href="/?s=&<?= $taxonomy ?>=<?= $content_type->slug ?>">
+                        <?= $content_type->name ?>
+                    </a>
+                <?php endforeach; ?>
                 <?php if ($post->post_type === "pl_project") : ?>
                     <?php render_project_dates(display_active: true); ?>
                 <?php else : ?>
                     <span><?= $post_date ?></span>
-                    <span><?= $author ?></span>
+                    <a href="/?s&author=<?= $author_id ?>">
+                        <?= $author ?>
+                    </a>
                 <?php endif ?>
             </div>
             <?php
@@ -324,6 +367,15 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('text', 'end_year')->set_attribute('type', 'number'),
         ));
 
+    Container::make('post_meta', 'Extra Fields')
+        ->where('post_type', '=', 'page')
+        ->add_fields(array(
+            Field::make('complex', 'background_images', 'Background Images')
+                ->add_fields([
+                    Field::make('image', 'image', 'Image')->set_value_type('url')
+                ])
+        ));
+
     Block::make(__('Project Dates'))
         ->add_fields(array(
             Field::make('separator', 'crb_separator', __('Project Dates'))
@@ -332,30 +384,6 @@ add_action('carbon_fields_register_fields', function () {
             render_project_dates();
         });
     
-    Block::make(__('Project Details'))
-        ->add_fields(array(
-            Field::make('separator', 'crb_separator', __('Project Details'))
-        ))
-        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-            $post = get_post();
-            $content_types = get_the_terms($post, "pl_project_type") ?: [];
-            $content_type = implode(" ", array_map(function ($term) {
-                return $term->name;
-            }, $content_types));
-
-            ?>
-            <div class="project-details">
-                <?php if ($content_type) :
-                    ?><span class="mb-2"><?= $content_type ?></span><?php
-                endif;
-                ?>
-                <div>
-                <?php render_project_dates(display_active: true); ?>
-                </div>
-            </div>
-            <?php
-        });
-
     /* Member Fields and Blocks */
     Container::make('post_meta', 'Extra Fields')
         ->where('post_type', '=', 'pl_member')
@@ -381,7 +409,102 @@ add_action('carbon_fields_register_fields', function () {
         ->add_fields(array(
             Field::make('text', 'position'),
         ));
+
+    /* Timeline Blocks */
+    Container::make('post_meta', 'Extra Fields')
+        ->where('post_type', '=', 'pl_timeline_entry')
+        ->add_fields(array(
+            Field::make('text', 'year')->set_attribute('type', 'number')
+                ->set_required(true),
+        ));
+
+    Block::make(__('Timeline Entries'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Timeline Entries'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $timeline_entries = get_posts([
+                'post_type' => 'pl_timeline_entry',
+                'post_status' => 'publish',
+                'numberposts' => -1
+            ]);
+            if (!count($timeline_entries)) {
+                echo '<p>No timeline entries found</p>';
+                return;
+            }
+            $decades = [];
+            usort($timeline_entries, function ($a, $b) use (&$decades) {
+                $year_a = carbon_get_post_meta($a->ID, 'year');
+                $year_b = carbon_get_post_meta($b->ID, 'year');
+
+                // Side effect in sort function? Gross! But efficient...
+                $decade_a = substr($year_a, 0, 3) . '0s';
+                $decade_b = substr($year_b, 0, 3) . '0s';
+                $decades[$decade_a] = true;
+                $decades[$decade_b] = true;
+
+                return $year_a < $year_b ? -1 : 1;
+            });
+            $decades = array_keys($decades);
+            sort($decades);
+            $current_decade = "1900s";
+            ?>
+            <div class="platform-timeline-links">
+                <div>
+                    <ul class="platform-timeline-links__list">
+                    <?php foreach ($decades as $decade) : ?>
+                        <li>
+                            <a href="#<?= $decade ?>" class="btn-default">
+                                <?= $decade ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="platform-timeline">
+                <div class="platform-timeline__line">
+                    <div class="platform-timeline__marker-container">
+                        <div class="platform-timeline__marker">
+                            <span class="platform-timeline__year">
+                                <?= carbon_get_post_meta($timeline_entries[0]->ID, 'year') ?>
+                            </span>
+                            <div class="platform-timeline__circle"></div>
+                        </div>
+                        <div class="platform-timeline__active-line"></div>
+                    </div>
+                </div>
+                <div class="platform-timeline__entries">
+                    <?php foreach ($timeline_entries as $entry) {
+                        $year = carbon_get_post_meta($entry->ID, 'year');
+                        if (substr($year, 0, 3) !== substr($current_decade, 0, 3)) {
+                            $current_decade = substr($year, 0, 3) . '0s';
+                            $id = $current_decade;
+                        } else {
+                            $id = null;
+                        } ?>
+                        <div <?= $id ? 'id="' . $id . '"' : '' ?> 
+                            class="platform-timeline__entry"
+                            data-year="<?= $year ?>"
+                        >
+                            <div class="platform-timeline__circle"></div>
+                            <h2><?= get_the_title($entry) ?></h2>
+                            <div>
+                                <?= apply_filters('the_content', $entry->post_content); ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php
+        });
 });
+
+add_filter("term_link", function ($termlink, $term, $taxonomy) {
+    $taxonomy_param = $taxonomy === "category" ? "category_name" : $taxonomy;
+    return "/?s=&$taxonomy_param={$term->slug}";
+}, 10, 3);
+
 add_filter("query_loop_block_query_vars", function ($query) {
     // If the search parameter has the special value ":all", don't filter
     // This is used in the Carousel block
@@ -409,6 +532,10 @@ add_filter("query_loop_block_query_vars", function ($query) {
 });
 
 add_action('pre_get_posts', function ($query) {
+    if ($query->get("s") === ':all') {
+        $query->set("s", "");
+        return $query;
+    }
     if ($query->is_search()) {
         $slugs_to_exclude = ["blog", "resources", "projects"];
         $ids_to_exclude = array_map(function ($slug) {
@@ -495,6 +622,24 @@ add_action('init', function () {
             'show_in_rest' => true,
             'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
             'taxonomies' => array("category", "content-type")
+        )
+    );
+
+    register_post_type(
+        'pl_timeline_entry',
+        array(
+            'labels'      => array(
+                'name'          => 'Timeline Entries',
+                'singular_name' => 'Timeline Entry',
+            ),
+            'public'      => true,
+            'has_archive' => true,
+            'menu_icon' => 'dashicons-calendar',
+            'rewrite' => array('slug' => 'timeline'),
+            'show_in_rest' => true,
+            'supports' => array('title', 'editor', 'author'),
+            'exclude_from_search' => true,
+            'taxonomies' => []
         )
     );
 

@@ -1,4 +1,4 @@
-// Make whole category card a link (can't do this in block editor)
+// Make whole project card a link (can't do this in block editor)
 document.querySelectorAll(".platform-category-cards .wp-block-column").forEach(col => {
     const link = col.querySelector("h2 a")
     if (!link) {
@@ -180,7 +180,6 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
 /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
 document.querySelectorAll('.platform-illustration svg').forEach(svg => {
     svg.querySelectorAll("path").forEach(path => {
-        console.log("added event listener", path)
         path.addEventListener("mouseenter", () => {
             svg.appendChild(path)
         })
@@ -223,6 +222,86 @@ document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbo
         location.href = `${path}?${queryParams}`
     })
 })
+
+/* Set up search filter accordion */
+document.querySelectorAll('.search-filter__section').forEach(section => {
+    const button = section.querySelector(".search-filter__expand")
+    const optionsList = section.querySelector(".search-filter__options")
+    button.addEventListener("click", () => {
+        const closed = button.getAttribute("data-closed")
+        if (closed) {
+            button.removeAttribute("data-closed")
+            optionsList.style.height = optionsList.getAttribute("data-original-height")
+        } else {
+            button.setAttribute("data-closed", true)
+            optionsList.style.height = 0
+        }
+    })
+    optionsList.style.height = optionsList.clientHeight + "px"
+    optionsList.setAttribute("data-original-height", optionsList.style.height)
+})
+
+/* Set up timeline */
+const timelineEntriesContainer = document.querySelector(".platform-timeline__entries")
+const timelineEntries = document.querySelectorAll(".platform-timeline__entry")
+
+if (timelineEntries.length) {
+    const decadeLinks = document.querySelector(".platform-timeline-links__list")
+    const decadeLinksPosition = decadeLinks.getBoundingClientRect().bottom
+
+    const yearMarkerContainer = document.querySelector(".platform-timeline__marker")
+    const yearMarker = document.querySelector(".platform-timeline__year")
+    const yearMarkerPosition = document.querySelector(
+        ".platform-timeline__marker .platform-timeline__circle"
+    ).getBoundingClientRect().top
+    const activeLine = document.querySelector(".platform-timeline__active-line")
+
+    const updateTimeline = () => {
+        const currentDisplayedYear = yearMarker.textContent
+        let activeEntryIndex = 0
+        for (let i = 0; i < timelineEntries.length; i++) {
+            const entry = timelineEntries[i]
+            entry.removeAttribute("data-active")
+            if (entry.getBoundingClientRect().top < yearMarkerPosition) {
+                activeEntryIndex = i
+                entry.setAttribute("data-active", true)
+            }
+        }
+
+        const activeEntry = timelineEntries[activeEntryIndex]
+        const activeYear = activeEntry.getAttribute("data-year")
+        if (activeYear !== currentDisplayedYear) {
+            yearMarker.textContent = activeYear
+        }
+
+        const activeLineHeight = Math.min(
+            yearMarkerPosition - timelineEntries[0].getBoundingClientRect().top,
+            timelineEntriesContainer.clientHeight
+        )
+        activeLine.style.height = activeLineHeight + "px"
+
+        // Stop line scrolling into the footer
+        if (timelineEntriesContainer.getBoundingClientRect().bottom < yearMarkerPosition) {
+            yearMarkerContainer.style.position = "absolute"
+            yearMarkerContainer.style.top = timelineEntriesContainer.clientHeight - 8 + "px"
+        } else {
+            yearMarkerContainer.style.position = ""
+            yearMarkerContainer.style.top = ""
+        }
+
+        // Stop decade links scrolling into the footer
+        if (timelineEntriesContainer.getBoundingClientRect().bottom < decadeLinksPosition) {
+            decadeLinks.style.position = "absolute"
+            decadeLinks.style.top = timelineEntriesContainer.clientHeight - decadeLinks.clientHeight + "px"
+        } else {
+            decadeLinks.style.position = ""
+            decadeLinks.style.top = ""
+        }
+    }
+
+    window.addEventListener("scroll", updateTimeline)
+    updateTimeline()
+}
 
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"
