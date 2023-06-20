@@ -604,7 +604,7 @@ add_action('carbon_fields_register_fields', function () {
                     <ul class="platform-timeline-links__list">
                     <?php foreach ($decades as $decade) : ?>
                         <li>
-                            <a href="#<?= $decade ?>" class="btn-default">
+                            <a href="#<?= $decade ?>" class="btn-default bg-cream">
                                 <?= $decade ?>
                             </a>
                         </li>

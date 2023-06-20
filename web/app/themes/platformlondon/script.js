@@ -249,6 +249,19 @@ if (timelineEntries.length) {
     const decadeLinks = document.querySelector(".platform-timeline-links__list")
     const decadeLinksPosition = decadeLinks.getBoundingClientRect().bottom
 
+    decadeLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault()
+            const decade = link.getAttribute("href").split("#")[1]
+            const target = document.getElementById(decade)
+            window.scrollTo({
+                left: 0,
+                top: target.offsetTop,
+                behavior: "smooth"
+            })
+        })
+    });
+
     const yearMarkerContainer = document.querySelector(".platform-timeline__marker")
     const yearMarker = document.querySelector(".platform-timeline__year")
     const yearMarkerPosition = document.querySelector(
