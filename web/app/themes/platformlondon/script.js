@@ -179,9 +179,9 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
 
 /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
 document.querySelectorAll('.platform-illustration svg').forEach(svg => {
-    svg.querySelectorAll("path").forEach(path => {
-        path.addEventListener("mouseenter", () => {
-            svg.appendChild(path)
+    svg.querySelectorAll("a").forEach(link => {
+        link.addEventListener("mouseenter", () => {
+            svg.appendChild(link)
         })
     })
 })
@@ -302,6 +302,15 @@ if (timelineEntries.length) {
     window.addEventListener("scroll", updateTimeline)
     updateTimeline()
 }
+
+// Fit SVG viewbox to the inner content. Used in the Project Details block to display just one of the
+// category SVGs
+document.querySelectorAll(".project-details svg").forEach((svg) => {
+    // Get the bounds of the SVG content
+    const bbox = svg.getBBox();
+    svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+})
+
 
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"

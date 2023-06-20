@@ -1,6 +1,8 @@
 <!-- wp:template-part {"slug":"header"} /-->
 
 <!-- wp:group {"className":"projects-carousel","layout":{"type":"default"}} -->
+<div class="wp-block-group projects-carousel"><!-- wp:cover {"url":"http://localhost:8082/app/uploads/2023/05/Projects-background.png","id":305,"dimRatio":0,"isDark":false} -->
+<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><img class="wp-block-cover__image-background wp-image-305" alt="" src="http://localhost:8082/app/uploads/2023/05/Projects-background.png" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"projects-carousel","layout":{"type":"default"}} -->
 <div class="wp-block-group projects-carousel"><!-- wp:post-title {"textAlign":"center","level":1} /-->
 
 <!-- wp:navigation {"ref":294,"overlayMenu":"never"} /-->
@@ -9,30 +11,30 @@
 <div><button class="projects-carousel__button" type="button">←</button><button class="projects-carousel__button" type="button">→</button></div>
 <!-- /wp:html -->
 
-<!-- wp:query {"queryId":2,"query":{"perPage":"99","pages":0,"offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]},"displayLayout":{"type":"flex","columns":3}} -->
+<!-- wp:query {"queryId":2,"query":{"perPage":"99","pages":0,"offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":":all","exclude":[],"sticky":"","inherit":false,"parents":[],"taxQuery":null},"displayLayout":{"type":"flex","columns":3}} -->
 <div class="wp-block-query"><!-- wp:post-template -->
 <!-- wp:carbon-fields/project-dates /-->
 
-<!-- wp:post-title /-->
+<!-- wp:post-title {"isLink":true} /-->
 
-<!-- wp:post-featured-image /-->
+<!-- wp:post-featured-image {"isLink":true} /-->
 
 <!-- wp:read-more {"content":"View Project →"} /-->
 
 <!-- wp:post-terms {"term":"category"} /-->
 <!-- /wp:post-template --></div>
 <!-- /wp:query --></div>
+<!-- /wp:group --></div></div>
+<!-- /wp:cover --></div>
 <!-- /wp:group -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
-<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+<!-- wp:carbon-fields/post-filter /-->
 
-<!-- wp:paragraph -->
-<p>asdf</p>
-<!-- /wp:paragraph -->
+<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
 
 <!-- wp:separator {"style":{"spacing":{"margin":{"top":"0"}}}} -->
 <hr class="wp-block-separator has-alpha-channel-opacity" style="margin-top:0"/>

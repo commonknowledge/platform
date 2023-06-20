@@ -4,8 +4,32 @@ use Carbon_Fields\Block;
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
+const ECONOMY_SVG = '<path d="M402.593 197.593V197.659L393.476 202.933L335.78 236.34L335.714 236.373L268.735 197.626L268.647 197.681L201.812 236.373L134.877 275.12V275.164L67.8984 313.911L67.8874 313.9L10.1358 280.471L1.4043 275.417V274.91L67.8984 236.417L67.9425 236.373L134.877 197.626L201.812 158.89L268.735 120.143H268.79L402.593 197.593Z" fill="#7AD7DB"/>';
+const CULTURE_SVG = '<path d="M469.577 391.65V391.698L402.646 430.441L335.715 469.185H335.667L201.805 391.698V391.65L268.736 352.906L335.715 314.163L402.646 352.906L469.577 391.65Z" fill="#8AE167"/>';
+const LIBERATION_SVG = '<path d="M670.419 275.418L536.556 352.906H536.509L469.625 391.649H469.578L402.646 352.906L335.715 314.162L402.646 275.418L469.578 314.162L536.509 275.371H536.556L603.488 236.627L670.419 275.418Z" fill="#FEA9BE"/>';
+const ENERGY_SVG = '<path d="M603.487 236.627L536.556 275.371H536.509L469.577 314.162L402.646 275.419L335.715 236.675V236.627L402.646 197.884L268.783 120.396L335.715 81.6051L402.646 120.349V120.396L469.577 159.14L536.556 197.884L603.487 236.627Z" fill="#FFA81A"/>';
+const COMMUNITY_SVG = '<path d="M402.646 275.419L335.715 314.162L268.736 352.906L201.805 391.65V391.697L134.873 352.954V352.906L67.8945 314.162L134.873 275.419V275.371L201.805 236.628L268.736 197.884L335.715 236.628V236.675L402.646 275.419Z" fill="#FFEF56"/>';
+
+const CATEGORY_SVGS = [
+    "economy" => ECONOMY_SVG,
+    "culture" => CULTURE_SVG,
+    "liberation" => LIBERATION_SVG,
+    "energy" => ENERGY_SVG,
+    "community" => COMMUNITY_SVG,
+];
+
+function get_category_svg($slug)
+{
+    $category = get_category_by_slug($slug);
+    return (
+        '<a href="' . get_category_link($category) . '">' .
+        CATEGORY_SVGS[$slug] .
+        '</a>'
+    );
+}
+
 /* Util Functions */
-function render_project_dates($display_active = false)
+function get_project_dates(): string
 {
     $start_year = carbon_get_the_post_meta('start_year');
     $end_year = carbon_get_the_post_meta('end_year') ?: "Ongoing";
@@ -15,8 +39,20 @@ function render_project_dates($display_active = false)
     } else {
         $content = $end_year;
     }
+    return $content;
+}
 
-    if ($display_active && ($end_year === "Ongoing" || $end_year == date('Y'))) {
+function is_project_active(): bool
+{
+    $end_year = carbon_get_the_post_meta('end_year');
+    return !$end_year || ((int) $end_year >= (int) date('Y'));
+}
+
+function render_project_dates($display_active = false)
+{
+    $content = get_project_dates();
+
+    if ($display_active && is_project_active()) {
         $content = "ACTIVE " . $content;
     }
 
@@ -34,15 +70,42 @@ add_action('carbon_fields_register_fields', function () {
             <div class="platform-illustration">
                 <img class="platform-illustration__background" src="/app/themes/platformlondon/assets/img/platform-illustration.png" />
                 <svg width="671" height="470" viewBox="0 0 671 470" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M402.593 197.593V197.659L393.476 202.933L335.78 236.34L335.714 236.373L268.735 197.626L268.647 197.681L201.812 236.373L134.877 275.12V275.164L67.8984 313.911L67.8874 313.9L10.1358 280.471L1.4043 275.417V274.91L67.8984 236.417L67.9425 236.373L134.877 197.626L201.812 158.89L268.735 120.143H268.79L402.593 197.593Z" fill="#7AD7DB"/>
-                    <path d="M469.577 391.65V391.698L402.646 430.441L335.715 469.185H335.667L201.805 391.698V391.65L268.736 352.906L335.715 314.163L402.646 352.906L469.577 391.65Z" fill="#8AE167"/>
-                    <path d="M670.419 275.418L536.556 352.906H536.509L469.625 391.649H469.578L402.646 352.906L335.715 314.162L402.646 275.418L469.578 314.162L536.509 275.371H536.556L603.488 236.627L670.419 275.418Z" fill="#FEA9BE"/>
-                    <path d="M603.487 236.627L536.556 275.371H536.509L469.577 314.162L402.646 275.419L335.715 236.675V236.627L402.646 197.884L268.783 120.396L335.715 81.6051L402.646 120.349V120.396L469.577 159.14L536.556 197.884L603.487 236.627Z" fill="#FFA81A"/>
-                    <path d="M402.646 275.419L335.715 314.162L268.736 352.906L201.805 391.65V391.697L134.873 352.954V352.906L67.8945 314.162L134.873 275.419V275.371L201.805 236.628L268.736 197.884L335.715 236.628V236.675L402.646 275.419Z" fill="#FFEF56"/>
+                    <?= get_category_svg("economy") ?>
+                    <?= get_category_svg("culture") ?>
+                    <?= get_category_svg("liberation") ?>
+                    <?= get_category_svg("energy") ?>
+                    <?= get_category_svg("community") ?>
                 </svg>
             </div>
             <?php
         });
+
+    Block::make('Image Pair')
+        ->add_fields([
+            Field::make('image', 'image_1', 'Image 1'),
+            Field::make('image', 'image_2', 'Image 2')
+        ])
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $image_1 = wp_get_attachment_image($fields["image_1"], 'medium_large');
+            $image_2 = wp_get_attachment_image($fields["image_2"], 'medium_large');
+            ?>
+            <div class="platform-image-pair">
+                <div class="platform-image-pair__images">
+                    <?= $image_1 ?>
+                    <?= $image_2 ?>
+                </div>
+            </div>
+            <?
+        });
+
+    Container::make('post_meta', 'Extra Fields')
+        ->where('post_type', 'IN', ['page', 'pl_project'])
+        ->add_fields(array(
+            Field::make('complex', 'background_images', 'Background Images')
+                ->add_fields([
+                    Field::make('image', 'image', 'Image')->set_value_type('url')
+                ])
+        ));
 
     Block::make(__('Background Images'))
         ->add_fields(array(
@@ -55,11 +118,11 @@ add_action('carbon_fields_register_fields', function () {
                 return;
             }
             ?>
-            <div class="background-images hidden md:block">
+            <div class="background-images hidden md:block absolute w-full h-full">
                 <?php foreach ($background_images as $i => $background_image) {
                     $top = (100 * $i / $count) . '%';
                     $even = $i % 2 === 0;
-                    $style = "position:absolute;z-index:0;top:$top;mix-blend-mode:multiply;";
+                    $style = "position:absolute;z-index:0;top:$top;mix-blend-mode:multiply;max-width:20%;";
                     if ($even) {
                         $style .= "left:0";
                     } else {
@@ -337,16 +400,18 @@ add_action('carbon_fields_register_fields', function () {
             ?>
             <div class="post-details">
                 <?php if ($first_content_type) :?>
-                    <a href="/?s=&<?= $taxonomy ?>=<?= $first_content_type->slug ?>">
-                        <?= $first_content_type->name ?>
-                    </a>
+                    <div class="post-details__terms">
+                        <a href="/?s=&<?= $taxonomy ?>=<?= $first_content_type->slug ?>">
+                            <?= $first_content_type->name ?>
+                        </a>
+                    <?php foreach ($content_types as $content_type) :?>
+                        ,&nbsp;
+                        <a href="/?s=&<?= $taxonomy ?>=<?= $content_type->slug ?>">
+                            <?= $content_type->name ?>
+                        </a>
+                    <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
-                <?php foreach ($content_types as $content_type) :?>
-                    ,&nbsp;
-                    <a href="/?s=&<?= $taxonomy ?>=<?= $content_type->slug ?>">
-                        <?= $content_type->name ?>
-                    </a>
-                <?php endforeach; ?>
                 <?php if ($post->post_type === "pl_project") : ?>
                     <?php render_project_dates(display_active: true); ?>
                 <?php else : ?>
@@ -365,15 +430,7 @@ add_action('carbon_fields_register_fields', function () {
         ->add_fields(array(
             Field::make('text', 'start_year')->set_attribute('type', 'number'),
             Field::make('text', 'end_year')->set_attribute('type', 'number'),
-        ));
-
-    Container::make('post_meta', 'Extra Fields')
-        ->where('post_type', '=', 'page')
-        ->add_fields(array(
-            Field::make('complex', 'background_images', 'Background Images')
-                ->add_fields([
-                    Field::make('image', 'image', 'Image')->set_value_type('url')
-                ])
+            Field::make('file', 'pdf', 'Project PDF')->set_type('application/pdf')->set_value_type('url')
         ));
 
     Block::make(__('Project Dates'))
@@ -382,6 +439,99 @@ add_action('carbon_fields_register_fields', function () {
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
             render_project_dates();
+        });
+
+    Block::make(__('Project Header'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Project Header')),
+            Field::make('image', 'background_image', 'Background image')->set_value_type('url')
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $image = $fields["background_image"] ?? null;
+            $download_url = carbon_get_the_post_meta("pdf");
+            ?>
+            <div class="project-header">
+                <div class="project-header__cover" style="background-image:url('<?= $image ?>')">
+                    <span class="btn-default">Project</span>
+                    <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
+                    <div class="project-header__buttons">
+                        <?php if (is_project_active()) : ?>
+                            <span class="btn-default btn-active">Active</span>
+                        <?php endif; ?>
+                        <span class="btn-default bg-cream">
+                            <?= get_project_dates() ?>
+                        </span>
+                        <?php if ($download_url) : ?>
+                            <a 
+                                target="_blank"
+                                class="btn-default bg-cream project-download-link"
+                                href="<?= $download_url ?>">
+                                Download PDF
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+        });
+
+    Block::make(__('Project Download Link'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Project Download Link'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $download_url = carbon_get_the_post_meta("pdf");
+            if ($download_url) : ?>
+                <div class="project-download-link-container">
+                    <a 
+                        target="_blank"
+                        class="btn-default bg-cream project-download-link"
+                        href="<?= $download_url ?>">
+                        Download PDF
+                    </a>
+                </div>
+            <?php endif;
+        });
+
+    Block::make(__('Project Details'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Project Details'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $post = get_post();
+            $categories = wp_get_post_categories($post->ID, ['fields' => 'all']);
+            $project_types = get_the_terms($post, "pl_project_type") ?: [];
+            ?>
+            <div class="project-details">
+                <?php if ($categories) : ?>
+                    <span class="project-details__label">Focus Areas</span>
+                    <ul class="project-details__categories">
+                        <?php foreach ($categories as $category) : ?>
+                            <li class="project-details__category">
+                                <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <?= get_category_svg($category->slug) ?>
+                                </svg>
+                                <a class="btn-default category-<?= $category->slug ?>" href="<?= get_category_link($category) ?>">
+                                    <?= $category->name ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+                <?php if ($project_types) : ?>
+                    <span class="project-details__label">Project Types</span>
+                    <ul class="project-details__terms">
+                        <?php foreach ($project_types as $project_type) : ?>
+                            <li class="project-details__term">
+                                <a href="<?= get_term_link($project_type, "pl_project_type") ?>">
+                                    <?= $project_type->name ?>
+                                </a>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+            <?php
         });
     
     /* Member Fields and Blocks */
@@ -414,7 +564,7 @@ add_action('carbon_fields_register_fields', function () {
     Container::make('post_meta', 'Extra Fields')
         ->where('post_type', '=', 'pl_timeline_entry')
         ->add_fields(array(
-            Field::make('text', 'year')->set_attribute('type', 'number')
+            Field::make('text', 'year', "Year (YYYY)")->set_attribute('type', 'number')
                 ->set_required(true),
         ));
 
@@ -508,8 +658,18 @@ add_filter("term_link", function ($termlink, $term, $taxonomy) {
 add_filter("query_loop_block_query_vars", function ($query) {
     // If the search parameter has the special value ":all", don't filter
     // This is used in the Carousel block
-    if ($query['s'] ?? '' === ':all') {
+    if (($query['s'] ?? '') === ':all') {
         $query['s'] = '';
+        return $query;
+    }
+    // Special value ":related" means get posts with categories that the
+    // current post has
+    if (($query['s'] ?? '') === ':related') {
+        $current_post = get_post();
+        $categories = wp_get_post_categories($current_post->ID);
+        if ($categories) {
+            $query["category__in"] = $categories;
+        }
         return $query;
     }
     $category_name = get_query_var("category_name");
@@ -531,8 +691,23 @@ add_filter("query_loop_block_query_vars", function ($query) {
     return $query;
 });
 
+// Make medium large image size available for insertion
+// normally default and left out as option
+// https://wordpress.stackexchange.com/questions/290259/make-medium-large-images-available-to-insert-into-post
+// https://github.com/WordPress/gutenberg/issues/33010
+add_filter('image_size_names_choose', function () {
+    return [
+        'thumbnail'    => __('Thumbnail', 'textdomain'),
+        'medium'       => __('Medium', 'textdomain'),
+        'medium_large' => __('Medium Large', 'textdomain'),
+        'large'        => __('Large', 'textdomain'),
+        'full'         => __('Full Size', 'textdomain'),
+    ];
+});
+
 add_action('pre_get_posts', function ($query) {
-    if ($query->get("s") === ':all') {
+    // Ignore special parameters in block editor
+    if ($query->get("s") === ':all' || $query->get("s") === ':related') {
         $query->set("s", "");
         return $query;
     }
@@ -633,9 +808,8 @@ add_action('init', function () {
                 'singular_name' => 'Timeline Entry',
             ),
             'public'      => true,
-            'has_archive' => true,
+            'has_archive' => false,
             'menu_icon' => 'dashicons-calendar',
-            'rewrite' => array('slug' => 'timeline'),
             'show_in_rest' => true,
             'supports' => array('title', 'editor', 'author'),
             'exclude_from_search' => true,
