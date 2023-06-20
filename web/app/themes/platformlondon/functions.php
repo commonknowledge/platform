@@ -95,7 +95,7 @@ add_action('carbon_fields_register_fields', function () {
                     <?= $image_2 ?>
                 </div>
             </div>
-            <?
+            <?php
         });
 
     Container::make('post_meta', 'Extra Fields')
