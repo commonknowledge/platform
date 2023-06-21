@@ -702,6 +702,10 @@ header .wp-block-search {
     @apply relative md:w-[calc(100%+5rem)] z-20;
 }
 
+.platform-strapline em {
+    @apply btn-default font-normal text-lg not-italic normal-case inline-block mr-2;
+}
+
 .platform-illustration {
     @apply md:-mt-10 relative z-10;
     mix-blend-mode: multiply;
