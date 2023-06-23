@@ -316,9 +316,9 @@ if (timelineEntries.length) {
     updateTimeline()
 }
 
-// Fit SVG viewbox to the inner content. Used in the Project Details block to display just one of the
+// Fit SVG viewbox to the inner content. Used in the Project Details Footer block to display just one of the
 // category SVGs
-document.querySelectorAll(".project-details svg").forEach((svg) => {
+document.querySelectorAll(".post-details-footer svg").forEach((svg) => {
     // Get the bounds of the SVG content
     const bbox = svg.getBBox();
     svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);

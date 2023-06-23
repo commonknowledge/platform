@@ -57,7 +57,7 @@ Tags: full-site-editing,
  */
 
 .wp-block-image.size-full {
-    @apply !m-0 !max-w-none;
+    @apply !mx-0 !max-w-none;
 }
 
 .wp-block-image.size-full>img {
@@ -72,6 +72,14 @@ Tags: full-site-editing,
     @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
 }
 
+.wp-block-image.size-large>figcaption {
+    @apply md:-ml-16 uppercase;
+}
+
+.wp-block-image.size-medium_large>figcaption {
+    @apply md:-ml-16 uppercase;
+}
+
 .wp-block-separator {
     @apply border-dark-green !border-t-0 border-b;
 }
@@ -82,6 +90,10 @@ Tags: full-site-editing,
 
 .entry-content {
     @apply relative;
+}
+
+.entry-content figcaption {
+    @apply text-sm;
 }
 
 
@@ -95,6 +107,11 @@ h4,
 h5,
 h6 {
     @apply uppercase font-bold;
+}
+
+text {
+    @apply normal-case text-dark-green;
+    font-size: 0.5rem;
 }
 
 /*
@@ -466,9 +483,15 @@ header .wp-block-search {
     }
 }
 
-/**
+/* Post Header Block */
+.post-header {
+    @apply flex flex-col items-center mb-16;
+}
 
-*/
+.post-header h1 {
+    @apply text-center !mt-4 !mb-12;
+    max-width: 1000px;
+}
 
 /* Post Details Block */
 .post-details {
@@ -483,6 +506,11 @@ header .wp-block-search {
     @apply mr-4;
 }
 
+/* Post Full-width Image */
+.single .wp-block-image.size-full {
+    @apply !-mx-4 !mb-16;
+}
+
 /* Project Header Block */
 .project-header {
     @apply mb-16;
@@ -490,7 +518,7 @@ header .wp-block-search {
 
 .project-header h1 {
     @apply text-center !mt-4 !mb-12;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 .project-header__cover {
@@ -519,31 +547,31 @@ header .wp-block-search {
     top: 0.4rem;
 }
 
-.project-details {
+.post-details-footer {
     @apply relative flex flex-col mb-16;
 }
 
-.project-details__label {
+.post-details-footer__label {
     @apply border-dark-green border-t uppercase mb-4;
 }
 
-.project-details__categories,.project-details__terms {
-    @apply flex flex-wrap items-center gap-4 mb-8;
+.post-details-footer__categories,.post-details-footer__terms {
+    @apply flex flex-wrap items-center gap-4 pb-4 mb-4;
 }
 
-.project-details__terms {
+.post-details-footer__terms {
     @apply pl-5;
 }
 
-.project-details__term {
+.post-details-footer__term {
     @apply list-disc mr-4;
 }
 
-.project-details__category {
+.post-details-footer__category {
     @apply flex items-center;
 }
 
-.project-details__category svg {
+.post-details-footer__category svg {
     @apply mr-2;
     height: 2rem;
 }

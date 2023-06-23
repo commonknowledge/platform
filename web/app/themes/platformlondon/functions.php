@@ -21,6 +21,9 @@ const CATEGORY_SVGS = [
 function get_category_svg($slug)
 {
     $category = get_category_by_slug($slug);
+    if (empty(CATEGORY_SVGS[$slug])) {
+        return "";
+    }
     return (
         '<a href="' . get_category_link($category) . '">' .
         CATEGORY_SVGS[$slug] .
@@ -374,6 +377,19 @@ add_action('carbon_fields_register_fields', function () {
         });
 
     /* Post Fields and Blocks */
+    Block::make(__('Post Header'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Post Header')),
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            ?>
+            <div class="post-header">
+                <span class="btn-default">Blog</span>
+                <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
+            </div>
+            <?php
+        });
+
     Block::make(__('Post Details'))
         ->add_fields(array(
             Field::make('separator', 'crb_separator', __('Post Details'))
@@ -420,6 +436,65 @@ add_action('carbon_fields_register_fields', function () {
                         <?= $author ?>
                     </a>
                 <?php endif ?>
+            </div>
+            <?php
+        });
+
+    Block::make(__('Post Details Footer'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Post Details Footer'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $post = get_post();
+            $categories = wp_get_post_categories($post->ID, ['fields' => 'all']);
+            $taxonomies = [
+                "pl_project_type",
+                "pl_place",
+                "pl_player",
+                "pl_issue",
+                "pl_organisation"
+            ];
+            ?>
+            <div class="post-details-footer">
+                <?php if ($categories) : ?>
+                    <span class="post-details-footer__label">Focus Areas</span>
+                    <ul class="post-details-footer__categories">
+                        <?php foreach ($categories as $category) {
+                            $svg = get_category_svg($category->slug);
+                            ?>
+                            <li class="post-details-footer__category">
+                                <?php if ($svg) : ?>
+                                    <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <?= $svg ?>
+                                    </svg>
+                                <?php endif; ?>
+                                <a class="btn-default category-<?= $category->slug ?>" href="<?= get_category_link($category) ?>">
+                                    <?= $category->name ?>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                <?php endif; ?>
+                <?php foreach ($taxonomies as $taxonomy) {
+                    $terms = get_the_terms($post, $taxonomy);
+                    $title = get_taxonomy($taxonomy)->labels->name;
+                    $a = 3;
+                    ?>
+                    <?php if ($terms) : ?>
+                        <span class="post-details-footer__label">
+                            <?= $title ?>
+                        </span>
+                        <ul class="post-details-footer__terms">
+                            <?php foreach ($terms as $term) : ?>
+                                <li class="post-details-footer__term">
+                                    <a href="<?= get_term_link($term, $taxonomy) ?>">
+                                        <?= $term->name ?>
+                                    </a>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                    <?php endif; ?>
+                <?php } ?>
             </div>
             <?php
         });
@@ -491,47 +566,6 @@ add_action('carbon_fields_register_fields', function () {
                     </a>
                 </div>
             <?php endif;
-        });
-
-    Block::make(__('Project Details'))
-        ->add_fields(array(
-            Field::make('separator', 'crb_separator', __('Project Details'))
-        ))
-        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-            $post = get_post();
-            $categories = wp_get_post_categories($post->ID, ['fields' => 'all']);
-            $project_types = get_the_terms($post, "pl_project_type") ?: [];
-            ?>
-            <div class="project-details">
-                <?php if ($categories) : ?>
-                    <span class="project-details__label">Focus Areas</span>
-                    <ul class="project-details__categories">
-                        <?php foreach ($categories as $category) : ?>
-                            <li class="project-details__category">
-                                <svg fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <?= get_category_svg($category->slug) ?>
-                                </svg>
-                                <a class="btn-default category-<?= $category->slug ?>" href="<?= get_category_link($category) ?>">
-                                    <?= $category->name ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-                <?php if ($project_types) : ?>
-                    <span class="project-details__label">Project Types</span>
-                    <ul class="project-details__terms">
-                        <?php foreach ($project_types as $project_type) : ?>
-                            <li class="project-details__term">
-                                <a href="<?= get_term_link($project_type, "pl_project_type") ?>">
-                                    <?= $project_type->name ?>
-                                </a>
-                            </li>
-                        <?php endforeach ?>
-                    </ul>
-                <?php endif; ?>
-            </div>
-            <?php
         });
     
     /* Member Fields and Blocks */
@@ -840,6 +874,58 @@ add_action('init', function () {
         'labels'            => [
             'name'              => _x('Post Types', 'taxonomy general name'),
             'singular_name'     => _x('Post type', 'taxonomy singular name'),
+        ]
+    ]);
+
+    register_taxonomy('pl_organisation', ['post'], [
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest' => true,
+        'query_var'         => true,
+        'rewrite'           => ['slug' => 'organisation'],
+        'labels'            => [
+            'name'              => _x('Organisations', 'taxonomy general name'),
+            'singular_name'     => _x('Organisation', 'taxonomy singular name'),
+        ]
+    ]);
+
+    register_taxonomy('pl_player', ['post'], [
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest' => true,
+        'query_var'         => true,
+        'rewrite'           => ['slug' => 'player'],
+        'labels'            => [
+            'name'              => _x('Players', 'taxonomy general name'),
+            'singular_name'     => _x('Player', 'taxonomy singular name'),
+        ]
+    ]);
+
+    register_taxonomy('pl_issue', ['post'], [
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest' => true,
+        'query_var'         => true,
+        'rewrite'           => ['slug' => 'issue'],
+        'labels'            => [
+            'name'              => _x('Issues', 'taxonomy general name'),
+            'singular_name'     => _x('Issue', 'taxonomy singular name'),
+        ]
+    ]);
+
+    register_taxonomy('pl_place', ['post'], [
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest' => true,
+        'query_var'         => true,
+        'rewrite'           => ['slug' => 'place'],
+        'labels'            => [
+            'name'              => _x('Places', 'taxonomy general name'),
+            'singular_name'     => _x('Place', 'taxonomy singular name'),
         ]
     ]);
 
