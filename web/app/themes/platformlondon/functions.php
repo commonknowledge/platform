@@ -56,13 +56,122 @@ function render_project_dates($display_active = false)
     $content = get_project_dates();
 
     if ($display_active && is_project_active()) {
-        $content = "ACTIVE " . $content;
+        $content = "ACTIVE&nbsp;&nbsp;&nbsp;&nbsp;" . $content;
     }
 
     echo "<span class=\"project-dates text-right uppercase\">$content</span>";
 }
 
+function get_custom_post_type_taxonomy($post)
+{
+    switch ($post->post_type) {
+        case "post":
+            return "pl_post_type";
+        case "pl_project":
+            return "pl_project_type";
+        case "pl_resource":
+        default:
+            return "content-type";
+    }
+}
+
 add_action('carbon_fields_register_fields', function () {
+    /* Project Fields and Blocks */
+    Container::make('post_meta', 'Project Metadata')
+        ->where('post_type', '=', 'pl_project')
+        ->add_fields(array(
+            Field::make('text', 'start_year')->set_attribute('type', 'number'),
+            Field::make('text', 'end_year')->set_attribute('type', 'number'),
+            Field::make('image', 'background_image', 'Background Image')->set_value_type('url'),
+            Field::make('file', 'pdf', 'Project PDF')->set_type('application/pdf')->set_value_type('url'),
+            Field::make('association', 'members', 'Team')
+                ->set_types([
+                    [
+                        'type'      => 'post',
+                        'post_type' => 'pl_member',
+                    ]
+                ])
+        ));
+
+    Container::make('post_meta', 'Related Content')
+        ->where('post_type', 'IN', ['post', 'pl_project'])
+        ->add_fields(array(
+            Field::make('association', 'related', 'Related')
+                ->set_types([
+                    [
+                        'type'      => 'post',
+                        'post_type' => 'pl_resource',
+                    ],
+                    [
+                        'type'      => 'post',
+                        'post_type' => 'post',
+                    ],
+                    [
+                        'type'      => 'post',
+                        'post_type' => 'pl_project',
+                    ]
+                ])
+        ));
+
+    Block::make(__('Project Dates'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Project Dates'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            render_project_dates();
+        });
+
+    Block::make(__('Project Header'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Project Header')),
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $image = carbon_get_the_post_meta("background_image");
+            $download_url = carbon_get_the_post_meta("pdf");
+            ?>
+            <div class="project-header">
+                <div class="project-header__cover" style="background-image:url('<?= $image ?>')">
+                    <span class="btn-default">Project</span>
+                    <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
+                    <div class="project-header__buttons">
+                        <?php if (is_project_active()) : ?>
+                            <span class="btn-default btn-active">Active</span>
+                        <?php endif; ?>
+                        <span class="btn-default bg-cream">
+                            <?= get_project_dates() ?>
+                        </span>
+                        <?php if ($download_url) : ?>
+                            <a 
+                                target="_blank"
+                                class="btn-default bg-cream project-download-link"
+                                href="<?= $download_url ?>">
+                                Download PDF
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+        });
+
+    Block::make(__('Project Download Link'))
+        ->add_fields(array(
+            Field::make('separator', 'crb_separator', __('Project Download Link'))
+        ))
+        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $download_url = carbon_get_the_post_meta("pdf");
+            if ($download_url) : ?>
+                <div class="project-download-link-container">
+                    <a 
+                        target="_blank"
+                        class="btn-default bg-cream project-download-link"
+                        href="<?= $download_url ?>">
+                        Download PDF
+                    </a>
+                </div>
+            <?php endif;
+        });
+    
     /* Page Fields and Blocks */
     Block::make(__('Platform Illustration'))
         ->add_fields(array(
@@ -382,10 +491,36 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('separator', 'crb_separator', __('Post Header')),
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+            $post = get_post();
+            $post_type = get_post_type_object($post->post_type);
+            $post_type_href = match($post->post_type) {
+                "post" => "/blog/",
+                "pl_resource" => "/resources/",
+                default => "/"
+            };
+            $post_type_taxonomy = get_custom_post_type_taxonomy($post);
+            $post_types = get_the_terms($post, $post_type_taxonomy);
+            $post_date = get_the_date('j M Y');
+            $author_id = $post->post_author;
+            $author = get_the_author_meta("display_name", $author_id);
+
             ?>
             <div class="post-header">
-                <span class="btn-default">Blog</span>
+                <a href="<?= $post_type_href ?>" class="btn-default">
+                    <?= $post_type->labels->singular_name ?>
+                </a>
                 <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
+                <div class="post-header__details">
+                    <?php if ($post_types) : ?>
+                        <a href="<?= get_term_link($post_types[0], $post_type_taxonomy) ?>">
+                            <?= $post_types[0]->name ?>
+                        </a>
+                    <?php endif ?>
+                    <span><?= $post_date ?></span>
+                    <a href="/?s&author=<?= $author_id ?>">
+                        <?= $author ?>
+                    </a>
+                </div>
             </div>
             <?php
         });
@@ -396,34 +531,24 @@ add_action('carbon_fields_register_fields', function () {
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
             $post = get_post();
-            switch ($post->post_type) {
-                case "post":
-                    $taxonomy = "pl_post_type";
-                    break;
-                case "pl_project":
-                    $taxonomy = "pl_project_type";
-                    break;
-                default:
-                    $taxonomy = "content-type";
-            }
-            $content_types = get_the_terms($post, $taxonomy) ?: [];
-            $first_content_type = array_pop($content_types);
+            $post_type_taxonomy = get_custom_post_type_taxonomy($post);
+            $post_types = get_the_terms($post, $post_type_taxonomy) ?: [];
+            $first_post_type = array_pop($post_types);
             $post_date = get_the_date('j M Y');
-            $author = get_the_author();
-            $author_id = get_the_author_meta('ID');
+            $author_id = $post->post_author;
+            $author = get_the_author_meta("display_name", $author_id);
             $author = $author ? explode(" ", $author)[0] : "";
 
             ?>
             <div class="post-details">
-                <?php if ($first_content_type) :?>
+                <?php if ($first_post_type) :?>
                     <div class="post-details__terms">
-                        <a href="/?s=&<?= $taxonomy ?>=<?= $first_content_type->slug ?>">
-                            <?= $first_content_type->name ?>
+                        <a href="<?= get_term_link($first_post_type, $post_type_taxonomy) ?>">
+                            <?= $first_post_type->name ?><?= $post_types ? ",&nbsp;" : "" ?>
                         </a>
-                    <?php foreach ($content_types as $content_type) :?>
-                        ,&nbsp;
-                        <a href="/?s=&<?= $taxonomy ?>=<?= $content_type->slug ?>">
-                            <?= $content_type->name ?>
+                    <?php foreach ($post_types as $post_type) :?>
+                        <a href="<?= get_term_link($post_type, $post_type_taxonomy) ?>">
+                            <?= $post_type->name ?>
                         </a>
                     <?php endforeach; ?>
                     </div>
@@ -454,6 +579,7 @@ add_action('carbon_fields_register_fields', function () {
                 "pl_issue",
                 "pl_organisation"
             ];
+            $members = carbon_get_the_post_meta("members");
             ?>
             <div class="post-details-footer">
                 <?php if ($categories) : ?>
@@ -478,7 +604,6 @@ add_action('carbon_fields_register_fields', function () {
                 <?php foreach ($taxonomies as $taxonomy) {
                     $terms = get_the_terms($post, $taxonomy);
                     $title = get_taxonomy($taxonomy)->labels->name;
-                    $a = 3;
                     ?>
                     <?php if ($terms) : ?>
                         <span class="post-details-footer__label">
@@ -495,81 +620,24 @@ add_action('carbon_fields_register_fields', function () {
                         </ul>
                     <?php endif; ?>
                 <?php } ?>
+                <?php if ($members) : ?>
+                    <span class="post-details-footer__label">
+                        Team
+                    </span>
+                    <ul class="post-details-footer__terms">
+                        <?php foreach ($members as $member) : ?>
+                            <li class="post-details-footer__term">
+                                <?= get_post($member["id"])->post_title ?>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+                <?php endif; ?>
             </div>
             <?php
         });
 
-    /* Project Fields and Blocks */
-    Container::make('post_meta', 'Extra Fields')
-        ->where('post_type', '=', 'pl_project')
-        ->add_fields(array(
-            Field::make('text', 'start_year')->set_attribute('type', 'number'),
-            Field::make('text', 'end_year')->set_attribute('type', 'number'),
-            Field::make('file', 'pdf', 'Project PDF')->set_type('application/pdf')->set_value_type('url')
-        ));
-
-    Block::make(__('Project Dates'))
-        ->add_fields(array(
-            Field::make('separator', 'crb_separator', __('Project Dates'))
-        ))
-        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-            render_project_dates();
-        });
-
-    Block::make(__('Project Header'))
-        ->add_fields(array(
-            Field::make('separator', 'crb_separator', __('Project Header')),
-            Field::make('image', 'background_image', 'Background image')->set_value_type('url')
-        ))
-        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-            $image = $fields["background_image"] ?? null;
-            $download_url = carbon_get_the_post_meta("pdf");
-            ?>
-            <div class="project-header">
-                <div class="project-header__cover" style="background-image:url('<?= $image ?>')">
-                    <span class="btn-default">Project</span>
-                    <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
-                    <div class="project-header__buttons">
-                        <?php if (is_project_active()) : ?>
-                            <span class="btn-default btn-active">Active</span>
-                        <?php endif; ?>
-                        <span class="btn-default bg-cream">
-                            <?= get_project_dates() ?>
-                        </span>
-                        <?php if ($download_url) : ?>
-                            <a 
-                                target="_blank"
-                                class="btn-default bg-cream project-download-link"
-                                href="<?= $download_url ?>">
-                                Download PDF
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <?php
-        });
-
-    Block::make(__('Project Download Link'))
-        ->add_fields(array(
-            Field::make('separator', 'crb_separator', __('Project Download Link'))
-        ))
-        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-            $download_url = carbon_get_the_post_meta("pdf");
-            if ($download_url) : ?>
-                <div class="project-download-link-container">
-                    <a 
-                        target="_blank"
-                        class="btn-default bg-cream project-download-link"
-                        href="<?= $download_url ?>">
-                        Download PDF
-                    </a>
-                </div>
-            <?php endif;
-        });
-    
     /* Member Fields and Blocks */
-    Container::make('post_meta', 'Extra Fields')
+    Container::make('post_meta', 'Member Metadata')
         ->where('post_type', '=', 'pl_member')
         ->add_fields(array(
             Field::make('text', 'position'),
@@ -588,14 +656,14 @@ add_action('carbon_fields_register_fields', function () {
         });
 
     /* Resource Fields and Blocks */
-    Container::make('post_meta', 'Extra Fields')
+    Container::make('post_meta', 'Resource Metadata')
         ->where('post_type', '=', 'pl_resource')
         ->add_fields(array(
             Field::make('text', 'position'),
         ));
 
     /* Timeline Blocks */
-    Container::make('post_meta', 'Extra Fields')
+    Container::make('post_meta', 'Timeline Date')
         ->where('post_type', '=', 'pl_timeline_entry')
         ->add_fields(array(
             Field::make('text', 'year', "Year (YYYY)")->set_attribute('type', 'number')
@@ -696,15 +764,32 @@ add_filter("query_loop_block_query_vars", function ($query) {
         $query['s'] = '';
         return $query;
     }
-    // Special value ":related" means get posts with categories that the
-    // current post has
+    // Special value ":related" means prioritise posts with categories
+    // that the current post has
     if (($query['s'] ?? '') === ':related') {
         $current_post = get_post();
+        $query["exclude"] = [$current_post->ID];
+
+        $explicitly_related = carbon_get_the_post_meta("related");
+        $explicitly_related_ids = array_map(function ($post) {
+            return $post['id'];
+        }, $explicitly_related);
+
         $categories = wp_get_post_categories($current_post->ID);
+        $related_query = $query;
         if ($categories) {
-            $query["category__in"] = $categories;
+            $related_query["category__in"] = $categories;
         }
-        return $query;
+        $related_posts = get_posts($related_query);
+
+        $other_posts = get_posts($query);
+        $posts = array_merge($related_posts, $other_posts);
+        $post_ids = array_map(function ($post) {
+            return $post->ID;
+        }, $posts);
+
+        $query["post__in"] = array_merge($explicitly_related_ids, $post_ids);
+        $query["orderby"] = "post__in";
     }
     $category_name = get_query_var("category_name");
     if ($category_name) {
@@ -783,6 +868,8 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 add_action('init', function () {
+    unregister_taxonomy_for_object_type('post_tag', 'post');
+
     register_post_type(
         'pl_project',
         array(
@@ -796,7 +883,7 @@ add_action('init', function () {
             'rewrite' => array('slug' => 'project'),
             'show_in_rest' => true,
             'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
-            'taxonomies' => array('category', 'post_tag')
+            'taxonomies' => array('category')
         )
     );
 
@@ -877,7 +964,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_organisation', ['post'], [
+    register_taxonomy('pl_organisation', ['post', 'pl_project'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -890,7 +977,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_player', ['post'], [
+    register_taxonomy('pl_player', ['post', 'pl_project'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -903,7 +990,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_issue', ['post'], [
+    register_taxonomy('pl_issue', ['post', 'pl_project'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -916,7 +1003,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_place', ['post'], [
+    register_taxonomy('pl_place', ['post', 'pl_project'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,

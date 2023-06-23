@@ -353,7 +353,7 @@ header .wp-block-search {
     }
 
     .wp-block-post.type-$(type) > .wp-block-columns {
-        @apply !flex-wrap;
+        @apply !flex-wrap !gap-4;
     }
 
     .wp-block-post.type-$(type) .wp-block-columns {
@@ -456,8 +456,15 @@ header .wp-block-search {
         }
 
         /* Min width for image and text colums */
-        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column {
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:not(:empty) {
             min-width: 240px;
+        }
+
+        /* Collapse empty colums */
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:empty {
+            flex-basis: 0 !important;
+            flex-grow: 0;
+            margin-left: -1rem;
         }
 
         /* On pages, the first item is 100%, so the indexing here needs to be incremented */
@@ -491,6 +498,14 @@ header .wp-block-search {
 .post-header h1 {
     @apply text-center !mt-4 !mb-12;
     max-width: 1000px;
+}
+
+.post-header__details {
+    @apply uppercase;
+}
+
+.post-header__details > *:not(:last-child) {
+    @apply mr-4;
 }
 
 /* Post Details Block */

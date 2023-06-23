@@ -1234,7 +1234,8 @@ header .wp-block-search {
            object-fit: cover;
     }
 .wp-block-post.type-post > .wp-block-columns {
-        flex-wrap: wrap !important
+        flex-wrap: wrap !important;
+        gap: 1rem !important
     }
 .wp-block-post.type-post .wp-block-columns {
         margin: 0px !important;
@@ -1343,8 +1344,15 @@ header .wp-block-search {
         }
 
         /* Min width for image and text colums */
-        .wp-block-post.type-post > .wp-block-columns > .wp-block-column {
+        .wp-block-post.type-post > .wp-block-columns > .wp-block-column:not(:empty) {
             min-width: 240px;
+        }
+
+        /* Collapse empty colums */
+        .wp-block-post.type-post > .wp-block-columns > .wp-block-column:empty {
+            flex-basis: 0 !important;
+            flex-grow: 0;
+            margin-left: -1rem;
         }
 
         /* On pages, the first item is 100%, so the indexing here needs to be incremented */
@@ -1377,7 +1385,8 @@ header .wp-block-search {
            object-fit: cover;
     }
 .wp-block-post.type-pl_resource > .wp-block-columns {
-        flex-wrap: wrap !important
+        flex-wrap: wrap !important;
+        gap: 1rem !important
     }
 .wp-block-post.type-pl_resource .wp-block-columns {
         margin: 0px !important;
@@ -1486,8 +1495,15 @@ header .wp-block-search {
         }
 
         /* Min width for image and text colums */
-        .wp-block-post.type-pl_resource > .wp-block-columns > .wp-block-column {
+        .wp-block-post.type-pl_resource > .wp-block-columns > .wp-block-column:not(:empty) {
             min-width: 240px;
+        }
+
+        /* Collapse empty colums */
+        .wp-block-post.type-pl_resource > .wp-block-columns > .wp-block-column:empty {
+            flex-basis: 0 !important;
+            flex-grow: 0;
+            margin-left: -1rem;
         }
 
         /* On pages, the first item is 100%, so the indexing here needs to be incremented */
@@ -1525,6 +1541,14 @@ header .wp-block-search {
   margin-bottom: 3rem !important;
   text-align: center;
     max-width: 1000px;
+}
+
+.post-header__details {
+  text-transform: uppercase;
+}
+
+.post-header__details > *:not(:last-child) {
+  margin-right: 1rem;
 }
 
 /* Post Details Block */

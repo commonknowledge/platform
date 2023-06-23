@@ -17,10 +17,10 @@ services:
     image: mariadb
     container_name: platform-mysql
     volumes:
-      - wordpress-starter-template-mysql:/var/lib/mysql
+      - platform-mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=wordpress-starter-template
+      - MYSQL_DATABASE=platform
     restart: always
     ports:
       - "3308:3306"
@@ -34,7 +34,7 @@ services:
       - ./:/var/www/html:rw,cached
       - ./docker/wordpress/php.ini:/usr/local/etc/php/conf.d/php.ini
     environment:
-      - WORDPRESS_DB_NAME=wordpress-starter-template
+      - WORDPRESS_DB_NAME=platform
       - WORDPRESS_DB_PASSWORD=password
       - WORDPRESS_DB_HOST=mysql
       - WORDPRESS_TABLE_PREFIX=wp_
@@ -52,4 +52,4 @@ services:
       - ./:/var/www/html:rw,cached
 
 volumes:
-  wordpress-starter-template-mysql:
+  platform-mysql:
