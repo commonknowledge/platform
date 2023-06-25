@@ -83,6 +83,7 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('text', 'start_year')->set_attribute('type', 'number'),
             Field::make('text', 'end_year')->set_attribute('type', 'number'),
             Field::make('image', 'background_image', 'Background Image')->set_value_type('url'),
+            Field::make('text', 'url', 'Project Website')->set_attribute('type', 'url'),
             Field::make('file', 'pdf', 'Project PDF')->set_type('application/pdf')->set_value_type('url'),
             Field::make('association', 'members', 'Team')
                 ->set_types([
@@ -94,7 +95,7 @@ add_action('carbon_fields_register_fields', function () {
         ));
 
     Container::make('post_meta', 'Related Content')
-        ->where('post_type', 'IN', ['post', 'pl_project'])
+        ->where('post_type', 'IN', ['post', 'pl_project', 'pl_resource'])
         ->add_fields(array(
             Field::make('association', 'related', 'Related')
                 ->set_types([
@@ -128,6 +129,7 @@ add_action('carbon_fields_register_fields', function () {
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
             $image = carbon_get_the_post_meta("background_image");
             $download_url = carbon_get_the_post_meta("pdf");
+            $website_url = carbon_get_the_post_meta("url");
             ?>
             <div class="project-header">
                 <div class="project-header__cover" style="background-image:url('<?= $image ?>')">
@@ -146,6 +148,14 @@ add_action('carbon_fields_register_fields', function () {
                                 class="btn-default bg-cream project-download-link"
                                 href="<?= $download_url ?>">
                                 Download PDF
+                            </a>
+                        <?php endif; ?>
+                        <?php if ($website_url) : ?>
+                            <a 
+                                target="_blank"
+                                class="btn-default bg-cream project-website-link"
+                                href="<?= $website_url ?>">
+                                <?= $website_url ?>
                             </a>
                         <?php endif; ?>
                     </div>
@@ -371,40 +381,83 @@ add_action('carbon_fields_register_fields', function () {
             Field::make('separator', 'crb_separator', __('Search Filter'))
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-            $active_category = $_GET["category_name"] ?? "";
-            $active_year = $_GET["year"] ?? "";
-            $active_author = $_GET["author"] ?? "";
+            $params = [
+                "category_name",
+                "author",
+                "member",
+                "year"
+            ];
+            $param_values = [];
+            foreach ($params as $param) {
+                $value = $_GET[$param] ?? null;
+                $param_values[$param] = $value ? explode(",", $value) : [];
+            }
+
             $filter_sections = [];
             $filter_sections[] = [
                 "title" => "Focus Areas",
                 "param" => "category_name",
-                "options" => array_map(function ($category) use ($active_category) {
+                "options" => array_map(function ($category) use ($param_values) {
                     return [
                         "name" => $category->name,
                         "value" => $category->slug,
-                        "selected" => str_contains($active_category, $category->slug)
+                        "selected" => in_array($category->slug, $param_values["category_name"])
                     ];
                 }, get_categories())
             ];
-            foreach (["content-type", "pl_post_type", "pl_project_type"] as $taxonomy) {
+
+            $filter_sections[] = [
+                "title" => "Author",
+                "param" => "author",
+                "options" => array_map(function ($author) use ($param_values) {
+                    return [
+                        "name" => $author->display_name,
+                        "value" => $author->ID,
+                        "selected" => in_array($author->ID, $param_values["author"])
+                    ];
+                }, get_users())
+            ];
+
+            $taxonomies = [
+                "content-type",
+                "pl_place",
+                "pl_player",
+                "pl_project_type",
+                "pl_issue",
+                "pl_organisation"
+            ];
+            foreach ($taxonomies as $taxonomy) {
                 $active_term = $_GET[$taxonomy] ?? "";
+                $active_terms = explode(",", $active_term);
                 $title = get_taxonomy($taxonomy)->labels->singular_name;
                 $filter_sections[] = [
                     "title" => $title,
                     "param" => $taxonomy,
-                    "options" => array_map(function ($term) use ($active_term) {
+                    "options" => array_map(function ($term) use ($active_terms) {
                         return [
                             "name" => $term->name,
                             "value" => $term->slug,
-                            "selected" => str_contains($active_term, $term->slug)
+                            "selected" => in_array($term->slug, $active_terms)
                         ];
                     }, get_terms(["taxonomy" => $taxonomy]))
                 ];
             }
 
+            $filter_sections[] = [
+                "title" => "Team",
+                "param" => "member",
+                "options" => array_map(function ($member) use ($param_values) {
+                    return [
+                        "name" => $member->post_title,
+                        "value" => $member->ID,
+                        "selected" => in_array($member->ID, $param_values["member"])
+                    ];
+                }, get_posts('numberposts=-1&post_type=pl_member&orderby=post_name&order=ASC'))
+            ];
+
             function get_year_options()
             {
-                $loop = get_posts('numberposts=10&post_type=any&order=ASC');
+                $loop = get_posts('numberposts=1&post_type=any&order=ASC');
                 $date = $loop[0]->post_date;
                 $year = (int) explode("-", $date)[0];
                 $current_year = (int) date("Y");
@@ -419,25 +472,13 @@ add_action('carbon_fields_register_fields', function () {
             $filter_sections[] = [
                 "title" => "Year",
                 "param" => "year",
-                "options" => array_map(function ($year) use ($active_year) {
+                "options" => array_map(function ($year) use ($param_values) {
                     return [
                         "name" => $year,
                         "value" => $year,
-                        "selected" => str_contains($active_year, $year)
+                        "selected" => in_array($year, $param_values["year"])
                     ];
                 }, get_year_options())
-            ];
-
-            $filter_sections[] = [
-                "title" => "Author",
-                "param" => "author",
-                "options" => array_map(function ($author) use ($active_author) {
-                    return [
-                        "name" => $author->display_name,
-                        "value" => $author->ID,
-                        "selected" => str_contains($active_author, $author->ID)
-                    ];
-                }, get_users())
             ];
 
             ?>
@@ -503,7 +544,7 @@ add_action('carbon_fields_register_fields', function () {
             $post_date = get_the_date('j M Y');
             $author_id = $post->post_author;
             $author = get_the_author_meta("display_name", $author_id);
-
+            $download_url = carbon_get_post_meta($post->ID, "pdf");
             ?>
             <div class="post-header">
                 <a href="<?= $post_type_href ?>" class="btn-default">
@@ -521,6 +562,11 @@ add_action('carbon_fields_register_fields', function () {
                         <?= $author ?>
                     </a>
                 </div>
+                <?php if ($download_url) : ?>
+                    <a target="_blank" href="<?= $download_url ?>" class="btn-default project-download-link mt-8">
+                        Download PDF
+                    </a>
+                <?php endif ?>
             </div>
             <?php
         });
@@ -574,12 +620,15 @@ add_action('carbon_fields_register_fields', function () {
             $categories = wp_get_post_categories($post->ID, ['fields' => 'all']);
             $taxonomies = [
                 "pl_project_type",
+                "content-type",
                 "pl_place",
                 "pl_player",
                 "pl_issue",
                 "pl_organisation"
             ];
-            $members = carbon_get_the_post_meta("members");
+            $members = array_map(function ($m) {
+                return get_post($m["id"]);
+            }, carbon_get_the_post_meta("members") ?? []);
             ?>
             <div class="post-details-footer">
                 <?php if ($categories) : ?>
@@ -627,7 +676,9 @@ add_action('carbon_fields_register_fields', function () {
                     <ul class="post-details-footer__terms">
                         <?php foreach ($members as $member) : ?>
                             <li class="post-details-footer__term">
-                                <?= get_post($member["id"])->post_title ?>
+                                <a href="<?= get_permalink($member) ?>">
+                                    <?= $member->post_title ?>
+                                </a>
                             </li>
                         <?php endforeach ?>
                     </ul>
@@ -659,7 +710,14 @@ add_action('carbon_fields_register_fields', function () {
     Container::make('post_meta', 'Resource Metadata')
         ->where('post_type', '=', 'pl_resource')
         ->add_fields(array(
-            Field::make('text', 'position'),
+            Field::make('file', 'pdf', 'Resource PDF')->set_type('application/pdf')->set_value_type('url'),
+            Field::make('association', 'members', 'Team')
+            ->set_types([
+                [
+                    'type'      => 'post',
+                    'post_type' => 'pl_member',
+                ]
+            ])
         ));
 
     /* Timeline Blocks */
@@ -752,6 +810,18 @@ add_action('carbon_fields_register_fields', function () {
         });
 });
 
+add_filter("the_permalink", function ($termlink, $term, $taxonomy) {
+    $taxonomy_param = $taxonomy === "category" ? "category_name" : $taxonomy;
+    return "/?s=&$taxonomy_param={$term->slug}";
+}, 10, 3);
+
+add_filter('post_type_link', function ($post_link, $post) {
+    if ($post->post_type == 'pl_member') {
+        $post_link = '/?s=&member=' . $post->ID;
+    }
+    return $post_link;
+}, 10, 2);
+
 add_filter("term_link", function ($termlink, $term, $taxonomy) {
     $taxonomy_param = $taxonomy === "category" ? "category_name" : $taxonomy;
     return "/?s=&$taxonomy_param={$term->slug}";
@@ -783,12 +853,12 @@ add_filter("query_loop_block_query_vars", function ($query) {
         $related_posts = get_posts($related_query);
 
         $other_posts = get_posts($query);
-        $posts = array_merge($related_posts, $other_posts);
-        $post_ids = array_map(function ($post) {
+        $prioritised_posts = array_merge($related_posts, $other_posts);
+        $prioritised_post_ids = array_map(function ($post) {
             return $post->ID;
-        }, $posts);
+        }, $prioritised_posts);
 
-        $query["post__in"] = array_merge($explicitly_related_ids, $post_ids);
+        $query["post__in"] = array_merge($explicitly_related_ids, $prioritised_post_ids);
         $query["orderby"] = "post__in";
     }
     $category_name = get_query_var("category_name");
@@ -840,6 +910,19 @@ add_action('pre_get_posts', function ($query) {
         $query->set("orderby", [
             'date' => strtoupper($sort_order),
         ]);
+        $member_param = $_GET["member"] ?? null;
+        if ($member_param) {
+            $member_ids = $member_param ? explode(",", $member_param) : [];
+            $meta_query = $query->get("meta_query") ?: [];
+            $meta_query[] = [
+                "key" => "members",
+                "compare" => "IN",
+                "value" => array_map(function ($id) {
+                    return "post:pl_member:$id";
+                }, $member_ids)
+            ];
+            $query->set("meta_query", $meta_query);
+        }
     }
 });
 
@@ -964,7 +1047,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_organisation', ['post', 'pl_project'], [
+    register_taxonomy('pl_organisation', ['post', 'pl_project', 'pl_resource'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -990,7 +1073,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_issue', ['post', 'pl_project'], [
+    register_taxonomy('pl_issue', ['post', 'pl_project', 'pl_resource'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -1003,7 +1086,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_place', ['post', 'pl_project'], [
+    register_taxonomy('pl_place', ['post', 'pl_project', 'pl_resource'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -1016,7 +1099,7 @@ add_action('init', function () {
         ]
     ]);
 
-    register_taxonomy('pl_project_type', ['pl_project'], [
+    register_taxonomy('pl_project_type', ['pl_project', 'pl_resource'], [
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,

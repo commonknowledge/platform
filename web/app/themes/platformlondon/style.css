@@ -511,6 +511,9 @@ video {
 .mb-2 {
   margin-bottom: 0.5rem !important;
 }
+.mt-8 {
+  margin-top: 2rem !important;
+}
 .block {
   display: block !important;
 }
@@ -1598,6 +1601,10 @@ header .wp-block-search {
     min-height: 600px;
 }
 
+.project-header__buttons {
+  position: relative;
+}
+
 .project-header__buttons .btn-default:not(:last-child) {
   margin-right: 0.5rem;
 }
@@ -1626,6 +1633,35 @@ header .wp-block-search {
     content: "\2193";
     right: 0.75rem;
     top: 0.4rem;
+}
+
+.project-website-link {
+  position: absolute;
+  display: none;
+  padding-right: 2rem !important;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 768px) {
+
+  .project-website-link {
+    display: inline-block;
+  }
+}
+
+.project-website-link {
+    left: 100%;
+    transform: rotate(-15deg);
+    top: -4rem;
+}
+
+.project-website-link::after {
+  position: absolute;
+    content: "\2191";
+    right: 0.75rem;
+    top: 0.4rem;
+    transform: rotate(45deg);
 }
 
 .post-details-footer {

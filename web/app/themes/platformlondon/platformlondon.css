@@ -543,6 +543,10 @@ header .wp-block-search {
     min-height: 600px;
 }
 
+.project-header__buttons {
+    @apply relative;
+}
+
 .project-header__buttons .btn-default:not(:last-child) {
     @apply mr-2;
 }
@@ -560,6 +564,21 @@ header .wp-block-search {
     content: "\2193";
     right: 0.75rem;
     top: 0.4rem;
+}
+
+.project-website-link {
+    @apply absolute !pr-8 hidden md:inline-block text-lg;
+    left: 100%;
+    transform: rotate(-15deg);
+    top: -4rem;
+}
+
+.project-website-link::after {
+    @apply absolute;
+    content: "\2191";
+    right: 0.75rem;
+    top: 0.4rem;
+    transform: rotate(45deg);
 }
 
 .post-details-footer {
