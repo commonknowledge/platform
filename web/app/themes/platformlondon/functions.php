@@ -130,10 +130,11 @@ add_action('carbon_fields_register_fields', function () {
             $image = carbon_get_the_post_meta("background_image");
             $download_url = carbon_get_the_post_meta("pdf");
             $website_url = carbon_get_the_post_meta("url");
+            $cover_class = $image ? "" : "project-header__cover--no-image";
             ?>
             <div class="project-header">
-                <div class="project-header__cover" style="background-image:url('<?= $image ?>')">
-                    <span class="btn-default">Project</span>
+                <div class="project-header__cover <?= $cover_class ?>" style="background-image:url('<?= $image ?>')">
+                    <a class="btn-default" href="/projects/">Project</a>
                     <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
                     <div class="project-header__buttons">
                         <?php if (is_project_active()) : ?>
@@ -925,6 +926,31 @@ add_action('pre_get_posts', function ($query) {
         }
     }
 });
+
+add_filter('render_block', function ($block_content, $block) {
+    if ($block['blockName'] === 'core/navigation' &&
+        !is_admin() &&
+        !wp_is_json_request()
+    ) {
+        //return $block_content;
+        return preg_replace(
+            '/\<svg width(.*?)\<\/svg\>/',
+            <<<EOF
+            <svg width="24" height="24" 
+                 xmlns="http://www.w3.org/2000/svg" 
+                 viewBox="0 0 24 24" 
+                 aria-hidden="true" focusable="false">
+                <rect x="4" y="5" width="16" height="1.5"></rect>
+                <rect x="4" y="10" width="16" height="1.5"></rect>
+                <rect x="4" y="15" width="16" height="1.5"></rect>
+            </svg>
+EOF,
+            $block_content
+        );
+    }
+
+    return $block_content;
+}, null, 2);
 
 add_action('after_setup_theme', function () {
     \Carbon_Fields\Carbon_Fields::boot();

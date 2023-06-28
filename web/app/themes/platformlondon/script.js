@@ -11,7 +11,7 @@ document.querySelectorAll(".platform-category-cards .wp-block-column").forEach(c
     newLink.style.height = "100%"
     newLink.style.padding = "1rem"
     const children = [...col.children]
-    for(const child of children) {
+    for (const child of children) {
         newLink.appendChild(child)
     }
     col.appendChild(newLink)
@@ -72,7 +72,7 @@ if (aboutContent) {
         const sectionIndex = sectionTitles.findIndex(t => t === titleToShow)
         const next = sectionIndex === sectionTitles.length - 1 ? null : sectionTitles[sectionIndex + 1]
         const prev = sectionIndex === 0 ? null : sectionTitles[sectionIndex - 1]
-        
+
         if (finalButtons) {
             aboutContent.removeChild(finalButtons)
         }
@@ -170,11 +170,11 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
     cards.forEach((card, i) => {
         card.addEventListener("click", () => displayCard(i))
     })
-    
+
     buttons[0].addEventListener("click", () => displayCard(currentIndex - 1))
     buttons[1].addEventListener("click", () => displayCard(currentIndex + 1))
 
-    cardContainer.style.transform 
+    cardContainer.style.transform
 })
 
 /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
@@ -324,6 +324,24 @@ document.querySelectorAll(".post-details-footer svg").forEach((svg) => {
     svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
 })
 
+/**
+ * Invert site logo when mobile navbar is opened
+ */
+const logo = document.querySelector("header .wp-block-site-logo img")
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.target.classList.contains('is-menu-open')) {
+            logo.style.filter = "brightness(0) invert(1)"
+        } else {
+            logo.style.filter = ""
+        }
+    });
+});
+
+observer.observe(document.querySelector('.wp-block-navigation__responsive-container'), {
+    attributes: true,
+    attributeFilter: ['class']
+});
 
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"
