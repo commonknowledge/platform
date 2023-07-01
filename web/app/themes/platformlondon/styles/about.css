@@ -1,0 +1,43 @@
+/* About Page */
+
+/* Category Cards */
+.platform-category-cards {
+    @apply p-0 !max-w-1024 mt-0 mb-12 !flex-wrap justify-center gap-8;
+}
+
+.platform-category-cards .wp-block-column {
+    @apply p-4 md:min-w-320 md:h-320 md:max-w-320 rounded shadow-md;
+}
+
+.platform-category-cards .wp-block-heading {
+    @apply font-bold;
+}
+
+/* Tabs */
+nav.platform-tabs {
+    @apply border-b border-dark-green mb-16;
+}
+
+.platform-tabs ul {
+    @apply flex flex-wrap pl-2;
+}
+
+.platform-tabs li {
+    @apply mb-2 md:mb-0;
+}
+
+.platform-tabs li:not(:last-child) {
+    @apply mr-2;
+}
+
+.platform-tabs button {
+    @apply rounded-lg md:rounded-bl-none md:rounded-br-none hover:!bg-dark-green hover:!text-white !py-2 !px-4;
+}
+
+.platform-tabs button.active {
+    @apply bg-dark-green text-white;
+}
+
+.platform-about-final-buttons {
+    @apply px-4 mb-16 flex;
+}

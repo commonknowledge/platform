@@ -1,0 +1,35 @@
+/* Font */
+
+@font-face {
+    font-family: "pp-mori";
+    font-style: normal;
+    src: url("./assets/fonts/pp-mori_normal_400.otf");
+}
+@font-face {
+    font-family: "pp-mori";
+    font-style: italic;
+    src: url("./assets/fonts/pp-mori_italic_400.otf");
+}
+@font-face {
+    font-family: "pp-mori";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/pp-mori_normal_600.otf");
+}
+@font-face {
+    font-family: "pp-mori";
+    font-style: italic;
+    font-weight: bold;
+    src: url("./assets/fonts/pp-mori_italic_600.otf");
+}
+
+@font-face {
+    font-family: "styrene-b-trial";
+    font-style: normal;
+    src: url("./assets/fonts/styrene-b-trial_normal_400.otf");
+}
+@font-face {
+    font-family: "styrene-b-trial";
+    font-style: italic;
+    src: url("./assets/fonts/styrene-b-trial_italic_400.otf");
+}

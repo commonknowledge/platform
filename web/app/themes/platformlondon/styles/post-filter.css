@@ -1,0 +1,36 @@
+/* Post Filter on Blog/Resources/Projects Page */
+.post-filter {
+    @apply px-4 mt-16 mb-12;
+}
+
+.post-filter__categories {
+    @apply flex flex-wrap mb-4;
+}
+
+.post-filter__categories li:not(:last-child) {
+    @apply mr-2;
+}
+
+.post-filter__categories .energy {
+    @apply bg-orange !border-0;;
+}
+
+.post-filter__categories .community {
+    @apply bg-yellow !border-0;;
+}
+
+.post-filter__categories .culture {
+    @apply bg-light-green !border-0;;
+}
+
+.post-filter__categories .economy {
+    @apply bg-teal !border-0;;
+}
+
+.post-filter__categories .liberation {
+    @apply bg-pink !border-0;;
+}
+
+.post-filter__categories .active {
+    @apply !bg-dark-green !text-white;
+}

@@ -1,0 +1,25 @@
+/* Headings */
+
+/*
+ * HTML Elements
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply uppercase font-bold;
+}
+
+/* Page Main Heading */
+.page h1.wp-block-post-title, .single h1.wp-block-post-title {
+    @apply text-5xl md:text-6xl lg:text-8xl mt-8 mb-24;
+}
+
+/* Query Loop Headings */
+h2.wp-block-post-title {
+    @apply mb-4 text-2xl lg:text-3xl;
+    word-break: normal !important;
+    word-wrap: normal !important;
+}

@@ -1,0 +1,12 @@
+/* Our History Homepage Section */
+.platform-history {
+    @apply relative mb-8;
+}
+
+.platform-history h2 {
+    @apply !text-white;
+}
+
+.platform-history .wp-block-navigation {
+    @apply absolute -bottom-4 left-1/2 -translate-x-1/2 md:-top-4 md:left-2/3 md:bottom-auto md:translate-x-0;
+}

@@ -1,0 +1,16 @@
+/* Download Link Block */
+
+.post-download-link-container {
+    @apply text-center relative mb-16;
+}
+
+.post-download-link {
+    @apply relative !pr-8 hidden md:inline;
+}
+
+.post-download-link::after {
+    @apply absolute;
+    content: "\2193";
+    right: 0.75rem;
+    top: 0.4rem;
+}

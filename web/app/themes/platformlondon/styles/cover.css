@@ -1,0 +1,15 @@
+/* Cover */
+.wp-block-cover h1,
+.wp-block-cover h2,
+.wp-block-cover h3,
+.wp-block-cover h4,
+.wp-block-cover h5,
+.wp-block-cover h6,
+.wp-block-cover a,
+.wp-block-cover .project-dates {
+    @apply !text-dark-green;
+}
+
+.wp-block-cover .wp-block-navigation-item a {
+    @apply !bg-cream !text-dark-green hover:!bg-dark-green hover:!text-white;
+}

@@ -1,0 +1,6 @@
+/* SVG */
+
+text {
+    @apply normal-case text-dark-green;
+    font-size: 0.5rem;
+}

@@ -1,0 +1,30 @@
+/* Post Details Footer Block (at the bottom of Single Post page) */
+
+.post-details-footer {
+    @apply relative flex flex-col mb-16;
+}
+
+.post-details-footer__label {
+    @apply border-dark-green border-t uppercase mb-4;
+}
+
+.post-details-footer__categories,.post-details-footer__terms {
+    @apply flex flex-wrap items-center gap-4 pb-4 mb-4;
+}
+
+.post-details-footer__terms {
+    @apply pl-5;
+}
+
+.post-details-footer__term {
+    @apply list-disc mr-4;
+}
+
+.post-details-footer__category {
+    @apply flex items-center;
+}
+
+.post-details-footer__category svg {
+    @apply mr-2;
+    height: 2rem;
+}

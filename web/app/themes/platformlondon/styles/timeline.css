@@ -1,0 +1,121 @@
+/* Timeline */
+body .is-layout-constrained .platform-timeline-links {
+    @apply !m-0;
+}
+
+/* Position "hack" start: Fix position relative to parent (instead of window) */
+.platform-timeline-links {
+    @apply relative hidden lg:block;
+}
+
+.platform-timeline-links > div {
+    @apply absolute;
+    top: 0;
+    left: 0;
+}
+
+.platform-timeline-links > div > ul {
+    @apply fixed;
+    height: 2rem;
+    width: 6rem;
+}
+/* "Hack" end */
+
+.platform-timeline-links ul {
+    @apply p-0 list-none;
+}
+
+.platform-timeline-links li {
+    @apply mb-6;
+}
+
+.platform-timeline-links,.platform-timeline {
+    @apply relative z-10;
+}
+
+.platform-timeline__circle {
+    @apply bg-dark-green;
+    border-radius: 50%;;
+    height: 1rem;
+    width: 1rem;
+}
+
+.platform-timeline {
+    @apply flex relative pt-2;
+}
+
+.platform-timeline__line {
+    @apply border-faded-green border-r relative;
+    left: 2rem;
+}
+
+@screen md {
+    .platform-timeline__line {
+        left: -4rem;
+    }
+}
+
+.platform-timeline__marker-container {
+    @apply absolute;
+    top: calc(-1rem - 8px);
+}
+
+@screen md {
+    .platform-timeline__marker-container {
+        top: -4px;
+    }
+}
+
+.platform-timeline__marker {
+    @apply flex flex-col md:flex-row items-center fixed bg-cream md:bg-transparent z-20;
+    margin-left: calc(1px - 1.5rem);
+}
+
+@screen md {
+    .platform-timeline__marker {
+        margin-left: calc(1px - 3.5rem);
+    }
+}
+
+.platform-timeline__marker span {
+    @apply text-center;
+    width: 3rem;
+}
+
+.platform-timeline__active-line {
+    @apply absolute border-dark-green border-r;
+    top: 4px;
+    right: -1px;
+}
+
+.platform-timeline__entries {
+    @apply -mt-2 pl-16 md:pl-0;
+}
+
+.platform-timeline__entry {
+    @apply mb-16 relative;
+}
+
+.platform-timeline__entry .platform-timeline__circle {
+    @apply absolute bg-faded-green;
+    top: 0.5rem;
+    left: -2.5rem;
+}
+
+@screen md {
+    .platform-timeline__entry .platform-timeline__circle {
+        left: -4.5rem;
+    }
+}
+
+.platform-timeline__entry[data-active=true] .platform-timeline__circle {
+    @apply bg-dark-green;
+}
+
+.platform-timeline__entry h2 {
+    @apply !font-normal !normal-case text-2xl mb-4;
+}
+
+.platform-timeline .wp-block-columns {
+    @apply !p-0 !mb-2;
+}

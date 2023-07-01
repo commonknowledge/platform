@@ -1,0 +1,295 @@
+/* Query Loop Block */
+
+.wp-block-post-template {
+    @apply !gap-0;
+}
+
+.wp-block-post {
+    @apply p-4 pt-0 flex flex-col;
+}
+
+.wp-block-post>* {
+    @apply p-0;
+}
+
+.wp-block-post-excerpt {
+    @apply font-sans;
+}
+
+.wp-block-post-content .wp-block-post-title {
+    @apply !uppercase !font-bold;
+}
+
+.wp-block-post-featured-image a {
+    @apply h-full;
+}
+
+.wp-block-read-more[href] {
+    @apply btn-default ml-auto -mt-5 mr-2 relative z-10;
+}
+
+.wp-block-post-terms {
+    @apply truncate;
+}
+
+.wp-block-post-terms a:not(:last-child) {
+    @apply mr-4;
+}
+
+.wp-block-post-terms a::before {
+    content: "\2022\20";
+}
+
+.wp-block-post-terms__separator {
+    @apply hidden;
+}
+
+/* Query Loop always full width */
+.wp-block-query {
+    @apply !max-w-none;
+}
+
+/* Query Loop for Posts and Resources */
+@each $type in post, pl_resource {
+    .wp-block-post.type-$(type) {
+        @apply !mb-16;
+        width: 100% !important;
+    }
+
+    .wp-block-post.type-$(type):last-child,.wp-block-post.type-$(type):nth-last-child(2) {
+        @apply !mb-0;
+    }
+
+    .wp-block-post.type-$(type) img {
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .wp-block-post.type-$(type) > .wp-block-columns {
+        @apply !flex-wrap !gap-4 h-full;
+    }
+
+    .wp-block-post.type-$(type) .wp-block-columns {
+        @apply !m-0 !px-0;
+    }
+
+    /* Force text to go under the image */
+    .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column {
+        @apply !basis-full;
+    }
+
+    @screen md {
+        /* On Blog/Resources page, first item is 100% width */
+        .page .wp-block-post.type-$(type):first-child {
+            max-width: none !important;
+            width: 100% !important;
+        }
+
+        .page .wp-block-post.type-$(type):first-child h2.wp-block-post-title {
+            @apply text-2xl md:text-3xl lg:text-5xl;
+        }
+
+        /* First item on Blog/Resources page can have side-by-side image and text at wp-md size */
+        .page .wp-block-post.type-$(type):first-child > .wp-block-columns {
+            flex-wrap: nowrap !important;
+        }
+
+        .page .wp-block-post.type-$(type):first-child  > .wp-block-columns > .wp-block-column:first-child {
+            flex-basis: initial !important;
+            flex-shrink: 0;
+            max-width: 50%;
+        }
+
+        .page .wp-block-post.type-$(type):first-child .wp-block-column:last-child {
+            display: flex;
+            flex-basis: initial !important;
+            flex-direction: column;
+        }
+
+        .wp-block-post.type-$(type) {
+            max-width: 50%;
+        }
+
+        /* Show image and text side-by-side */
+        .wp-block-post.type-$(type) > .wp-block-columns {
+            flex-wrap: nowrap !important;
+        }
+
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:first-child {
+            max-width: 50%;
+        }
+
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:last-child {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wp-block-post.type-$(type) img {
+            height: 324px;
+        }
+
+        .wp-block-post.type-$(type) .wp-block-post-title a {
+            min-height: 0;
+            @apply line-clamp-5;
+        }
+
+        .wp-block-post.type-$(type) .wp-block-post-excerpt__excerpt {
+            min-height: 0;
+            @apply line-clamp-3 mb-4;
+        }
+    }
+
+    @screen masonry {
+        .wp-block-post.type-$(type) {
+            min-width: 520px;
+        }
+
+        /* First child should be 5/12 columns and not smaller than 480px */
+        .wp-block-post.type-$(type):nth-child(4n+1) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        /* Second child should take the rest of the space but not bigger than 7/12 columns */
+        .wp-block-post.type-$(type):nth-child(4n+2) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        /* Third child should be 5/12 columns and not smaller than 480px */
+        .wp-block-post.type-$(type):nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        /* Fourth child should take the rest of the space but not bigger than 7/12 columns */
+        .wp-block-post.type-$(type):nth-child(4n) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        /* Min width for image and text colums */
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:not(:empty) {
+            min-width: 240px;
+        }
+
+        /* Collapse empty colums */
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:empty {
+            flex-basis: 0 !important;
+            flex-grow: 0;
+            margin-left: -1rem;
+        }
+
+        /* On pages, the first item is 100%, so the indexing here needs to be incremented */
+        .page .wp-block-post.type-$(type):nth-child(4n+2) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        .page .wp-block-post.type-$(type):nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-$(type):nth-child(4n) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-$(type):nth-child(4n+1):not(:first-child) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+    }
+}
+
+/* Query Loop for Projects */
+.wp-block-post.type-pl_project {
+    @apply shadow-md !m-4 pt-4;
+    width: calc(100% - 4rem / 3) !important;
+}
+
+@screen wpmd {
+    .wp-block-post.type-pl_project {
+        @apply !mt-0 !mr-4 !ml-0 !mb-4;
+        width: calc(33.33% - 4rem / 3) !important;
+    }
+    .wp-block-post.type-pl_project:nth-child(3n+1) {
+        @apply !mt-0 !mr-4 !ml-4 !mb-4;
+    }
+}
+
+.wp-block-post.type-pl_project h2.wp-block-post-title {
+    @apply line-clamp-3 mb-8 md:text-3xl lg:text-5xl;
+    min-height: 0;
+}
+
+.wp-block-post.type-pl_project.category-energy {
+    @apply bg-orange;
+}
+
+.wp-block-post.type-pl_project.category-community {
+    @apply bg-yellow;
+}
+
+.wp-block-post.type-pl_project.category-culture {
+    @apply bg-light-green;
+}
+
+.wp-block-post.type-pl_project.category-economy {
+    @apply bg-teal;
+}
+
+.wp-block-post.type-pl_project.category-liberation {
+    @apply bg-pink;
+}
+
+.type-pl_project .wp-block-post-featured-image {
+    @apply aspect-[4/3] mt-auto min-h-0 mb-4;
+}
+
+.type-pl_project .wp-block-post-featured-image img {
+    @apply h-full object-cover;
+}
+
+.type-pl_project .wp-block-post-excerpt__excerpt {
+    min-height: 0;
+    @apply line-clamp-5 mb-4;
+}
+
+.wp-block-post.category-energy .wp-block-read-more[href] {
+    @apply bg-orange;
+}
+
+.wp-block-post.category-community .wp-block-read-more[href] {
+    @apply bg-yellow;
+}
+
+.wp-block-post.category-culture .wp-block-read-more[href] {
+    @apply bg-light-green;
+}
+
+.wp-block-post.category-economy .wp-block-read-more[href] {
+    @apply bg-teal;
+}
+
+.wp-block-post.category-liberation .wp-block-read-more[href] {
+    @apply bg-pink;
+}
+
+.type-pl_project .post-details {
+    @apply !mt-0;
+}
+
+/* Query Loop for Members */
+.wp-block-post.type-pl_member {
+    @apply lg:!w-[calc(25%-1rem)]
+}
+
+.wp-block-post.type-pl_member .wp-block-post-title {
+    @apply text-xl mb-2;
+}
+
+.wp-block-post.type-pl_member img {
+    @apply aspect-square object-cover;
+}

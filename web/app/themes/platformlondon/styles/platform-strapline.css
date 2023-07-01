@@ -1,0 +1,71 @@
+/* Platform Strapline (big text that appears first on home page, bottom of other pages) */
+
+.platform-strapline {
+    @apply overflow-hidden my-16 md:pt-16 border-dark-green md:border-t md:mx-4;
+}
+
+.home .platform-strapline {
+    @apply mt-0 border-t-0 md:pt-8 md:-mt-8;
+}
+
+.platform-strapline > .wp-block-columns {
+    @apply md:px-0;
+}
+
+.platform-strapline .wp-block-heading {
+    @apply relative md:w-[calc(100%+5rem)] z-20 break-normal !text-5xl md:!text-6xl;
+}
+
+.platform-strapline em {
+    @apply btn-default font-normal text-lg not-italic normal-case inline-block mr-2;
+    padding-bottom: 0.25rem !important;
+    padding-top: 0.25rem !important;
+}
+
+@screen md {
+    .platform-strapline em {
+        padding-bottom: 0.5rem !important;
+        padding-top: 0.5rem !important;
+    }
+}
+
+.platform-illustration {
+    @apply md:-mt-10 relative z-10;
+    mix-blend-mode: multiply;
+}
+
+.platform-illustration__background {
+    opacity: 0.2;
+}
+
+.platform-illustration svg {
+    left: 4.75%;
+    opacity: 0.75;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+@screen md {
+    .platform-illustration svg {
+        top: 24%;
+    }
+}
+
+.platform-illustration path {
+    cursor: pointer;
+    transition: transform 1s;
+}
+
+.platform-illustration path:hover {
+    transform: translateY(-20px);
+    /*
+     * z-index doesn't work for SVG elements,
+     * so moving the shape to the top
+     * is handled in JavaScript
+     */
+}
+
+.platform-strapline hr {
+    @apply mx-4 mb-4;
+}

@@ -1,0 +1,5 @@
+/* Separator */
+
+.wp-block-separator {
+    @apply border-dark-green !border-t-0 border-b;
+}

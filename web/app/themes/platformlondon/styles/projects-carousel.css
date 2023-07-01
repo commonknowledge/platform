@@ -1,0 +1,100 @@
+/* Projects Carousel */
+
+.projects-carousel {
+    @apply relative;
+}
+
+.projects-carousel {
+    --card-width: 320px;
+}
+
+@screen md {
+    .projects-carousel {
+        --card-width: 440px;
+    }
+}
+
+@screen lg {
+    .projects-carousel {
+        --card-width: 560px;
+    }
+}
+
+.projects-carousel .wp-block-cover {
+    @apply !px-0 !pb-16 mb-16;
+    background-color: #fff39d;
+    margin-top: -250px;
+    padding-top: calc(250px + 1rem);
+}
+
+.projects-carousel .wp-block-navigation__container {
+    @apply mb-16 justify-center hidden md:flex;
+}
+
+.projects-carousel .wp-block-navigation__container li {
+    transform: translateY(-3rem) rotate(-10deg);
+    margin-left: 28rem;
+}
+
+.projects-carousel .wp-block-query {
+    overflow: hidden;
+}
+
+.projects-carousel__button {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    @apply btn-default-no-padding !rounded-full !px-[0.8rem] !py-2 md:hidden;
+}
+
+.projects-carousel__button:first-child {
+    left: 0.5rem;
+}
+
+.projects-carousel__button:last-child {
+    right: 0.5rem;
+}
+
+.projects-carousel .wp-block-post-template {
+    flex-wrap: nowrap;
+    margin-left: 50%;
+    max-width: none;
+    /* 
+     * Start by displaying the second post. Transform left (negative) by the
+     * width of 1.5 cards.
+     */
+    transform: translate3d(calc(var(--card-width) * -1.25), 0, 0);
+    transition: transform 1.5s;
+}
+
+@screen md {
+    .projects-carousel .wp-block-post-template {
+        transform: translate3d(calc(var(--card-width) * -1.5), 0, 0);
+    }
+}
+
+body.page .projects-carousel .wp-block-post-template .wp-block-post {
+    cursor: pointer;
+    margin: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: var(--card-width) !important;
+    min-width: var(--card-width) !important;
+    padding-bottom: 1.5rem !important;
+    transform: scale(1);
+    width: var(--card-width) !important;
+    transition: transform 1.5s;
+}
+
+.projects-carousel h2.wp-block-post-title {
+    @apply !mb-auto;
+}
+
+.projects-carousel .wp-block-post-featured-image {
+    @apply !mt-4 !mb-0;
+}
+
+.projects-carousel .wp-block-post:not(:nth-child(2)) {
+    transform: scale(0.8) !important;
+}

@@ -1,0 +1,69 @@
+/* Post Content Styles */
+.entry-content {
+    @apply relative; /* Ensure on top of background elements */
+}
+
+.wp-block-post-content {
+    @apply mb-16 font-sans;
+}
+
+.wp-block-post-content h2,
+.wp-block-post-content h3,
+.wp-block-post-content h4,
+.wp-block-post-content h5,
+.wp-block-post-content h6 {
+    @apply !font-normal !normal-case mb-6;
+}
+
+.wp-block-post-content h2 {
+    @apply text-5xl;
+}
+
+.wp-block-post-content h3 {
+    @apply text-4xl;
+}
+
+.wp-block-post-content h4 {
+    @apply text-3xl;
+}
+
+.wp-block-post-content h5 {
+    @apply text-base !uppercase;
+}
+
+.wp-block-post-content h6 {
+    @apply text-lg;
+}
+
+.wp-block-post-content p {
+    @apply mb-6;
+}
+
+.wp-block-post-content p + h1,
+.wp-block-post-content p + h2,
+.wp-block-post-content p + h3,
+.wp-block-post-content p + h4,
+.wp-block-post-content p + h5,
+.wp-block-post-content p + h6 {
+    @apply mt-16 mb-6;
+}
+
+.wp-block-post-content ul {
+    @apply list-disc pl-4;
+}
+
+.wp-block-post-content ul.is-flex-container {
+    @apply !pl-0;
+}
+
+.wp-block-post-content li {
+    @apply mb-4;
+}
+
+.wp-block-post-content > .wp-block-image {
+    @apply my-16;
+}
+
+.page .wp-site-blocks > hr {
+    @apply mx-4 mb-12;
+}

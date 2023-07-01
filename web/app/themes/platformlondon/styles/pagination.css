@@ -1,0 +1,25 @@
+/* Pagination */
+
+.wp-block-query-pagination {
+    @apply p-4 mt-8;
+}
+
+.wp-block-query-pagination-numbers {
+    @apply !m-auto;
+}
+
+.wp-block-query-pagination .page-numbers {
+    @apply btn-default-no-padding !rounded-full !px-4 !py-2;
+}
+
+.wp-block-query-pagination .page-numbers.current {
+    @apply !bg-dark-green !text-white;
+}
+
+.wp-block-query-pagination .wp-block-query-pagination-previous {
+    @apply hidden;
+}
+
+.wp-block-query-pagination .wp-block-query-pagination-next {
+    @apply hidden;
+}

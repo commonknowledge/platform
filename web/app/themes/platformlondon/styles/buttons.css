@@ -1,0 +1,33 @@
+/* Buttons */
+
+.btn-default-no-padding {
+    @apply hover:!bg-dark-green hover:!text-white border border-dark-green rounded-full shadow-md truncate;
+}
+
+.btn-default {
+    @apply btn-default-no-padding !py-2 !px-4;
+}
+
+.btn-active {
+    @apply bg-dark-green !text-white;
+}
+
+.btn-default.category-energy {
+    @apply border-0 bg-orange hover:!bg-orange;
+}
+
+.btn-default.category-community {
+    @apply border-0 bg-yellow hover:!bg-yellow;
+}
+
+.btn-default.category-culture {
+    @apply border-0 bg-light-green hover:!bg-light-green;
+}
+
+.btn-default.category-economy {
+    @apply border-0 bg-teal hover:!bg-teal;
+}
+
+.btn-default.category-liberation {
+    @apply border-0 bg-pink hover:!bg-pink;
+}

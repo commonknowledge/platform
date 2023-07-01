@@ -1,0 +1,17 @@
+/* Post Header Block (at the top of Single Post page) */
+.post-header {
+    @apply flex flex-col items-center mb-16;
+}
+
+.post-header h1 {
+    @apply text-center !mt-4 !mb-12;
+    max-width: 1000px;
+}
+
+.post-header__details {
+    @apply uppercase;
+}
+
+.post-header__details > *:not(:last-child) {
+    @apply mr-4;
+}

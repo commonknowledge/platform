@@ -1,0 +1,17 @@
+/* Related Content */
+
+.related-content {
+    @apply mb-20;
+}
+
+.related-content .wp-block-heading {
+    @apply font-normal normal-case text-4xl px-4 mb-8;
+}
+
+.related-content .wp-block-query {
+    @apply mb-8;
+}
+
+.related-content .wp-block-query {
+    @apply mb-8;
+}

@@ -1,0 +1,45 @@
+/* Project Header Block (at the top of Single Project page) */
+.project-header {
+    @apply mb-16;
+}
+
+.project-header h1 {
+    @apply text-center !mt-4 !mb-12;
+    max-width: 1000px;
+}
+
+.project-header__cover {
+    @apply flex flex-col items-center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 600px;
+}
+
+.project-header__cover.project-header__cover--no-image {
+    min-height: 0;
+}
+
+.project-header__buttons {
+    @apply relative;
+}
+
+.project-header__buttons .btn-default:not(:last-child) {
+    @apply mr-2;
+}
+
+/* Website Link Block */
+.project-website-link {
+    @apply absolute !pr-8 hidden md:inline-block text-lg;
+    left: 100%;
+    transform: rotate(-15deg);
+    top: -4rem;
+}
+
+.project-website-link::after {
+    @apply absolute;
+    content: "\2191";
+    right: 0.75rem;
+    top: 0.4rem;
+    transform: rotate(45deg);
+}

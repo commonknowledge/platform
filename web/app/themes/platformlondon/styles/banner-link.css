@@ -1,0 +1,8 @@
+/* Banner Link (pattern) */
+.banner-link .wp-block-column:last-child {
+    @apply flex items-center justify-end;
+}
+
+.banner-link .wp-block-column:nth-child(2) a {
+    @apply btn-default hidden md:inline;
+}

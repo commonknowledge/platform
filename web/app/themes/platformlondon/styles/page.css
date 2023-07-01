@@ -1,0 +1,9 @@
+/* Page Specific Styles */
+
+.page .has-global-padding .wp-block-query {
+    @apply !-ml-4 !-mr-4;
+}
+
+.page .wp-block-query-no-results {
+    @apply px-4;
+}

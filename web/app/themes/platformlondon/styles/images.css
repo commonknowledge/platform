@@ -1,0 +1,60 @@
+/* Images */
+
+.wp-block-image.size-full {
+    @apply !mx-0 !max-w-none;
+}
+
+.wp-block-image.size-full>img {
+    @apply !w-full object-cover;
+    min-height: 300px;
+}
+
+.wp-block-image.size-large>img {
+    @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
+}
+
+.wp-block-image.size-medium_large>img {
+    @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
+}
+
+.wp-block-image.size-large>figcaption {
+    @apply md:-ml-16 uppercase;
+}
+
+.wp-block-image.size-medium_large>figcaption {
+    @apply md:-ml-16 uppercase;
+}
+
+.entry-content figcaption {
+    @apply text-sm;
+}
+
+/* Post Full-width Image */
+.single .wp-block-image.size-full {
+    @apply !-mx-4 !mb-16;
+}
+
+/* Image Pair */
+.platform-image-pair {
+    @apply my-16;
+}
+
+.platform-image-pair__images {
+    @apply flex flex-col items-center;
+}
+
+.platform-image-pair__images img:first-child {
+    @apply mb-4;
+}
+
+@screen md {
+    .platform-image-pair__images {
+        @apply flex-row gap-4 items-stretch -ml-16 -mr-16;
+        width: calc(100% + 8rem);
+    }
+
+    .platform-image-pair img {
+        @apply !mb-0 object-cover;
+        width: 50%;
+    }
+}
