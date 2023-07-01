@@ -1,4 +1,5 @@
 /* Post Header Block (at the top of Single Post page) */
+
 .post-header {
     @apply flex flex-col items-center mb-16;
 }
