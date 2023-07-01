@@ -197,6 +197,9 @@
 				}
 			},
 			"heading": {
+				"color": {
+					"text": "#185500"
+				},
 				"typography": {
 					"fontFamily": "var:preset|font-family|styrene-b-trial"
 				}

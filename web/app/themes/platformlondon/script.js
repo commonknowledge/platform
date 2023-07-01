@@ -275,7 +275,7 @@ if (timelineEntries.length) {
         for (let i = 0; i < timelineEntries.length; i++) {
             const entry = timelineEntries[i]
             entry.removeAttribute("data-active")
-            if (entry.getBoundingClientRect().top < yearMarkerPosition) {
+            if (entry.getBoundingClientRect().top < yearMarkerPosition - 8) {
                 activeEntryIndex = i
                 entry.setAttribute("data-active", true)
             }

@@ -61,7 +61,8 @@ Tags: full-site-editing,
 }
 
 .wp-block-image.size-full>img {
-    @apply !w-full;
+    @apply !w-full object-cover;
+    min-height: 300px;
 }
 
 .wp-block-image.size-large>img {
@@ -157,6 +158,10 @@ text {
     @apply border border-dark-green rounded-full shadow-md truncate relative z-40 !px-4;
     background: none !important;
 }
+.wp-block-search__input:hover,.wp-block-search__input:focus {
+    @apply shadow-yellow;
+    box-shadow: 0 0 50px 10px theme('colors.yellow');
+}
 .wp-block-search::after {
     content: "";
     background-image: url("/app/themes/platformlondon/assets/img/search.svg");
@@ -241,7 +246,7 @@ header .wp-block-search {
 
 /* Page */
 .page h1.wp-block-post-title, .single h1.wp-block-post-title {
-    @apply text-4xl md:text-6xl lg:text-8xl mt-8 mb-24;
+    @apply text-5xl md:text-6xl lg:text-8xl mt-8 mb-24;
 }
 
 /* Prevent double padding from query block and child items */
@@ -253,32 +258,32 @@ header .wp-block-search {
     @apply px-4;
 }
 
-.page .wp-block-query-pagination {
+.wp-block-query-pagination {
     @apply p-4 mt-8;
 }
 
-.page .wp-block-query-pagination-numbers {
+.wp-block-query-pagination-numbers {
     @apply !m-auto;
 }
 
-.page .wp-block-query-pagination .page-numbers {
-    @apply btn-default-no-padding !rounded-full !px-[0.9rem] !py-2;
+.wp-block-query-pagination .page-numbers {
+    @apply btn-default-no-padding !rounded-full !px-4 !py-2;
 }
 
-.page .wp-block-query-pagination .page-numbers.current {
+.wp-block-query-pagination .page-numbers.current {
     @apply !bg-dark-green !text-white;
 }
 
-.page .wp-block-query-pagination .wp-block-query-pagination-previous {
+.wp-block-query-pagination .wp-block-query-pagination-previous {
     @apply hidden;
 }
 
-.page .wp-block-query-pagination .wp-block-query-pagination-next {
+.wp-block-query-pagination .wp-block-query-pagination-next {
     @apply hidden;
 }
 
 .wp-block-post-content {
-    @apply mb-32 font-sans;
+    @apply mb-16 font-sans;
 }
 
 .wp-block-post-content h2,
@@ -371,12 +376,8 @@ header .wp-block-search {
     @apply p-0;
 }
 
-.wp-block-post .wp-block-post-title {
-    @apply text-2xl;
-}
-
-.wp-block-post-title {
-    @apply mb-4 text-2xl;
+h2.wp-block-post-title {
+    @apply mb-4 text-2xl md:text-3xl lg:text-5xl;
     word-break: normal !important;
     word-wrap: normal !important;
 }
@@ -417,6 +418,7 @@ header .wp-block-search {
 /* Query Loop for Posts and Resources */
 @each $type in post, pl_resource {
     .wp-block-post.type-$(type) {
+        @apply !mb-16;
         width: 100% !important;
     }
 
@@ -445,8 +447,8 @@ header .wp-block-search {
             width: 100% !important;
         }
 
-        .page .wp-block-post.type-$(type):first-child .wp-block-post-title {
-            @apply text-5xl;
+        .page .wp-block-post.type-$(type):first-child h2.wp-block-post-title {
+            @apply text-2xl md:text-3xl lg:text-5xl;
         }
 
         /* First item on Blog/Resources page can have side-by-side image and text at wp-md size */
@@ -611,6 +613,7 @@ header .wp-block-search {
 
 .project-header__cover {
     @apply flex flex-col items-center;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 600px;
@@ -628,15 +631,15 @@ header .wp-block-search {
     @apply mr-2;
 }
 
-.project-download-link-container {
+.post-download-link-container {
     @apply text-center relative mb-16;
 }
 
-.project-download-link {
+.post-download-link {
     @apply relative !pr-8 hidden md:inline;
 }
 
-.project-download-link::after {
+.post-download-link::after {
     @apply absolute;
     content: "\2193";
     right: 0.75rem;
@@ -703,8 +706,8 @@ header .wp-block-search {
     }
 }
 
-.wp-block-post.type-pl_project .wp-block-post-title {
-    @apply md:text-5xl line-clamp-3 mb-8;
+.wp-block-post.type-pl_project h2.wp-block-post-title {
+    @apply line-clamp-3 mb-8 md:text-3xl lg:text-5xl;
     min-height: 0;
 }
 
@@ -860,9 +863,9 @@ header .wp-block-search {
 }
 
 .platform-stack .banner-link .wp-block-column:nth-child(2) p {
-    @apply absolute w-full;
+    @apply absolute;
     left: 1rem;
-    bottom: 2rem;
+    bottom: 3rem;
 }
 
 .platform-stack .banner-link .wp-block-column:nth-child(2) a {
@@ -877,11 +880,15 @@ header .wp-block-search {
 
 /* Platform Strapline */
 .platform-strapline {
-    @apply overflow-hidden mt-16 pt-16;
+    @apply overflow-hidden my-16 md:pt-16 border-dark-green md:border-t md:mx-4;
 }
 
 .home .platform-strapline {
-    @apply -mt-20;
+    @apply mt-0 border-t-0 md:pt-8 md:-mt-8;
+}
+
+.platform-strapline > .wp-block-columns {
+    @apply md:px-0;
 }
 
 .platform-strapline .wp-block-heading {
@@ -890,6 +897,15 @@ header .wp-block-search {
 
 .platform-strapline em {
     @apply btn-default font-normal text-lg not-italic normal-case inline-block mr-2;
+    padding-bottom: 0.25rem !important;
+    padding-top: 0.25rem !important;
+}
+
+@screen md {
+    .platform-strapline em {
+        padding-bottom: 0.5rem !important;
+        padding-top: 0.5rem !important;
+    }
 }
 
 .platform-illustration {
@@ -957,7 +973,7 @@ header .wp-block-search {
 
 /* Footer */
 footer {
-    @apply mt-16 pb-4;
+    @apply md:mt-16 pb-4;
 }
 
 footer hr {
@@ -1027,11 +1043,15 @@ footer h6 {
 
 /* Category Cards */
 .platform-category-cards {
-    @apply p-0 !max-w-1024 mt-0 mb-12 !flex-wrap justify-center;
+    @apply p-0 !max-w-1024 mt-0 mb-12 !flex-wrap justify-center gap-8;
 }
 
 .platform-category-cards .wp-block-column {
     @apply p-4 md:min-w-320 md:h-320 md:max-w-320 rounded shadow-md;
+}
+
+.platform-category-cards .wp-block-heading {
+    @apply font-bold;
 }
 
 /* Tabs */
@@ -1065,7 +1085,7 @@ nav.platform-tabs {
 
 /* Post Filter on Blog/Resources Page */
 .post-filter {
-    @apply px-4 my-16;
+    @apply px-4 mt-16 mb-12;
 }
 
 .post-filter__categories {
@@ -1108,15 +1128,13 @@ nav.platform-tabs {
     @apply relative;
 }
 
-@screen sm {
-    .projects-carousel {
-        --card-width: 320px;
-    }
+.projects-carousel {
+    --card-width: 320px;
 }
 
 @screen md {
     .projects-carousel {
-        --card-width: 400px;
+        --card-width: 440px;
     }
 }
 
@@ -1151,7 +1169,7 @@ nav.platform-tabs {
     position: absolute;
     top: 50%;
     z-index: 1;
-    @apply btn-default-no-padding !rounded-full !px-[0.9rem] !py-2 md:hidden;
+    @apply btn-default-no-padding !rounded-full !px-[0.8rem] !py-2 md:hidden;
 }
 
 .projects-carousel__button:first-child {
@@ -1170,8 +1188,14 @@ nav.platform-tabs {
      * Start by displaying the second post. Transform left (negative) by the
      * width of 1.5 cards.
      */
-    transform: translate3d(calc(var(--card-width) * -1.5), 0, 0);
+    transform: translate3d(calc(var(--card-width) * -1.25), 0, 0);
     transition: transform 1.5s;
+}
+
+@screen md {
+    .projects-carousel .wp-block-post-template {
+        transform: translate3d(calc(var(--card-width) * -1.5), 0, 0);
+    }
 }
 
 .projects-carousel .wp-block-post-template .wp-block-post {
@@ -1187,8 +1211,12 @@ nav.platform-tabs {
     transition: transform 1.5s;
 }
 
+.projects-carousel h2.wp-block-post-title {
+    @apply !mb-auto;
+}
+
 .projects-carousel .wp-block-post-featured-image {
-    @apply !mb-0;
+    @apply !mt-4 !mb-0;
 }
 
 .projects-carousel .wp-block-post:not(:nth-child(2)) {
@@ -1213,12 +1241,16 @@ body.search .wp-block-search {
     @apply !px-0 gap-8;
 }
 
+.search-sort {
+    @apply !ml-auto;
+}
+
 .search-sort select {
     @apply btn-default bg-cream;
 }
 
 .search-results-count {
-    @apply text-2xl;
+    @apply hidden md:block text-2xl;
 }
 
 .search-filter__section {
@@ -1286,7 +1318,7 @@ body.search.search-results .wp-block-post .wp-block-columns {
 }
 
 body.search.search-results .wp-block-post > .wp-block-columns {
-    @apply !my-4;
+    @apply !mt-4 !mb-12 md:!mb-4;
 }
 
 body.search.search-results .wp-block-post > .wp-block-columns > .wp-block-column {
@@ -1377,6 +1409,7 @@ body .is-layout-constrained .platform-timeline-links {
 }
 
 .platform-timeline__marker span {
+    @apply text-center;
     width: 3rem;
 }
 
@@ -1415,7 +1448,7 @@ body .is-layout-constrained .platform-timeline-links {
 }
 
 .platform-timeline .wp-block-columns {
-    @apply !p-0;
+    @apply !p-0 !mb-2;
 }
 
 .platform-image-pair {
@@ -1440,6 +1473,10 @@ body .is-layout-constrained .platform-timeline-links {
         @apply !mb-0 object-cover;
         width: 50%;
     }
+}
+
+.related-content {
+    @apply mb-20;
 }
 
 .related-content .wp-block-heading {

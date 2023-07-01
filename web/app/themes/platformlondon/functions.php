@@ -165,17 +165,17 @@ add_action('carbon_fields_register_fields', function () {
             <?php
         });
 
-    Block::make(__('Project Download Link'))
+    Block::make(__('Post Download Link'))
         ->add_fields(array(
-            Field::make('separator', 'crb_separator', __('Project Download Link'))
+            Field::make('separator', 'crb_separator', __('Post Download Link'))
         ))
         ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
             $download_url = carbon_get_the_post_meta("pdf");
             if ($download_url) : ?>
-                <div class="project-download-link-container">
+                <div class="post-download-link-container">
                     <a 
                         target="_blank"
-                        class="btn-default bg-cream project-download-link"
+                        class="btn-default bg-cream post-download-link"
                         href="<?= $download_url ?>">
                         Download PDF
                     </a>
@@ -902,7 +902,7 @@ add_action('pre_get_posts', function ($query) {
         return $query;
     }
     if ($query->is_search()) {
-        $slugs_to_exclude = ["blog", "resources", "projects"];
+        $slugs_to_exclude = ["blog", "resources", "projects", "timeline"];
         $ids_to_exclude = array_map(function ($slug) {
             return url_to_postid($slug);
         }, $slugs_to_exclude);
