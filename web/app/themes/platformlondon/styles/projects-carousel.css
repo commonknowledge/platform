@@ -95,6 +95,6 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post {
     @apply !mt-4 !mb-0;
 }
 
-.projects-carousel .wp-block-post:not(:nth-child(2)) {
-    transform: scale(0.8) !important;
+body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-child(2)) {
+    transform: scale(0.8);
 }
