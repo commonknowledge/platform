@@ -1,7 +1,7 @@
 /* Query Loop Block */
 
 .wp-block-post-template {
-    @apply !gap-0;
+    @apply !gap-x-0 !gap-y-4;
 }
 
 .wp-block-post {
@@ -16,8 +16,16 @@
     @apply font-sans;
 }
 
-.wp-block-post-content .wp-block-post-title {
-    @apply !uppercase !font-bold;
+.yellow-drop-shadow {
+    filter: drop-shadow(0 0 1rem theme('colors.yellow'));
+}
+
+.wp-block-post-title a:hover {
+    @apply yellow-drop-shadow;
+}
+
+.wp-block-post-template .wp-block-post-featured-image {
+    @apply mb-0;
 }
 
 .wp-block-post-featured-image a {
@@ -52,12 +60,7 @@
 /* Query Loop for Posts and Resources */
 @each $type in post, pl_resource {
     .wp-block-post.type-$(type) {
-        @apply !mb-16;
         width: 100% !important;
-    }
-
-    .wp-block-post.type-$(type):last-child,.wp-block-post.type-$(type):nth-last-child(2) {
-        @apply !mb-0;
     }
 
     .wp-block-post.type-$(type) img {
@@ -124,6 +127,13 @@
             flex-direction: column;
         }
 
+        /* Collapse empty colums */
+        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:empty {
+            flex-basis: 0 !important;
+            flex-grow: 0;
+            margin-left: -1rem;
+        }
+
         .wp-block-post.type-$(type) img {
             height: 324px;
         }
@@ -173,13 +183,6 @@
             min-width: 240px;
         }
 
-        /* Collapse empty colums */
-        .wp-block-post.type-$(type) > .wp-block-columns > .wp-block-column:empty {
-            flex-basis: 0 !important;
-            flex-grow: 0;
-            margin-left: -1rem;
-        }
-
         /* On pages, the first item is 100%, so the indexing here needs to be incremented */
         .page .wp-block-post.type-$(type):nth-child(4n+2) {
             width: 520px !important;
@@ -222,6 +225,10 @@
 .wp-block-post.type-pl_project h2.wp-block-post-title {
     @apply line-clamp-3 mb-8 md:text-3xl lg:text-5xl;
     min-height: 0;
+}
+
+.wp-block-post.type-pl_project h2.wp-block-post-title a:hover {
+    filter: none;
 }
 
 .wp-block-post.type-pl_project.category-energy {

@@ -18,6 +18,24 @@ document.querySelectorAll(".platform-category-cards .wp-block-column").forEach(c
     col.style.padding = "0"
 })
 
+// Make post cards image and title glow at the same time
+const LINK_SELECTOR = '.wp-block-post-featured-image a,.wp-block-post-title a'
+document.querySelectorAll(".wp-block-post:not(.type-pl_project)").forEach(post => {
+    post.querySelectorAll(LINK_SELECTOR).forEach(link => {
+        const allLinks = link.closest('.wp-block-post').querySelectorAll('.wp-block-post-title a')
+        link.addEventListener("mouseenter", () => {
+            allLinks.forEach(otherLink => {
+                otherLink.classList.add("yellow-drop-shadow")
+            })
+        })
+        link.addEventListener("mouseleave", () => {
+            allLinks.forEach(otherLink => {
+                otherLink.classList.remove("yellow-drop-shadow")
+            })
+        })
+    })
+})
+
 // Set up About page tabs
 const aboutContent = document.querySelector(".platform-about")
 if (aboutContent) {
@@ -331,6 +349,7 @@ const logo = document.querySelector("header .wp-block-site-logo img")
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.target.classList.contains('is-menu-open')) {
+            /* Make an image monochrome with this one weird trick! */
             logo.style.filter = "brightness(0) invert(1)"
         } else {
             logo.style.filter = ""
@@ -342,6 +361,18 @@ observer.observe(document.querySelector('.wp-block-navigation__responsive-contai
     attributes: true,
     attributeFilter: ['class']
 });
+
+/**
+ * Set up download PDF dropdowns
+ */
+document.querySelectorAll(".post-download-link").forEach((downloadSelect) => {
+    downloadSelect.addEventListener("change", function () {
+        if (downloadSelect.value) {
+            window.open(downloadSelect.value, "_blank")
+        }
+        downloadSelect.value = ""
+    })
+})
 
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"

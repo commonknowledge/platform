@@ -9,9 +9,19 @@ Block::make(__('Project Header'))
     ))
     ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
         $image = carbon_get_the_post_meta("background_image");
-        $download_url = carbon_get_the_post_meta("pdf");
         $website_url = carbon_get_the_post_meta("url");
         $cover_class = $image ? "" : "project-header__cover--no-image";
+
+        $pdfs_meta = carbon_get_the_post_meta("pdfs");
+        $files = [];
+        foreach ($pdfs_meta as $pdf_meta) {
+            $file_id = $pdf_meta['pdf'];
+            $files[] = [
+                "title" => get_the_title($file_id),
+                "url" => wp_get_attachment_url($file_id)
+            ];
+        }
+
         ?>
         <div class="project-header">
             <div class="project-header__cover <?= $cover_class ?>" style="background-image:url('<?= $image ?>')">
@@ -24,13 +34,17 @@ Block::make(__('Project Header'))
                     <span class="btn-default bg-cream">
                         <?= get_project_dates() ?>
                     </span>
-                    <?php if ($download_url) : ?>
-                        <a 
-                            target="_blank"
-                            class="btn-default bg-cream project-download-link"
-                            href="<?= $download_url ?>">
-                            Download PDF
-                        </a>
+                    <?php if ($files) : ?>
+                        <div class="post-download-link-container">
+                            <select class="btn-default bg-cream post-download-link">
+                                <option value="" selected disabled>Download Project PDF</option>
+                                <?php foreach ($files as $file) : ?>
+                                    <option value="<?= $file['url'] ?>">
+                                        <?= $file['title'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     <?php endif; ?>
                     <?php if ($website_url) : ?>
                         <a 

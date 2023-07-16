@@ -76,7 +76,7 @@
 }
 
 .platform-stack .wp-block-post-featured-image {
-    @apply mb-0;
+    @apply !mb-0;
 }
 
 .platform-stack .banner-link .wp-block-column:nth-child(2) p {

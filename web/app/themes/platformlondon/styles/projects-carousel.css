@@ -27,8 +27,9 @@
     padding-top: calc(250px + 1rem);
 }
 
+/* Hide "Explore the Timeline" on mobile */
 .projects-carousel .wp-block-navigation__container {
-    @apply mb-16 justify-center hidden md:flex;
+    @apply -mt-8 mb-8 justify-center hidden md:flex;
 }
 
 .projects-carousel .wp-block-navigation__container li {
@@ -45,7 +46,7 @@
     position: absolute;
     top: 50%;
     z-index: 1;
-    @apply btn-default-no-padding !rounded-full !px-[0.8rem] !py-2 md:hidden;
+    @apply btn-default-no-padding !rounded-full !px-[0.8rem] !pb-[0.6rem] !pt-[0.4rem];
 }
 
 .projects-carousel__button:first-child {

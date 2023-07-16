@@ -1,16 +1,30 @@
 /* Download Link Block */
 
+.post-download-link-block {
+    @apply text-center mb-16
+}
+
 .post-download-link-container {
-    @apply text-center relative mb-16;
+    @apply inline relative hover:text-white;
+}
+
+.post-download-link-container::after {
+    @apply absolute;
+    content: '↓';
+    right: 1rem;
+    top: -1px;
+}
+
+.post-download-link-container:hover .post-download-link {
+    @apply !bg-dark-green;
+}
+
+.project-header .post-download-link-container {
+    @apply inline;
 }
 
 .post-download-link {
-    @apply relative !pr-8 hidden md:inline;
-}
-
-.post-download-link::after {
-    @apply absolute;
-    content: "\2193";
-    right: 0.75rem;
-    top: 0.4rem;
+    @apply relative hidden md:inline !pr-8;
+    appearance: none;
+    cursor: pointer;
 }

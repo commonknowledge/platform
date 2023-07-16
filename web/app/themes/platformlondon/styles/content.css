@@ -3,8 +3,16 @@
     @apply relative; /* Ensure on top of background elements */
 }
 
+.entry-content figure {
+    @apply mb-16;
+}
+
 .wp-block-post-content {
     @apply mb-16 font-sans;
+}
+
+.wp-block-post-content .wp-block-post-title {
+    @apply !uppercase !font-bold;
 }
 
 .wp-block-post-content h2,
