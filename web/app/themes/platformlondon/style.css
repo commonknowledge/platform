@@ -1026,6 +1026,12 @@ nav.platform-tabs {
   margin-bottom: 3rem;
 }
 
+/* Gravity Form */
+
+.entry-content .gform_wrapper {
+  margin-bottom: 2rem;
+}
+
 /* Cover */
 
 .wp-block-cover h1,
@@ -1212,6 +1218,7 @@ footer h6 {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 1rem;
 }
 
@@ -1249,6 +1256,7 @@ footer h6 {
 }
 
 .gform_button {
+  margin-bottom: 0px !important;
   width: 100%;
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;

@@ -11,7 +11,7 @@ Block::make(__('Post Filter'))
         $categories = get_categories();
         switch (get_post()->post_name) {
             case "resources":
-                $taxonomy = "content-type";
+                $taxonomy = "pl_resource_type";
                 $post_type_label = "Resource";
                 break;
             case "projects":

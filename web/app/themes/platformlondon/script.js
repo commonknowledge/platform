@@ -216,6 +216,7 @@ document.querySelectorAll('.search-sort select').forEach(select => {
 })
 
 /* Set up search filter checkboxes */
+const EXCLUSIVE_PARAMS = ["pl_post_type", "pl_resource_type", "pl_project_type"]
 document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbox => {
     checkbox.addEventListener("change", () => {
         const checked = checkbox.checked
@@ -224,6 +225,19 @@ document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbo
 
         const path = location.pathname
         const queryParams = new URLSearchParams(location.search)
+
+        if (EXCLUSIVE_PARAMS.includes(param)) {
+            for (const exclusiveParam of EXCLUSIVE_PARAMS) {
+                queryParams.delete(exclusiveParam)
+                if (exclusiveParam !== param) {
+                    document
+                        .querySelectorAll(`[id^='filter-${exclusiveParam}']`)
+                        .forEach(checkbox => {
+                            checkbox.checked = false
+                        })
+                }
+            }
+        }
 
         const currentValue = queryParams.get(param) || ''
         let currentValues = currentValue.split(",").filter(Boolean)

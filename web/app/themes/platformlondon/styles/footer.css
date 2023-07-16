@@ -46,24 +46,3 @@ footer h6 {
 .footer-links a {
     @apply block mb-2;
 }
-
-/* Gravity Forms */
-.gform_wrapper > form {
-    @apply flex flex-col md:flex-row gap-4 mt-4;
-}
-
-.gform_body {
-    @apply grow md:max-w-input;
-}
-
-.gform_fields input {
-    @apply border border-dark-green rounded-full shadow-md;
-}
-
-.gform_footer {
-    @apply !m-0 !p-0;
-}
-
-.gform_button {
-    @apply btn-default w-full md:w-auto;
-}

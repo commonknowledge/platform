@@ -47,7 +47,7 @@ register_post_type(
         'rewrite' => array('slug' => 'resource'),
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
-        'taxonomies' => array("category", "content-type")
+        'taxonomies' => array("category", "pl_resource_type")
     )
 );
 

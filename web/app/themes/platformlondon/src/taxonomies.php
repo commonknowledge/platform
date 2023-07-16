@@ -2,16 +2,16 @@
 
 unregister_taxonomy_for_object_type('post_tag', 'post');
 
-register_taxonomy('content-type', ['pl_resource'], [
+register_taxonomy('pl_resource_type', ['pl_resource'], [
     'hierarchical'      => true,
     'show_ui'           => true,
     'show_admin_column' => true,
     'show_in_rest' => true,
     'query_var'         => true,
-    'rewrite'           => ['slug' => 'content-type'],
+    'rewrite'           => ['slug' => 'resource-type'],
     'labels'            => [
-        'name'              => _x('Content types', 'taxonomy general name'),
-        'singular_name'     => _x('Content type', 'taxonomy singular name'),
+        'name'              => _x('Resource types', 'taxonomy general name'),
+        'singular_name'     => _x('Resource type', 'taxonomy singular name'),
     ]
 ]);
 

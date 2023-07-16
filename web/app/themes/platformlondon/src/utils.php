@@ -67,6 +67,6 @@ function get_custom_post_type_taxonomy($post)
             return "pl_project_type";
         case "pl_resource":
         default:
-            return "content-type";
+            return "pl_resource_type";
     }
 }

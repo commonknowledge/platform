@@ -69,23 +69,12 @@ Block::make(__('Search Filter'))
             }, get_categories())
         ];
 
-        $filter_sections[] = [
-            "title" => "Author",
-            "param" => "author",
-            "options" => array_map(function ($author) use ($param_values) {
-                return [
-                    "name" => $author->display_name,
-                    "value" => $author->ID,
-                    "selected" => in_array($author->ID, $param_values["author"])
-                ];
-            }, get_users())
-        ];
-
         $taxonomies = [
-            "content-type",
+            "pl_post_type",
+            "pl_resource_type",
+            "pl_project_type",
             "pl_place",
             "pl_player",
-            "pl_project_type",
             "pl_issue",
             "pl_organisation"
         ];
@@ -105,6 +94,18 @@ Block::make(__('Search Filter'))
                 }, get_terms(["taxonomy" => $taxonomy]))
             ];
         }
+
+        $filter_sections[] = [
+            "title" => "Author",
+            "param" => "author",
+            "options" => array_map(function ($author) use ($param_values) {
+                return [
+                    "name" => $author->display_name,
+                    "value" => $author->ID,
+                    "selected" => in_array($author->ID, $param_values["author"])
+                ];
+            }, get_users())
+        ];
 
         $filter_sections[] = [
             "title" => "Team",

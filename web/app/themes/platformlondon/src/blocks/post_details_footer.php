@@ -12,7 +12,7 @@ Block::make(__('Post Details Footer'))
         $categories = wp_get_post_categories($post->ID, ['fields' => 'all']);
         $taxonomies = [
             "pl_project_type",
-            "content-type",
+            "pl_resource_type",
             "pl_place",
             "pl_player",
             "pl_issue",

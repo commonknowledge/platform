@@ -75,3 +75,8 @@
 .page .wp-site-blocks > hr {
     @apply mx-4 mb-12;
 }
+
+/* Gravity Form */
+.entry-content .gform_wrapper {
+    @apply mb-8;
+}

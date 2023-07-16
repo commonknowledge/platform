@@ -142,7 +142,7 @@ add_filter("query_loop_block_query_vars", function ($query) {
     if ($category_name) {
         $query["category_name"] = $category_name;
     }
-    foreach (["content-type", "pl_post_type", "pl_project_type"] as $taxonomy) {
+    foreach (["pl_resource_type", "pl_post_type", "pl_project_type"] as $taxonomy) {
         $content_type = get_query_var($taxonomy);
         if ($content_type) {
             $query["tax_query"] = [
