@@ -2420,10 +2420,7 @@ h2.wp-block-post-title {
 
 @media (min-width: 768px) {
     .projects-carousel__button {
-    padding-bottom: 0.8rem !important;
-    padding-top: 0.2rem !important;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+    display: none;
   }
 
     .projects-carousel .wp-block-post-template {
@@ -2455,6 +2452,23 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post {
 
 body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-child(2)) {
     transform: scale(0.8);
+}
+
+.projects-carousel .projects-carousel__nav {
+  display: none;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+
+  .projects-carousel .projects-carousel__nav {
+    display: flex;
+  }
+}
+
+.projects-carousel__nav button {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 /* Query Loop Block */

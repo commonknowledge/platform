@@ -71,7 +71,7 @@
 
 @screen md {
     .projects-carousel__button {
-        @apply text-4xl !pb-[0.8rem] !pt-[0.2rem]
+        @apply hidden;
     }
 
     .projects-carousel .wp-block-post-template {
@@ -102,4 +102,12 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post {
 
 body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-child(2)) {
     transform: scale(0.8);
+}
+
+.projects-carousel .projects-carousel__nav {
+    @apply hidden md:flex justify-between;
+}
+
+.projects-carousel__nav button {
+    @apply mx-4;
 }
