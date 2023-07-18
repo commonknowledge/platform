@@ -19,6 +19,7 @@ Tags: full-site-editing,
 
 /* Base */
 @import "styles/font.css";
+@import "styles/shared.css";
 @import "styles/svg.css";
 
 /* Components */

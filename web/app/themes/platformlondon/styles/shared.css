@@ -1,0 +1,7 @@
+.green-shadow {
+    box-shadow: 0 4px 10px 0 theme('colors.dark-green / 40%')
+}
+
+.yellow-shadow {
+    box-shadow: 0 0 50px 10px theme('colors.yellow'), 0 4px 10px 0 theme('colors.dark-green / 40%');
+}

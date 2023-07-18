@@ -8,7 +8,7 @@
 }
 
 .gform_fields input {
-    @apply border border-dark-green rounded-full shadow-md;
+    @apply border border-dark-green rounded-full green-shadow;
 }
 
 .gform_footer {

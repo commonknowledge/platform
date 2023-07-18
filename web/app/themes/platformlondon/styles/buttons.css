@@ -1,11 +1,15 @@
 /* Buttons */
 
 .btn-default-no-padding {
-    @apply hover:!bg-dark-green hover:!text-white border border-dark-green rounded-full shadow-md truncate;
+    @apply hover:!bg-dark-green hover:!text-white border border-dark-green rounded-full truncate green-shadow;
+}
+
+.btn-default-no-padding:hover,.btn-default-no-padding:focus {
+    @apply yellow-shadow;
 }
 
 .btn-default {
-    @apply btn-default-no-padding !py-2 !px-4;
+    @apply btn-default-no-padding !px-4 !py-2;
 }
 
 .btn-active {
