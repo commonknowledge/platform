@@ -1,6 +1,6 @@
 /* Gravity Forms */
 .gform_wrapper > form {
-    @apply flex flex-col md:flex-row gap-4 mt-4 items-end;
+    @apply flex flex-col md:flex-row gap-4 mt-4 md:items-end;
 }
 
 .gform_body {

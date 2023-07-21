@@ -4,7 +4,7 @@
 }
 
 .entry-content figure {
-    @apply mb-16;
+    @apply mb-16 max-w-full;
 }
 
 .wp-block-post-content {

@@ -7,6 +7,10 @@
     @apply flex flex-wrap mb-4;
 }
 
+.post-filter__categories li {
+    @apply block;
+}
+
 .post-filter__categories li:not(:last-child) {
     @apply mr-2;
 }

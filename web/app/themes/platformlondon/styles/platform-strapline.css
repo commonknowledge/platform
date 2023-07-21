@@ -13,7 +13,7 @@
 }
 
 .platform-strapline .wp-block-heading {
-    @apply relative md:w-[calc(100%+5rem)] z-20 break-normal !text-5xl md:!text-6xl;
+    @apply relative lg:w-[calc(100%+5rem)] z-20 break-normal !text-4xl md:!text-5xl lg:!text-6xl;
 }
 
 .platform-strapline em {
@@ -39,7 +39,7 @@
 }
 
 .platform-illustration svg {
-    left: 4.75%;
+    left: 0;
     opacity: 0.75;
     position: absolute;
     top: 0;

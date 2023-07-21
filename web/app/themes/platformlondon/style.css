@@ -952,6 +952,7 @@ nav.platform-tabs {
 
 .entry-content figure {
   margin-bottom: 4rem;
+  max-width: 100%;
 }
 
 .wp-block-post-content {
@@ -1230,7 +1231,6 @@ footer h6 {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   gap: 1rem;
 }
 
@@ -1238,6 +1238,7 @@ footer h6 {
 
   .gform_wrapper > form {
     flex-direction: row;
+    align-items: flex-end;
   }
 }
 
@@ -1365,6 +1366,10 @@ footer h6 {
     z-index: 100001;
 }
 
+.wp-block-navigation {
+    z-index: 100001;
+}
+
 .wp-block-navigation-item__content {
   position: relative;
   z-index: 40;
@@ -1471,9 +1476,6 @@ footer h6 {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.wp-block-navigation__responsive-container-content {
-}
-
 .wp-block-navigation__responsive-container.is-menu-open.has-modal-open
 .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
   margin-top: 4rem;
@@ -1501,6 +1503,12 @@ footer h6 {
 
 .wp-block-navigation__responsive-container.is-menu-open.has-modal-open
 .wp-block-navigation__responsive-container-content .wp-block-navigation-item a:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(24 85 0 / var(--tw-text-opacity)) !important;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
+.current-menu-item .wp-block-navigation-item__content {
   --tw-text-opacity: 1 !important;
   color: rgb(24 85 0 / var(--tw-text-opacity)) !important;
 }
@@ -1874,6 +1882,7 @@ h2.wp-block-post-title {
 
 .platform-stack .banner-link .wp-block-column:nth-child(2) p {
   position: absolute;
+  z-index: 40;
     left: 1rem;
     bottom: 3rem;
 }
@@ -1932,11 +1941,19 @@ h2.wp-block-post-title {
   z-index: 20;
   overflow-wrap: normal;
   word-break: normal;
-  font-size: 3rem !important;
-  line-height: 1 !important;
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
 }
 
 @media (min-width: 768px) {
+
+  .platform-strapline .wp-block-heading {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+}
+
+@media (min-width: 1024px) {
 
   .platform-strapline .wp-block-heading {
     width: calc(100% + 5rem);
@@ -2070,7 +2087,7 @@ h2.wp-block-post-title {
 }
 
 .platform-illustration svg {
-    left: 4.75%;
+    left: 0;
     opacity: 0.75;
     position: absolute;
     top: 0;
@@ -2181,6 +2198,10 @@ h2.wp-block-post-title {
   margin-bottom: 1rem;
   display: flex;
   flex-wrap: wrap;
+}
+
+.post-filter__categories li {
+  display: block;
 }
 
 .post-filter__categories li:not(:last-child) {
