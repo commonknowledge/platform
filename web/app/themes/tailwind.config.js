@@ -22,6 +22,7 @@ module.exports = {
       screens: {
         masonry: 'calc(240px * 4 + 6rem)',
         wpmd: '600px',
+        content: '620px',
       },
       height: {
         320: '320px',

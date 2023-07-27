@@ -950,9 +950,19 @@ nav.platform-tabs {
   position: relative; /* Ensure on top of background elements */
 }
 
+/* Prevent images being wider than the screen width */
+
 .entry-content figure {
   margin-bottom: 4rem;
   max-width: 100%;
+}
+
+/* Restrict image size to content width (620px) */
+
+@media (min-width: 620px) {
+    .entry-content figure {
+        max-width: 620px;
+    }
 }
 
 .wp-block-post-content {

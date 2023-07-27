@@ -3,8 +3,16 @@
     @apply relative; /* Ensure on top of background elements */
 }
 
+/* Prevent images being wider than the screen width */
 .entry-content figure {
     @apply mb-16 max-w-full;
+}
+
+/* Restrict image size to content width (620px) */
+@screen content {
+    .entry-content figure {
+        max-width: 620px;
+    }
 }
 
 .wp-block-post-content {

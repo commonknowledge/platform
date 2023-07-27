@@ -1,5 +1,10 @@
 <?php
 
+# Load wp_generate_attachment_metadata function
+if (!function_exists('wp_crop_image')) {
+    include(ABSPATH . 'wp-admin/includes/image.php');
+}
+
 require_once("src/utils.php");
 
 add_action('init', function () {
@@ -170,6 +175,56 @@ add_filter('image_size_names_choose', function () {
         'full'         => __('Full Size', 'textdomain'),
     ];
 });
+
+// If an image is requested that has no sizes, generate them and update the metadata
+// Fixes bug where the image size dropdown does not appear in the block editor
+add_filter('rest_prepare_attachment', function ($response, $post, $request) {
+    if (array_key_exists("media_details", $response->data) && empty((array) $response->data['media_details'])) {
+        $path = explode("uploads", $response->data['source_url'])[1];
+        $upload_dir = wp_upload_dir()['basedir'];
+        $filepath = $upload_dir . $path;
+
+        // Taken from class-wp-rest-attachments-controller::prepare_item_for_response
+        $data = $response->data;
+        $data['media_details'] = wp_generate_attachment_metadata($response->data['id'], $filepath);
+
+        // Ensure empty details is an empty object.
+        if (empty($data['media_details'])) {
+            $data['media_details'] = new stdClass();
+        } elseif (!empty($data['media_details']['sizes'])) {
+            foreach ($data['media_details']['sizes'] as $size => &$size_data) {
+                if (isset($size_data['mime-type'])) {
+                    $size_data['mime_type'] = $size_data['mime-type'];
+                    unset($size_data['mime-type']);
+                }
+
+                // Use the same method image_downsize() does.
+                $image_src = wp_get_attachment_image_src($post->ID, $size);
+                if (!$image_src) {
+                    continue;
+                }
+
+                $size_data['source_url'] = $image_src[0];
+            }
+
+            $full_src = wp_get_attachment_image_src($post->ID, 'full');
+
+            if (!empty($full_src)) {
+                $data['media_details']['sizes']['full'] = array(
+                    'file'       => wp_basename($full_src[0]),
+                    'width'      => $full_src[1],
+                    'height'     => $full_src[2],
+                    'mime_type'  => $post->post_mime_type,
+                    'source_url' => $full_src[0],
+                );
+            }
+        } else {
+            $data['media_details']['sizes'] = new stdClass();
+        }
+        $response->data = $data;
+    }
+    return $response;
+}, 10, 3);
 
 add_filter('render_block', function ($block_content, $block) {
     if ($block['blockName'] === 'core/navigation' &&

@@ -12,7 +12,10 @@
             "pathMappings": {
                 "/var/www/html": "${workspaceFolder}"
             },
-            "stopOnEntry": true
+            "stopOnEntry": false,
+            "xdebugSettings": {
+                "max_data": -1
+            }
         }
     ]
 }
