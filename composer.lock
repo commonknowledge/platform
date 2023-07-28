@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2abf0500f215f97f985c6255e2c5ac3",
+    "content-hash": "72ab8905dd33abd5730f1dac2e7ac181",
     "packages": [
         {
             "name": "composer/installers",
@@ -1331,6 +1331,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/create-block-theme/"
+        },
+        {
+            "name": "wpackagist-plugin/pdfjs-viewer-shortcode",
+            "version": "2.1.8",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/pdfjs-viewer-shortcode/",
+                "reference": "tags/2.1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/pdfjs-viewer-shortcode.2.1.8.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/pdfjs-viewer-shortcode/"
         },
         {
             "name": "wpackagist-plugin/post-types-order",

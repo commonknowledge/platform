@@ -3,6 +3,10 @@
     @apply relative; /* Ensure on top of background elements */
 }
 
+.entry-content a {
+    @apply underline;
+}
+
 /* Prevent images being wider than the screen width */
 .entry-content figure {
     @apply mb-16 max-w-full;
