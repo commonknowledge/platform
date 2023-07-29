@@ -67,3 +67,21 @@ register_post_type(
         'taxonomies' => []
     )
 );
+
+register_post_type(
+    'pl_multimedia',
+    array(
+        'labels'      => array(
+            'name'          => 'Multimedia',
+            'singular_name' => 'Multimedia',
+        ),
+        'public'      => true,
+        'has_archive' => true,
+        'menu_icon' => 'dashicons-camera',
+        'rewrite' => array('slug' => 'multimedia'),
+        'show_in_rest' => true,
+        'supports' => array('title', 'editor', 'author'),
+        'exclude_from_search' => true,
+        'taxonomies' => []
+    )
+);

@@ -13,6 +13,10 @@
     @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
 }
 
+.wp-block-embed.is-type-video>.wp-block-embed__wrapper {
+    @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
+}
+
 .wp-block-image.size-medium_large>img {
     @apply md:-ml-16 md:-mr-16 md:max-w-[calc(100%+8rem)];
 }

@@ -954,6 +954,15 @@ nav.platform-tabs {
   text-decoration-line: underline;
 }
 
+.entry-content h1 a,
+.entry-content h2 a,
+.entry-content h3 a,
+.entry-content h4 a,
+.entry-content h5 a,
+.entry-content h6 a {
+  text-decoration-line: none;
+}
+
 /* Prevent images being wider than the screen width */
 
 .entry-content figure {
@@ -1122,18 +1131,8 @@ nav.platform-tabs {
 
 .post-download-link {
   position: relative;
-  display: none;
+  display: inline;
   padding-right: 2rem !important;
-}
-
-@media (min-width: 768px) {
-
-  .post-download-link {
-    display: inline;
-  }
-}
-
-.post-download-link {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
@@ -1635,6 +1634,12 @@ h2.wp-block-post-title {
 @media (min-width: 768px) {
 
   .wp-block-image.size-large>img {
+    margin-left: -4rem;
+    margin-right: -4rem;
+    max-width: calc(100% + 8rem);
+  }
+
+  .wp-block-embed.is-type-video>.wp-block-embed__wrapper {
     margin-left: -4rem;
     margin-right: -4rem;
     max-width: calc(100% + 8rem);

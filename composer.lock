@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72ab8905dd33abd5730f1dac2e7ac181",
+    "content-hash": "7924064bb333cf5f5e57877993c260bf",
     "packages": [
         {
             "name": "composer/installers",
@@ -1385,6 +1385,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/safe-svg/"
+        },
+        {
+            "name": "wpackagist-plugin/sticky-posts-switch",
+            "version": "2.1.3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/sticky-posts-switch/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/sticky-posts-switch.zip?timestamp=1659077675"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/sticky-posts-switch/"
         },
         {
             "name": "wpackagist-plugin/wordfence",

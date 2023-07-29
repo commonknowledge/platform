@@ -24,7 +24,7 @@
 }
 
 .post-download-link {
-    @apply relative hidden md:inline !pr-8;
+    @apply relative inline !pr-8;
     appearance: none;
     cursor: pointer;
 }

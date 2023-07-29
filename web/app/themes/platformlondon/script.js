@@ -258,21 +258,28 @@ document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbo
 })
 
 /* Set up search filter accordion */
+const closeSearchFilterSection = (section) => {
+    const button = section.querySelector(".search-filter__expand")
+    const optionsList = section.querySelector(".search-filter__options")
+    const closed = button.getAttribute("data-closed")
+    if (closed) {
+        button.removeAttribute("data-closed")
+        optionsList.style.height = optionsList.getAttribute("data-original-height")
+    } else {
+        button.setAttribute("data-closed", true)
+        optionsList.style.height = 0
+    }
+}
+
 document.querySelectorAll('.search-filter__section').forEach(section => {
     const button = section.querySelector(".search-filter__expand")
     const optionsList = section.querySelector(".search-filter__options")
     button.addEventListener("click", () => {
-        const closed = button.getAttribute("data-closed")
-        if (closed) {
-            button.removeAttribute("data-closed")
-            optionsList.style.height = optionsList.getAttribute("data-original-height")
-        } else {
-            button.setAttribute("data-closed", true)
-            optionsList.style.height = 0
-        }
+        closeSearchFilterSection(section)
     })
     optionsList.style.height = optionsList.clientHeight + "px"
     optionsList.setAttribute("data-original-height", optionsList.style.height)
+    closeSearchFilterSection(section)
 })
 
 /* Set up timeline */

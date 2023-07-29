@@ -250,3 +250,7 @@ EOF,
 
     return $block_content;
 }, null, 2);
+
+add_action('admin_menu', function () {
+    remove_meta_box('postcustom', 'page', 'normal');
+});
