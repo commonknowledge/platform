@@ -2228,6 +2228,10 @@ h6 a:hover {
   margin-right: 1rem;
 }
 
+.post-details a {
+    text-decoration: none;
+}
+
 /* Post Filter on Blog/Resources/Projects Page */
 
 .post-filter {
@@ -2668,6 +2672,10 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.wp-block-post-terms a {
+    text-decoration: none;
 }
 
 .wp-block-post-terms a:not(:last-child) {

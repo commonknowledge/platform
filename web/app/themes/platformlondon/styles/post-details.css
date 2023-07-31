@@ -10,3 +10,7 @@
 .post-details > *:not(:last-child) {
     @apply mr-4;
 }
+
+.post-details a {
+    text-decoration: none;
+}

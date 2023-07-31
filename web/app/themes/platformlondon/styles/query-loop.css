@@ -40,6 +40,10 @@
     @apply truncate;
 }
 
+.wp-block-post-terms a {
+    text-decoration: none;
+}
+
 .wp-block-post-terms a:not(:last-child) {
     @apply mr-4;
 }
