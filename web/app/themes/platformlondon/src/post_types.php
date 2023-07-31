@@ -80,8 +80,7 @@ register_post_type(
         'menu_icon' => 'dashicons-camera',
         'rewrite' => array('slug' => 'multimedia'),
         'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'author'),
-        'exclude_from_search' => true,
-        'taxonomies' => []
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
+        'taxonomies' => array('category')
     )
 );

@@ -28,7 +28,7 @@ register_taxonomy('pl_post_type', ['post'], [
     ]
 ]);
 
-register_taxonomy('pl_organisation', ['post', 'pl_project', 'pl_resource'], [
+register_taxonomy('pl_organisation', ['post', 'pl_multimedia', 'pl_project', 'pl_resource'], [
     'hierarchical'      => true,
     'show_ui'           => true,
     'show_admin_column' => true,
@@ -41,7 +41,7 @@ register_taxonomy('pl_organisation', ['post', 'pl_project', 'pl_resource'], [
     ]
 ]);
 
-register_taxonomy('pl_player', ['post', 'pl_project'], [
+register_taxonomy('pl_player', ['post', 'pl_multimedia', 'pl_project'], [
     'hierarchical'      => true,
     'show_ui'           => true,
     'show_admin_column' => true,
@@ -54,7 +54,7 @@ register_taxonomy('pl_player', ['post', 'pl_project'], [
     ]
 ]);
 
-register_taxonomy('pl_issue', ['post', 'pl_project', 'pl_resource'], [
+register_taxonomy('pl_issue', ['post', 'pl_multimedia', 'pl_project', 'pl_resource'], [
     'hierarchical'      => true,
     'show_ui'           => true,
     'show_admin_column' => true,
@@ -67,7 +67,7 @@ register_taxonomy('pl_issue', ['post', 'pl_project', 'pl_resource'], [
     ]
 ]);
 
-register_taxonomy('pl_place', ['post', 'pl_project', 'pl_resource'], [
+register_taxonomy('pl_place', ['post', 'pl_multimedia', 'pl_project', 'pl_resource'], [
     'hierarchical'      => true,
     'show_ui'           => true,
     'show_admin_column' => true,

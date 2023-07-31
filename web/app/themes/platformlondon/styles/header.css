@@ -68,3 +68,7 @@
 header .wp-block-search {
     @apply !mb-0;
 }
+
+header a:focus, header a:hover {
+    background: none;
+}
