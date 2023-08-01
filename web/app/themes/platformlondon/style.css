@@ -2405,7 +2405,7 @@ h6 a:hover {
   margin-bottom: 4rem;
   padding-left: 0px !important;
   padding-right: 0px !important;
-  padding-bottom: 4rem !important;
+  padding-bottom: 2rem !important;
     background-color: #fff39d;
     margin-top: -250px;
     padding-top: calc(250px + 1rem);
@@ -2436,44 +2436,6 @@ h6 a:hover {
     overflow: hidden;
 }
 
-.projects-carousel__button {
-    background-color: white;
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    padding-left: 0.8rem !important;
-    padding-right: 0.8rem !important;
-    padding-bottom: 0.6rem !important;
-    padding-top: 0.4rem !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-radius: 9999px;
-    border-width: 1px;
-    --tw-border-opacity: 1;
-    border-color: rgb(24 85 0 / var(--tw-border-opacity));
-    box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
-}
-
-.projects-carousel__button:hover {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
-
-.projects-carousel__button:hover,.projects-carousel__button:focus {
-    box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
-}
-
-.projects-carousel__button:first-child {
-    left: 0.5rem;
-}
-
-.projects-carousel__button:last-child {
-    right: 0.5rem;
-}
-
 .projects-carousel .wp-block-post-template {
     flex-wrap: nowrap;
     margin-left: 50%;
@@ -2487,10 +2449,6 @@ h6 a:hover {
 }
 
 @media (min-width: 768px) {
-    .projects-carousel__button {
-    display: none;
-  }
-
     .projects-carousel .wp-block-post-template {
         transform: translate3d(calc(var(--card-width) * -1.5), 0, 0);
     }
@@ -2523,15 +2481,9 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .projects-carousel .projects-carousel__nav {
-  display: none;
+  margin-top: 1rem;
+  display: flex;
   justify-content: space-between;
-}
-
-@media (min-width: 768px) {
-
-  .projects-carousel .projects-carousel__nav {
-    display: flex;
-  }
 }
 
 .projects-carousel__nav button {

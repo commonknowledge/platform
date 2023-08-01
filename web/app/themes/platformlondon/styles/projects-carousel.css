@@ -21,7 +21,7 @@
 }
 
 .projects-carousel .wp-block-cover {
-    @apply !px-0 !pb-16 mb-16;
+    @apply !px-0 !pb-8 mb-16;
     background-color: #fff39d;
     margin-top: -250px;
     padding-top: calc(250px + 1rem);
@@ -41,22 +41,6 @@
     overflow: hidden;
 }
 
-.projects-carousel__button {
-    background-color: white;
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    @apply btn-default-no-padding !rounded-full !px-[0.8rem] !pb-[0.6rem] !pt-[0.4rem];
-}
-
-.projects-carousel__button:first-child {
-    left: 0.5rem;
-}
-
-.projects-carousel__button:last-child {
-    right: 0.5rem;
-}
-
 .projects-carousel .wp-block-post-template {
     flex-wrap: nowrap;
     margin-left: 50%;
@@ -70,10 +54,6 @@
 }
 
 @screen md {
-    .projects-carousel__button {
-        @apply hidden;
-    }
-
     .projects-carousel .wp-block-post-template {
         transform: translate3d(calc(var(--card-width) * -1.5), 0, 0);
     }
@@ -105,7 +85,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .projects-carousel .projects-carousel__nav {
-    @apply hidden md:flex justify-between;
+    @apply flex justify-between mt-4;
 }
 
 .projects-carousel__nav button {
