@@ -1,5 +1,7 @@
 <?php
 
+require_once("src/redirects.php");
+
 # Load wp_generate_attachment_metadata function
 if (!function_exists('wp_crop_image')) {
     include(ABSPATH . 'wp-admin/includes/image.php');
