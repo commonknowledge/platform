@@ -61,8 +61,8 @@
     @apply !max-w-none;
 }
 
-/* Query Loop for Posts and Resources */
-@each $type in post, pl_resource {
+/* Query Loop for Posts, Resources and Multimedia */
+@each $type in post, pl_resource, pl_multimedia {
     .wp-block-post.type-$(type) {
         width: 100% !important;
     }

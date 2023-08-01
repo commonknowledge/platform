@@ -18,6 +18,10 @@ Block::make(__('Post Filter'))
                 $taxonomy = "pl_project_type";
                 $post_type_label = "Project";
                 break;
+            case "media":
+                $taxonomy = "pl_multimedia_type";
+                $post_type_label = "Multimedia";
+                break;
             default:
                 $taxonomy = "pl_post_type";
                 $post_type_label = "Post";

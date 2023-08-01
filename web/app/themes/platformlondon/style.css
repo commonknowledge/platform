@@ -2696,7 +2696,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   max-width: none !important;
 }
 
-/* Query Loop for Posts and Resources */
+/* Query Loop for Posts, Resources and Multimedia */
 
 .wp-block-post.type-post {
         width: 100% !important;
@@ -3041,6 +3041,180 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
         }
 
         .page .wp-block-post.type-pl_resource:nth-child(4n+1):not(:first-child) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+    }
+
+.wp-block-post.type-pl_multimedia {
+        width: 100% !important;
+    }
+
+.wp-block-post.type-pl_multimedia img {
+        height: 300px;
+        -o-object-fit: cover;
+           object-fit: cover;
+    }
+
+.wp-block-post.type-pl_multimedia > .wp-block-columns {
+        height: 100%;
+        flex-wrap: wrap !important;
+        gap: 1rem !important
+    }
+
+.wp-block-post.type-pl_multimedia .wp-block-columns {
+        margin: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important
+    }
+
+/* Force text to go under the image */
+
+.wp-block-post.type-pl_multimedia > .wp-block-columns > .wp-block-column {
+        flex-basis: 100% !important
+    }
+
+@media (min-width: 768px) {
+        /* On Blog/Resources page, first item is 100% width */
+        .page .wp-block-post.type-pl_multimedia:first-child {
+            max-width: none !important;
+            width: 100% !important;
+        }
+
+        .page .wp-block-post.type-pl_multimedia:first-child h2.wp-block-post-title {
+                        font-size: 1.5rem;
+                        line-height: 2rem;
+                }
+
+        @media (min-width: 768px) {
+                        .page .wp-block-post.type-pl_multimedia:first-child h2.wp-block-post-title {
+                                font-size: 1.875rem;
+                                line-height: 2.25rem;
+                        }
+                }
+
+        @media (min-width: 1024px) {
+                        .page .wp-block-post.type-pl_multimedia:first-child h2.wp-block-post-title {
+                                font-size: 3rem;
+                                line-height: 1;
+                        }
+                }
+
+        /* First item on Blog/Resources page can have side-by-side image and text at wp-md size */
+        .page .wp-block-post.type-pl_multimedia:first-child > .wp-block-columns {
+            flex-wrap: nowrap !important;
+        }
+
+        .page .wp-block-post.type-pl_multimedia:first-child  > .wp-block-columns > .wp-block-column:first-child {
+            flex-basis: initial !important;
+            flex-shrink: 0;
+            max-width: 50%;
+        }
+
+        .page .wp-block-post.type-pl_multimedia:first-child .wp-block-column:last-child {
+            display: flex;
+            flex-basis: initial !important;
+            flex-direction: column;
+        }
+
+        .wp-block-post.type-pl_multimedia {
+            max-width: 50%;
+        }
+
+        /* Show image and text side-by-side */
+        .wp-block-post.type-pl_multimedia > .wp-block-columns {
+            flex-wrap: nowrap !important;
+        }
+
+        .wp-block-post.type-pl_multimedia > .wp-block-columns > .wp-block-column:first-child {
+            max-width: 50%;
+        }
+
+        .wp-block-post.type-pl_multimedia > .wp-block-columns > .wp-block-column:last-child {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Collapse empty colums */
+        .wp-block-post.type-pl_multimedia > .wp-block-columns > .wp-block-column:empty {
+            flex-basis: 0 !important;
+            flex-grow: 0;
+            margin-left: -1rem;
+        }
+
+        .wp-block-post.type-pl_multimedia img {
+            height: 324px;
+        }
+
+        .wp-block-post.type-pl_multimedia .wp-block-post-title a {
+            min-height: 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+        }
+
+        .wp-block-post.type-pl_multimedia .wp-block-post-excerpt__excerpt {
+            min-height: 0;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+    }
+
+@media (min-width: calc(240px * 4 + 6rem)) {
+        .wp-block-post.type-pl_multimedia {
+            min-width: 520px;
+        }
+
+        /* First child should be 5/12 columns and not smaller than 480px */
+        .wp-block-post.type-pl_multimedia:nth-child(4n+1) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        /* Second child should take the rest of the space but not bigger than 7/12 columns */
+        .wp-block-post.type-pl_multimedia:nth-child(4n+2) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        /* Third child should be 5/12 columns and not smaller than 480px */
+        .wp-block-post.type-pl_multimedia:nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        /* Fourth child should take the rest of the space but not bigger than 7/12 columns */
+        .wp-block-post.type-pl_multimedia:nth-child(4n) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        /* Min width for image and text colums */
+        .wp-block-post.type-pl_multimedia > .wp-block-columns > .wp-block-column:not(:empty) {
+            min-width: 240px;
+        }
+
+        /* On pages, the first item is 100%, so the indexing here needs to be incremented */
+        .page .wp-block-post.type-pl_multimedia:nth-child(4n+2) {
+            width: 520px !important;
+            min-width: 41.67% !important;
+        }
+
+        .page .wp-block-post.type-pl_multimedia:nth-child(4n+3) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-pl_multimedia:nth-child(4n) {
+            width: calc(100% - 520px) !important;
+            max-width: 58.33% !important;
+        }
+
+        .page .wp-block-post.type-pl_multimedia:nth-child(4n+1):not(:first-child) {
             width: 520px !important;
             min-width: 41.67% !important;
         }

@@ -23,8 +23,21 @@ register_taxonomy('pl_post_type', ['post'], [
     'query_var'         => true,
     'rewrite'           => ['slug' => 'post-type'],
     'labels'            => [
-        'name'              => _x('Post Types', 'taxonomy general name'),
+        'name'              => _x('Post types', 'taxonomy general name'),
         'singular_name'     => _x('Post type', 'taxonomy singular name'),
+    ]
+]);
+
+register_taxonomy('pl_multimedia_type', ['pl_multimedia'], [
+    'hierarchical'      => true,
+    'show_ui'           => true,
+    'show_admin_column' => true,
+    'show_in_rest' => true,
+    'query_var'         => true,
+    'rewrite'           => ['slug' => 'media-type'],
+    'labels'            => [
+        'name'              => _x('Media types', 'taxonomy general name'),
+        'singular_name'     => _x('Media type', 'taxonomy singular name'),
     ]
 ]);
 
