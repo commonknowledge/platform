@@ -1103,40 +1103,34 @@ nav.platform-tabs {
   text-align: center;
 }
 
+.post-download-link-block h2 {
+  margin-bottom: 2rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.post-download-link-block a {
+  position: relative;
+  margin-right: 0.5rem !important;
+  display: inline-block;
+  padding-right: 1.5rem !important;
+}
+
+.post-download-link-block a:last-child {
+  margin-right: 0.5rem !important;
+}
+
+.post-download-link-block a::after {
+    content: "↓";
+    position: absolute;
+    top: 0.35rem;
+    right: 0.6rem;
+}
+
+/* Download Link in Project Header */
+
 .post-download-link-container {
-  position: relative;
   display: inline;
-}
-
-.post-download-link-container:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.post-download-link-container::after {
-  position: absolute;
-    content: '↓';
-    right: 1rem;
-    top: -1px;
-}
-
-.post-download-link-container:hover .post-download-link {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
-}
-
-.project-header .post-download-link-container {
-  display: inline;
-}
-
-.post-download-link {
-  position: relative;
-  display: inline;
-  padding-right: 2rem !important;
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-    cursor: pointer;
 }
 
 /* Footer */

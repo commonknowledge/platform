@@ -19,16 +19,10 @@ Block::make(__('Post Download Link'))
         }
         if ($files) : ?>
             <div class="post-download-link-block">
-                <div class="post-download-link-container">
-                    <select class="btn-default bg-cream post-download-link">
-                        <option value="" selected disabled>Download Project PDF</option>
-                        <?php foreach ($files as $file) : ?>
-                            <option value="<?= $file['url'] ?>">
-                                <?= $file['title'] ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+                <h2>Downloads</h2>
+                <?php foreach ($files as $file) : ?>
+                <a class="btn-default" href="<?= $file['url'] ?>" download><?= $file['title'] ?></a>
+                <?php endforeach; ?>
             </div>
         <?php endif;
     });
