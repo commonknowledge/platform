@@ -10,6 +10,7 @@ if (!function_exists('wp_crop_image')) {
 require_once("src/utils.php");
 
 add_action('init', function () {
+    require_once("src/commands.php");
     require_once("src/post_types.php");
     require_once("src/taxonomies.php");
 });

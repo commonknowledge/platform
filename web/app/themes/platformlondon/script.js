@@ -165,7 +165,7 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
 
     const cardContainer = carousel.querySelector(".wp-block-post-template")
     const cards = carousel.querySelectorAll(".wp-block-post")
-    const buttons = carousel.querySelectorAll(".projects-carousel__button,.projects-carousel__nav button")
+    const buttons = carousel.querySelectorAll(".projects-carousel__nav button")
 
     const displayCard = (index) => {
         if (index < 0) {
@@ -191,8 +191,6 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
 
     buttons[0].addEventListener("click", () => displayCard(currentIndex - 1))
     buttons[1].addEventListener("click", () => displayCard(currentIndex + 1))
-    buttons[2].addEventListener("click", () => displayCard(currentIndex - 1))
-    buttons[3].addEventListener("click", () => displayCard(currentIndex + 1))
 
     cardContainer.style.transform
 })
