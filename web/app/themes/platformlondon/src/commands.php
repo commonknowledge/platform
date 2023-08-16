@@ -35,6 +35,9 @@ function merge_categories($args)
                 wp_add_object_terms($post->ID, $cat_map[$category], "category");
             }
         }
+        if (count($categories) > 1) {
+            wp_remove_object_terms($post->ID, "uncategorized", "category");
+        }
     }
 }
 \WP_CLI::add_command('merge_categories', 'merge_categories');

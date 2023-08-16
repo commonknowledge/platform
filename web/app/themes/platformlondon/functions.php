@@ -130,21 +130,7 @@ add_filter("query_loop_block_query_vars", function ($query) {
             return $post['id'];
         }, $explicitly_related);
 
-        $categories = wp_get_post_categories($current_post->ID);
-        $related_query = $query;
-        if ($categories) {
-            $related_query["category__in"] = $categories;
-        }
-        $related_posts = get_posts($related_query);
-
-        $other_posts = get_posts($query);
-        $prioritised_posts = array_merge($related_posts, $other_posts);
-        $prioritised_post_ids = array_map(function ($post) {
-            return $post->ID;
-        }, $prioritised_posts);
-
-        $query["post__in"] = array_merge($explicitly_related_ids, $prioritised_post_ids);
-        $query["orderby"] = "post__in";
+        $query["post__in"] = $explicitly_related_ids;
     }
     $category_name = get_query_var("category_name");
     if ($category_name) {
