@@ -1915,6 +1915,10 @@ h6 a:hover {
         left: initial;
         right: 0;
     }
+
+    .platform-stack .wp-block-post.type-pl_project h2 {
+        font-size: 2.25rem !important;
+    }
 }
 
 .platform-stack .wp-block-post-featured-image {
