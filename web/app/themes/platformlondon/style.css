@@ -3399,21 +3399,13 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   padding-left: 1rem !important;
   padding-right: 1rem !important;
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
-    background: none !important;
+    background: url("/app/themes/platformlondon/assets/img/search.svg");
+    background-repeat: no-repeat;
+    background-position: 98%;
 }
 
 .wp-block-search__input:hover,.wp-block-search__input:focus {
     box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
-}
-
-.wp-block-search::after {
-    content: "";
-    background-image: url("/app/themes/platformlondon/assets/img/search.svg");
-    height: 1rem;
-    position: absolute;
-    right: 1rem;
-    top: 0.75rem;
-    width: 1rem;
 }
 
 /* Search Page */
@@ -3707,6 +3699,10 @@ body .is-layout-constrained .platform-timeline-links {
 
 .platform-timeline-links li {
   margin-bottom: 1.5rem;
+}
+
+.platform-timeline-links li a {
+  text-decoration-line: none;
 }
 
 .platform-timeline-links,.platform-timeline {

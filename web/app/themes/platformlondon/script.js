@@ -281,6 +281,21 @@ try {
         displayCategorySvg(null)
     })
 
+    /* Hide search icon when text input */
+    document.querySelectorAll(".wp-block-search__input").forEach(input => {
+        const { backgroundImage } = getComputedStyle(input)
+        input.addEventListener("keydown", () => {
+            input.style.backgroundImage = "none"
+        })
+        input.addEventListener("keyup", () => {
+            if (input.value) {
+                input.style.backgroundImage = "none"
+            } else {
+                input.style.backgroundImage = backgroundImage
+            }
+        })
+    })
+
     /* Set up search sort select */
     document.querySelectorAll('.search-sort select').forEach(select => {
         select.addEventListener("change", () => {

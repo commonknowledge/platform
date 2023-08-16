@@ -29,6 +29,10 @@ body .is-layout-constrained .platform-timeline-links {
     @apply mb-6;
 }
 
+.platform-timeline-links li a {
+    @apply no-underline;
+}
+
 .platform-timeline-links,.platform-timeline {
     @apply relative z-10;
 }
