@@ -1720,6 +1720,10 @@ h2.wp-block-post-title {
   }
 }
 
+input[type=checkbox] {
+    accent-color: #185500;
+}
+
 a:focus,a:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 239 86 / var(--tw-bg-opacity));
@@ -2522,7 +2526,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 .wp-block-post-template {
   -moz-column-gap: 0px !important;
        column-gap: 0px !important;
-  row-gap: 1rem !important;
+  row-gap: 3rem !important;
 }
 
 .wp-block-post {
