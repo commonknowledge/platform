@@ -1,7 +1,7 @@
 /* Platform Strapline (big text that appears first on home page, bottom of other pages) */
 
 .platform-strapline {
-    @apply overflow-hidden my-16 md:pt-16 border-dark-green md:border-t md:mx-4;
+    @apply my-16 md:pt-16 border-dark-green md:border-t md:mx-4;
 }
 
 .home .platform-strapline {
@@ -10,6 +10,10 @@
 
 .platform-strapline > .wp-block-columns {
     @apply md:px-0;
+}
+
+.platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+    position: relative;
 }
 
 .platform-strapline .wp-block-heading {
@@ -30,40 +34,68 @@
 }
 
 .platform-illustration {
-    @apply md:-mt-10 relative z-10;
-    mix-blend-mode: multiply;
+    @apply z-10;
+    height: calc(100vw - 2rem - 1px);
+    margin: -25vw 0;
+    position: relative;
+    width: calc(100vw - 2rem - 1px);
 }
 
-.platform-illustration__background {
-    opacity: 0.2;
-}
-
-.platform-illustration svg {
-    left: 0;
-    opacity: 0.75;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-@screen md {
-    .platform-illustration svg {
-        top: 24%;
+@media screen and (min-width: 782px) {
+    .platform-illustration {
+        height: 50vw;
+        left: 50%;
+        margin: 0;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        width: 50vw;
     }
 }
 
-.platform-illustration path {
-    cursor: pointer;
-    transition: transform 1s;
+.platform-illustration svg {
+    position: absolute;
+    transform: translateY(0);
+    transition: all 0.5s ease-in;
 }
 
-.platform-illustration path:hover {
-    transform: translateY(-20px);
-    /*
-     * z-index doesn't work for SVG elements,
-     * so moving the shape to the top
-     * is handled in JavaScript
-     */
+.platform-illustration #community-svg {
+    bottom: 29%;
+    left: 0%;
+    width: 46%;
+}
+
+.platform-illustration #economy-svg {
+    bottom: 31%;
+    left: 33%;
+    width: 58%;
+}
+
+.platform-illustration #liberation-svg {
+    bottom: 32%;
+    left: 28%;
+    width: 40%;
+}
+
+.platform-illustration #culture-svg {
+    bottom: 12%;
+    left: 18%;
+    width: 40%;
+}
+
+.platform-illustration #energy-svg {
+    bottom: 18%;
+    right: 0%;
+    width: 62%;
+}
+
+.platform-illustration g {
+    opacity: 0;
+    transition: all 0.5s ease-in;
+}
+
+.platform-illustration g[id$=base] {
+    opacity: 1;
 }
 
 .platform-strapline hr {

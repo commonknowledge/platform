@@ -197,12 +197,85 @@ document.querySelectorAll(".projects-carousel").forEach((carousel) => {
 
 /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
 document.querySelectorAll('.platform-illustration svg').forEach(svg => {
-    svg.querySelectorAll("a").forEach(link => {
-        link.addEventListener("mouseenter", () => {
-            svg.appendChild(link)
-        })
-    })
+    // Get the bounds of the SVG content
+    const bbox = svg.getBBox();
+    svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
 })
+
+const CATEGORIES = [
+    "community",
+    "economy",
+    "liberation",
+    "culture",
+    "energy",
+]
+
+const findCategory = (mouseX, mouseY) => {
+    for (const category of CATEGORIES) {
+        const svg = document.querySelector(`svg[id=${category}-svg]`)
+
+        let point = svg.createSVGPoint()
+        point.x = mouseX
+        point.y = mouseY
+        point = point.matrixTransform(svg.getScreenCTM().inverse())
+
+        const paths = document.querySelectorAll(`g[id=${category}-base] path`)
+        for (const path of paths) {
+            if (path.isPointInFill(point) || path.isPointInStroke(point)) {
+                return category
+            }
+        }
+    }
+    return null
+}
+
+let focusedCategory
+const illustration = document.querySelector('.platform-illustration')
+const handleIllustrationMouseMove = (e) => {
+    const { clientX: mouseX, clientY: mouseY } = e
+    let category = findCategory(mouseX, mouseY)
+
+    if (category) {
+        if (category !== focusedCategory) {
+            focusedCategory = category
+            displayCategorySvg(focusedCategory)
+        }
+    } else {
+        // If mouse is outside all bounding boxes, hide all illustrations
+        for (const category of CATEGORIES) {
+            const svg = document.querySelector(`g[id=${category}-base]`)
+            const bbox = svg.getBoundingClientRect()
+            if (bbox.left <= mouseX && bbox.right >= mouseX && bbox.top <= mouseY && bbox.bottom >= mouseY) {
+                return
+            }
+        }
+        focusedCategory = null
+        displayCategorySvg(null)
+    }
+}
+
+const displayCategorySvg = (category) => {
+    document.querySelectorAll('.platform-illustration g').forEach(g => {
+        if (g.id.startsWith(category)) {
+            g.style.opacity = 1
+        } else if (!g.id.endsWith("-base")) {
+            g.style.opacity = 0
+        } else {
+            g.style.opacity = category ? 0.1 : 1
+        }
+    })
+    document.querySelectorAll('.platform-illustration svg').forEach(svg => {
+        if (svg.id.startsWith(category)) {
+            svg.style.zIndex = 99
+            svg.style.transform = `translateY(-50px)`
+        } else {
+            svg.style.zIndex = 10
+            svg.style.transform = `translateY(0)`
+        }
+    })
+}
+window.dc = displayCategorySvg
+illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
 
 /* Set up search sort select */
 document.querySelectorAll('.search-sort select').forEach(select => {

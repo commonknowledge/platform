@@ -31,9 +31,7 @@ Block::make(__('Post Details Footer'))
                         ?>
                         <li class="post-details-footer__category">
                             <?php if ($svg) : ?>
-                                <svg fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <?= $svg ?>
-                                </svg>
+                                <?= $svg ?>
                             <?php endif; ?>
                             <a class="btn-default category-<?= $category->slug ?>" href="<?= get_category_link($category) ?>">
                                 <?= $category->name ?>

@@ -541,6 +541,10 @@ video {
   display: none !important;
 }
 
+.h-0 {
+  height: 0px !important;
+}
+
 .h-full {
   height: 100% !important;
 }
@@ -1940,7 +1944,6 @@ h6 a:hover {
 .platform-strapline {
   margin-top: 4rem;
   margin-bottom: 4rem;
-  overflow: hidden;
   --tw-border-opacity: 1;
   border-color: rgb(24 85 0 / var(--tw-border-opacity));
 }
@@ -1971,6 +1974,10 @@ h6 a:hover {
     padding-left: 0px;
     padding-right: 0px;
   }
+}
+
+.platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+    position: relative;
 }
 
 .platform-strapline .wp-block-heading {
@@ -2104,51 +2111,68 @@ h6 a:hover {
 }
 
 .platform-illustration {
-  position: relative;
   z-index: 10;
+    height: calc(100vw - 2rem - 1px);
+    margin: -25vw 0;
+    position: relative;
+    width: calc(100vw - 2rem - 1px);
 }
 
-@media (min-width: 768px) {
-
-  .platform-illustration {
-    margin-top: -2.5rem;
-  }
-}
-
-.platform-illustration {
-    mix-blend-mode: multiply;
-}
-
-.platform-illustration__background {
-    opacity: 0.2;
-}
-
-.platform-illustration svg {
-    left: 0;
-    opacity: 0.75;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .platform-illustration svg {
-        top: 24%;
+@media screen and (min-width: 782px) {
+    .platform-illustration {
+        height: 50vw;
+        left: 50%;
+        margin: 0;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        width: 50vw;
     }
 }
 
-.platform-illustration path {
-    cursor: pointer;
-    transition: transform 1s;
+.platform-illustration svg {
+    position: absolute;
+    transform: translateY(0);
+    transition: all 0.5s ease-in;
 }
 
-.platform-illustration path:hover {
-    transform: translateY(-20px);
-    /*
-     * z-index doesn't work for SVG elements,
-     * so moving the shape to the top
-     * is handled in JavaScript
-     */
+.platform-illustration #community-svg {
+    bottom: 29%;
+    left: 0%;
+    width: 46%;
+}
+
+.platform-illustration #economy-svg {
+    bottom: 31%;
+    left: 33%;
+    width: 58%;
+}
+
+.platform-illustration #liberation-svg {
+    bottom: 32%;
+    left: 28%;
+    width: 40%;
+}
+
+.platform-illustration #culture-svg {
+    bottom: 12%;
+    left: 18%;
+    width: 40%;
+}
+
+.platform-illustration #energy-svg {
+    bottom: 18%;
+    right: 0%;
+    width: 62%;
+}
+
+.platform-illustration g {
+    opacity: 0;
+    transition: all 0.5s ease-in;
+}
+
+.platform-illustration g[id$=base] {
+    opacity: 1;
 }
 
 .platform-strapline hr {
@@ -2195,6 +2219,10 @@ h6 a:hover {
 .post-details-footer__category {
   display: flex;
   align-items: center;
+}
+
+.post-details-footer__category a:hover,.post-details-footer__category a:focus {
+    background: none;
 }
 
 .post-details-footer__category svg {

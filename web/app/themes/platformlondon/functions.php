@@ -229,6 +229,7 @@ add_filter('rest_prepare_attachment', function ($response, $post, $request) {
     return $response;
 }, 10, 3);
 
+// Change navbar icon from two bars to three bars
 add_filter('render_block', function ($block_content, $block) {
     if ($block['blockName'] === 'core/navigation' &&
         !is_admin() &&

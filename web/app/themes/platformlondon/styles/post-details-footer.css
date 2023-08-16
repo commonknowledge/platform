@@ -24,6 +24,10 @@
     @apply flex items-center;
 }
 
+.post-details-footer__category a:hover,.post-details-footer__category a:focus {
+    background: none;
+}
+
 .post-details-footer__category svg {
     @apply mr-2;
     height: 2rem;
