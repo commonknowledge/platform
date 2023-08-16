@@ -5,6 +5,9 @@ module.exports = {
   content: ["./**/*.html", "./**/*.php"],
   important: true,
   plugins: [],
+  blocklist: [
+    "sticky"
+  ],
   theme: {
     colors: {
       transparent: "rgba(0, 0, 0, 0)",

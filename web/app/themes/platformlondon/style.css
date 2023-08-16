@@ -513,10 +513,6 @@ video {
   position: relative !important;
 }
 
-.sticky {
-  position: sticky !important;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem !important;
 }
