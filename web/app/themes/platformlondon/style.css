@@ -1119,6 +1119,10 @@ nav.platform-tabs {
     padding-right: 2.5rem !important;
 }
 
+.post-download-link-block a:hover,.post-download-link-block a:focus {
+    background-image: url("/app/themes/platformlondon/assets/img/down-inverse.svg");
+}
+
 .post-download-link-block a:last-child {
   margin-right: 0.5rem !important;
 }
