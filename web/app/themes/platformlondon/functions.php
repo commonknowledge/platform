@@ -13,6 +13,22 @@ add_action('init', function () {
     require_once("src/commands.php");
     require_once("src/post_types.php");
     require_once("src/taxonomies.php");
+
+    // Remove excerpt filtering for Member post type
+    remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+    add_filter('get_the_excerpt', function ($text, $post) {
+        if ($post->post_type !== "pl_member") {
+            return wp_trim_excerpt($text, $post);
+        }
+        $post = get_post($post);
+        $text = get_the_content('', false, $post);
+        $text = strip_shortcodes($text);
+        $text = excerpt_remove_blocks($text);
+        $text = apply_filters('the_content', $text);
+        $text = str_replace(']]>', ']]&gt;', $text);
+        //$text = wp_trim_words($text, 55, "");
+        return $text;
+    }, 10, 2);
 });
 
 add_action('carbon_fields_register_fields', function () {
@@ -215,13 +231,12 @@ add_filter('rest_prepare_attachment', function ($response, $post, $request) {
     return $response;
 }, 10, 3);
 
-// Change navbar icon from two bars to three bars
 add_filter('render_block', function ($block_content, $block) {
+    // Change navbar icon from two bars to three bars
     if ($block['blockName'] === 'core/navigation' &&
         !is_admin() &&
         !wp_is_json_request()
     ) {
-        //return $block_content;
         return preg_replace(
             '/\<svg width(.*?)\<\/svg\>/',
             <<<EOF
@@ -238,9 +253,22 @@ EOF,
         );
     }
 
+    // Unwrap outer <p> from Member post excerpts, because tags are not stripped (see above get_the_excerpt filter)
+    if ($block['blockName'] === 'core/post-excerpt' &&
+        !is_admin() &&
+        !wp_is_json_request()
+    ) {
+        global $post;
+        if ($post->post_type === "pl_member") {
+            $block_content = str_replace('<p class="wp-block-post-excerpt__excerpt">', "", $block_content);
+            $block_content = preg_replace("#</p></div>$#", "", $block_content);
+        }
+    }
+
     return $block_content;
 }, null, 2);
 
+// Remove custom post meta admin box
 add_action('admin_menu', function () {
     remove_meta_box('postcustom', 'page', 'normal');
 });

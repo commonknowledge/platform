@@ -69,6 +69,10 @@ header .wp-block-search {
     @apply !mb-0;
 }
 
+header .wp-block-search__input {
+    background-position: 96%;
+}
+
 header a:focus, header a:hover {
     background: none;
 }

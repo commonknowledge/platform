@@ -1548,6 +1548,10 @@ header .wp-block-search {
   margin-bottom: 0px !important;
 }
 
+header .wp-block-search__input {
+    background-position: 96%;
+}
+
 header a:focus, header a:hover {
     background: none;
 }

@@ -15,6 +15,7 @@ Container::make('post_meta', 'Project Metadata')
         Field::make('text', 'start_year')->set_attribute('type', 'number'),
         Field::make('text', 'end_year')->set_attribute('type', 'number'),
         Field::make('text', 'url', 'Project Website')->set_attribute('type', 'url'),
+        Field::make('text', 'url_title', 'Project Website Title'),
         Field::make('complex', 'pdfs', 'Project PDFs')
             ->add_fields([
                 Field::make('file', 'pdf', 'PDF')

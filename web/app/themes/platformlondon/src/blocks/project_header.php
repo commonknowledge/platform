@@ -10,6 +10,7 @@ Block::make(__('Project Header'))
     ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
         $image = carbon_get_the_post_meta("background_image");
         $website_url = carbon_get_the_post_meta("url");
+        $website_title = carbon_get_the_post_meta("url_title");
         $cover_class = $image ? "" : "project-header__cover--no-image";
 
         $pdfs_meta = carbon_get_the_post_meta("pdfs");
@@ -51,7 +52,7 @@ Block::make(__('Project Header'))
                             target="_blank"
                             class="btn-default bg-cream project-website-link"
                             href="<?= $website_url ?>">
-                            <?= $website_url ?>
+                            <?= $website_title ?: $website_url ?>
                         </a>
                     <?php endif; ?>
                 </div>
