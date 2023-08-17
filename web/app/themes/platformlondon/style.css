@@ -1725,8 +1725,8 @@ input[type=checkbox] {
 }
 
 select {
-    -moz-appearance: none; 
-    -webkit-appearance: none; 
+    -moz-appearance: none;
+    -webkit-appearance: none;
     appearance: none;
     background: url("/app/themes/platformlondon/assets/img/expand-more.svg");
     background-repeat: no-repeat;
@@ -3561,6 +3561,10 @@ body.search.search-results .wp-block-post .wp-block-post-title {
   margin-bottom: 0.5rem !important;
 }
 
+.search-result__details {
+    flex-wrap: wrap !important;
+}
+
 body.search.search-results .wp-block-post .post-details {
   margin-bottom: 0px !important;
 }
@@ -3570,6 +3574,16 @@ body.search.search-results .wp-block-post .wp-block-post-featured-image {
   margin-bottom: auto !important;
     height: 100% !important;
     max-height: 200px;
+}
+
+body.search.search-results .wp-block-post.type-pl_member .wp-block-post-featured-image {
+    max-width: 320px;
+}
+
+@media (min-width: 768px) {
+    body.search.search-results .wp-block-post.type-pl_member .wp-block-post-featured-image {
+        max-width: none;
+    }
 }
 
 body.search.search-results .wp-block-post img {
