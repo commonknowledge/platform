@@ -92,6 +92,10 @@ body.search.search-results .wp-block-post .wp-block-post-title {
     @apply !mb-2;
 }
 
+.search-result__details {
+    flex-wrap: wrap !important;
+}
+
 body.search.search-results .wp-block-post .post-details {
     @apply !mb-0;
 }
@@ -100,6 +104,16 @@ body.search.search-results .wp-block-post .wp-block-post-featured-image {
     @apply !my-auto;
     height: 100% !important;
     max-height: 200px;
+}
+
+body.search.search-results .wp-block-post.type-pl_member .wp-block-post-featured-image {
+    max-width: 320px;
+}
+
+@screen md {
+    body.search.search-results .wp-block-post.type-pl_member .wp-block-post-featured-image {
+        max-width: none;
+    }
 }
 
 body.search.search-results .wp-block-post img {

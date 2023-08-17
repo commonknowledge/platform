@@ -261,7 +261,7 @@ EOF,
         global $post;
         if ($post->post_type === "pl_member") {
             $block_content = str_replace('<p class="wp-block-post-excerpt__excerpt">', "", $block_content);
-            $block_content = preg_replace("#</p></div>$#", "", $block_content);
+            $block_content = preg_replace("#</p></div>$#", "</div>", $block_content);
         }
     }
 
