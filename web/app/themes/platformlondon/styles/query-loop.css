@@ -231,7 +231,17 @@
 }
 
 .wp-block-post.type-pl_project h2.wp-block-post-title {
-    @apply line-clamp-3 mb-8 md:text-3xl lg:text-5xl;
+    @apply my-2;
+}
+
+@screen md {
+    .wp-block-post.type-pl_project h2.wp-block-post-title {
+        height: 6rem;
+    }
+}
+
+.wp-block-post.type-pl_project h2.wp-block-post-title a {
+    @apply line-clamp-3;
     min-height: 0;
 }
 
@@ -267,9 +277,13 @@
     @apply h-full object-cover;
 }
 
+.type-pl_project .wp-block-post-excerpt {
+    @apply mb-4;
+}
+
 .type-pl_project .wp-block-post-excerpt__excerpt {
     min-height: 0;
-    @apply line-clamp-5 mb-4;
+    @apply line-clamp-5 mb-0;
 }
 
 .wp-block-post.category-energy .wp-block-read-more[href] {

@@ -74,6 +74,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post {
 
 .projects-carousel h2.wp-block-post-title {
     @apply !mb-auto;
+    height: auto !important;
 }
 
 .projects-carousel .wp-block-post-featured-image {
