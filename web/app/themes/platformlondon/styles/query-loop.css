@@ -231,12 +231,18 @@
 }
 
 .wp-block-post.type-pl_project h2.wp-block-post-title {
-    @apply my-2;
+    @apply my-2 text-2xl md:text-3xl lg:text-5xl;
 }
 
-@screen md {
+@screen wpmd {
     .wp-block-post.type-pl_project h2.wp-block-post-title {
-        height: 6rem;
+        height: 7rem;
+    }
+}
+
+@screen lg {
+    .wp-block-post.type-pl_project h2.wp-block-post-title {
+        height: 10rem;
     }
 }
 
