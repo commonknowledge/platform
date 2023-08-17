@@ -1113,18 +1113,14 @@ nav.platform-tabs {
   position: relative;
   margin-right: 0.5rem !important;
   display: inline-block;
-  padding-right: 1.5rem !important;
+    background: url("/app/themes/platformlondon/assets/img/down.svg");
+    background-repeat: no-repeat;
+    background-position: right 16px top 13px;
+    padding-right: 2.5rem !important;
 }
 
 .post-download-link-block a:last-child {
   margin-right: 0.5rem !important;
-}
-
-.post-download-link-block a::after {
-    content: "↓";
-    position: absolute;
-    top: 0.35rem;
-    right: 0.6rem;
 }
 
 /* Download Link in Project Header */
@@ -1546,10 +1542,6 @@ footer h6 {
 
 header .wp-block-search {
   margin-bottom: 0px !important;
-}
-
-header .wp-block-search__input {
-    background-position: 96%;
 }
 
 header a:focus, header a:hover {
@@ -3405,7 +3397,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
     background: url("/app/themes/platformlondon/assets/img/search.svg");
     background-repeat: no-repeat;
-    background-position: 98%;
+    background-position: right 16px top 11px;
 }
 
 .wp-block-search__input:hover,.wp-block-search__input:focus {

@@ -9,18 +9,15 @@
 }
 
 .post-download-link-block a {
-    @apply inline-block !mr-2 !pr-6 relative;
+    @apply inline-block !mr-2 relative;
+    background: url("/app/themes/platformlondon/assets/img/down.svg");
+    background-repeat: no-repeat;
+    background-position: right 16px top 13px;
+    padding-right: 2.5rem !important
 }
 
 .post-download-link-block a:last-child {
     @apply !mr-2;
-}
-
-.post-download-link-block a::after {
-    content: "↓";
-    position: absolute;
-    top: 0.35rem;
-    right: 0.6rem;
 }
 
 /* Download Link in Project Header */
