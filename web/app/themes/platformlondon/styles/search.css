@@ -38,7 +38,7 @@ body.search .wp-block-search {
 }
 
 .search-sort select {
-    @apply btn-default bg-cream;
+    @apply btn-default-no-padding bg-cream !py-2 !pl-4 !pr-8;
 }
 
 /* Search Result Count */

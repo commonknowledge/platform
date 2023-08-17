@@ -1,3 +1,17 @@
 input[type=checkbox] {
     accent-color: theme('colors.dark-green');
 }
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("/app/themes/platformlondon/assets/img/expand-more.svg");
+    background-repeat: no-repeat;
+    background-position: right 16px top 18px;
+    padding-right: 2rem;
+}
+
+select:hover,select:focus {
+    background-image: url("/app/themes/platformlondon/assets/img/expand-more-inverse.svg");
+}
