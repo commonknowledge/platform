@@ -145,8 +145,10 @@ add_filter("query_loop_block_query_vars", function ($query) {
         $explicitly_related_ids = array_map(function ($post) {
             return $post['id'];
         }, $explicitly_related);
+        $explicitly_related_ids[] = -1;
 
         $query["post__in"] = $explicitly_related_ids;
+        return $query;
     }
     $category_name = get_query_var("category_name");
     if ($category_name) {
