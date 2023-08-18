@@ -28,7 +28,7 @@ footer .wp-block-navigation__container {
 }
 
 footer .wp-block-navigation {
-    @apply mt-4;
+    @apply my-4;
 }
 
 footer .wp-block-navigation-item {
