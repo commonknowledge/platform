@@ -16,5 +16,6 @@
 }
 
 .gform_button {
-    @apply btn-default w-full md:w-auto !mb-0;
+    @apply btn-inverse w-full md:w-auto !mb-0;
+    cursor: pointer;
 }

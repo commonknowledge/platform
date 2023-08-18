@@ -1,7 +1,11 @@
 /* Buttons */
 
+.btn-default-no-color {
+    @apply border border-dark-green rounded-full truncate green-shadow;
+}
+
 .btn-default-no-padding {
-    @apply hover:!bg-dark-green hover:!text-white border border-dark-green rounded-full truncate green-shadow;
+    @apply btn-default-no-color hover:!bg-dark-green hover:!text-white;
 }
 
 .btn-default-no-padding:hover,.btn-default-no-padding:focus {
@@ -10,6 +14,10 @@
 
 .btn-default {
     @apply btn-default-no-padding !px-4 !py-2;
+}
+
+.btn-inverse {
+    @apply btn-default-no-color !px-4 !py-2 bg-dark-green text-white hover:bg-white hover:text-dark-green;
 }
 
 .btn-active {
