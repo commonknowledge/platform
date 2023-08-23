@@ -35,18 +35,6 @@ Block::make(__('Project Header'))
                     <span class="btn-default bg-cream">
                         <?= get_project_dates() ?>
                     </span>
-                    <?php if ($files) : ?>
-                        <div class="post-download-link-container">
-                            <select class="btn-default bg-cream post-download-link">
-                                <option value="" selected disabled>Download Project PDF</option>
-                                <?php foreach ($files as $file) : ?>
-                                    <option value="<?= $file['url'] ?>">
-                                        <?= $file['title'] ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    <?php endif; ?>
                     <?php if ($website_url) : ?>
                         <a 
                             target="_blank"
