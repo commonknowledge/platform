@@ -16,7 +16,7 @@ Block::make(__('Post Details Footer'))
             "pl_place",
             "pl_player",
             "pl_issue",
-            "pl_organisation"
+            "pl_collaborator"
         ];
         $members = array_map(function ($m) {
             return get_post($m["id"]);

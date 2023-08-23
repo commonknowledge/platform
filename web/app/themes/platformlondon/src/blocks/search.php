@@ -76,7 +76,7 @@ Block::make(__('Search Filter'))
             "pl_place",
             "pl_player",
             "pl_issue",
-            "pl_organisation"
+            "pl_collaborator"
         ];
         foreach ($taxonomies as $taxonomy) {
             $active_term = $_GET[$taxonomy] ?? "";

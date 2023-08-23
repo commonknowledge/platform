@@ -41,16 +41,16 @@ register_taxonomy('pl_multimedia_type', ['pl_multimedia'], [
     ]
 ]);
 
-register_taxonomy('pl_organisation', ['post', 'pl_multimedia', 'pl_project', 'pl_resource'], [
+register_taxonomy('pl_collaborator', ['post', 'pl_multimedia', 'pl_project', 'pl_resource'], [
     'hierarchical'      => true,
     'show_ui'           => true,
     'show_admin_column' => true,
     'show_in_rest' => true,
     'query_var'         => true,
-    'rewrite'           => ['slug' => 'organisation'],
+    'rewrite'           => ['slug' => 'collaborator'],
     'labels'            => [
-        'name'              => _x('Organisations', 'taxonomy general name'),
-        'singular_name'     => _x('Organisation', 'taxonomy singular name'),
+        'name'              => _x('Collaborators', 'taxonomy general name'),
+        'singular_name'     => _x('Collaborator', 'taxonomy singular name'),
     ]
 ]);
 
