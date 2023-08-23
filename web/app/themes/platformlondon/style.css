@@ -2201,6 +2201,7 @@ h6 a:hover {
   --tw-border-opacity: 1;
   border-color: rgb(24 85 0 / var(--tw-border-opacity));
   text-transform: uppercase;
+  padding-top: 10px;
 }
 
 .post-details-footer__categories,.post-details-footer__terms {
