@@ -1637,6 +1637,10 @@ h2.wp-block-post-title {
   text-transform: uppercase;
 }
 
+figcaption {
+  margin-top: 10px;
+};
+
 @media (min-width: 768px) {
 
   .wp-block-image.size-large>figcaption {
@@ -3811,6 +3815,10 @@ body .is-layout-constrained .platform-timeline-links {
 }
 
 @media (min-width: 768px) {
+
+  figcaption {
+    margin-top: 20px;
+  };
 
   .md\:block {
     display: block !important;
