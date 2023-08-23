@@ -654,7 +654,7 @@ text {
 @media (min-width: 768px) {
 
   .platform-category-cards .wp-block-column {
-    height: 320px;
+    height: auto;
     min-width: 320px;
     max-width: 320px;
   }
