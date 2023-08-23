@@ -3369,6 +3369,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .wp-block-post.type-pl_member .wp-block-post-title {
+  margin-top: 20px;
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
