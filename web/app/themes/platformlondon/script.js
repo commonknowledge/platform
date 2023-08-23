@@ -459,16 +459,23 @@ try {
     })
 
     /**
-     * Invert site logo when mobile navbar is opened
+     * Invert site logo and move it inside navbar when mobile navbar is opened
      */
     const logo = document.querySelector("header .wp-block-site-logo img")
+    const link = document.querySelector("header .wp-block-site-logo a")
+    const originalParent = document.querySelector(".wp-block-site-logo")
+    const newParentDiv = document.querySelector(".wp-block-navigation__responsive-dialog"); 
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.target.classList.contains('is-menu-open')) {
                 /* Make an image monochrome with this one weird trick! */
                 logo.style.filter = "brightness(0) invert(1)"
+                newParentDiv.insertBefore(link, newParentDiv.children[1])
+                link.appendChild(logo)
+               
             } else {
                 logo.style.filter = ""
+                originalParent.appendChild(logo);
             }
         });
     });
