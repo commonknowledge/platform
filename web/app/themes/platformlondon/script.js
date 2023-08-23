@@ -2,6 +2,7 @@ try {
     // Make whole project card a link (can't do this in block editor)
     document.querySelectorAll(".platform-category-cards .wp-block-column").forEach(col => {
         const link = col.querySelector("h2 a")
+        const header = col.querySelector("h2")
         if (!link) {
             return
         }
@@ -11,6 +12,8 @@ try {
         newLink.style.display = "block"
         newLink.style.height = "100%"
         newLink.style.padding = "1rem"
+        newLink.style.textDecoration = "none"
+        header.style.textDecoration = "underline"
         const children = [...col.children]
         for (const child of children) {
             newLink.appendChild(child)
