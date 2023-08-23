@@ -2278,6 +2278,12 @@ h6 a:hover {
   flex-wrap: wrap;
 }
 
+@media only screen and (max-width: 600px){
+  .post-filter__categories {
+    row-gap: 15px;
+  }
+}
+
 .post-filter__categories li {
   display: block;
 }
