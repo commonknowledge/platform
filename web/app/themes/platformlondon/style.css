@@ -1460,7 +1460,7 @@ footer h6 {
 }
 
 .wp-block-navigation__responsive-container-close {
-  padding-top: 3rem;
+  padding-top: 1rem;
   padding-right: 0.75rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1468,7 +1468,6 @@ footer h6 {
 
 .wp-block-navigation__responsive-container.is-menu-open.has-modal-open
 .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
-  margin-top: 4rem;
   width: 100%;
 }
 
