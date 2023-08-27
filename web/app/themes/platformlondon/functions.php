@@ -151,6 +151,7 @@ add_filter("query_loop_block_query_vars", function ($query) {
         }
 
         $query["post__in"] = $explicitly_related_ids;
+        $query["ignore_sticky_posts"] = true;
         return $query;
     }
     $category_name = get_query_var("category_name");
