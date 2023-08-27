@@ -1,6 +1,6 @@
-# WordPress Starter
+# Platform WordPress Site
 
-A starter repository for [WordPress](https://wordpress.org) websites for organisers, campaigns and anyone else who finds it useful.
+A WordPress project based off the [Common Knowledge WordPress Starter](https://github.com/commonknowledge/wordpress-starter-template).
 
 This folder structure uses the [Bedrock](https://roots.io/bedrock/) pattern, a modern WordPress stack.
 
@@ -11,16 +11,14 @@ This folder structure uses the [Bedrock](https://roots.io/bedrock/) pattern, a m
 
 ## Run locally
 
-1. [Generate a repository](https://github.com/commonknowledge/groundwork-starter-template/generate) from this template
-2. If you have PHP and Composer installed locally you can run from this directory `composer install`. Otherwise run `composer install` via Docker with `docker compose run composer install`.
-3. Copy `.env.example` to `.env`, running `cp .env.example .env`. The example file contains variables required for this Docker Compose setup but modify details appropriately [as per the Bedrock documentation](https://roots.io/bedrock/docs/environment-variables/) as required.
-4. Start up all containers with:
-
-```
-docker compose up
-```
-
-6. You can access the site at [http://localhost:8082](http://localhost:8082). You can install WordPress automatically by running `docker compose run wordpress wp --allow-root core install --url=http://localhost:8082 --title='WordPress Starter Template' --admin_user=ck_admin --admin_email=hello@commonknowledge.coop`.
+1. Copy `.env.example` to `.env`. There should be no need to change this file.
+2. Start the docker containers with `docker compose up -d`.
+3. Wait for the mysql container to be running (check with `docker compose logs -f mysql`)
+   then import the seed SQL: `mysql -uroot -ppassword -P 3308 < platform.sql`
+4. Install JS/CSS requirements: `cd web/app/themes; npm i`
+5. While still in the `theme` directory, start the CSS processor: `npm run watch`
+6. The site should now be up at http://localhost:8082.
+7. The admin system is at http://localhost:8082/wp/wp-admin and the default login/password is admin/admin.
 
 # Full development documentation
 
