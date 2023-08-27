@@ -6,9 +6,16 @@
 .platform-stack .wp-block-query {
     box-sizing: border-box;
     display: block;
+    max-width: 1500px !important;
     padding: 100px 0 200px;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 1500px) {
+    .platform-stack .wp-block-query {
+        overflow: visible;
+    }
 }
 
 .platform-stack .wp-block-post.type-pl_project {

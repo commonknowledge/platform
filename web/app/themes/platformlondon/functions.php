@@ -145,7 +145,10 @@ add_filter("query_loop_block_query_vars", function ($query) {
         $explicitly_related_ids = array_map(function ($post) {
             return $post['id'];
         }, $explicitly_related);
-        $explicitly_related_ids[] = -1;
+
+        if (!$explicitly_related_ids) {
+            $explicitly_related_ids = [-1];
+        }
 
         $query["post__in"] = $explicitly_related_ids;
         return $query;
@@ -265,6 +268,14 @@ EOF,
             $block_content = str_replace('<p class="wp-block-post-excerpt__excerpt">', "", $block_content);
             $block_content = preg_replace("#</p></div>$#", "</div>", $block_content);
         }
+    }
+
+    // Remove type="search" from search input so it can be more easily styled
+    if ($block['blockName'] === 'core/search' &&
+        !is_admin() &&
+        !wp_is_json_request()
+    ) {
+        $block_content = str_replace('<input type="search"', '<input type="text"', $block_content);
     }
 
     return $block_content;

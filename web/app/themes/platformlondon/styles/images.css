@@ -29,6 +29,20 @@
     @apply md:-ml-16 uppercase;
 }
 
+figcaption {
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    figcaption {
+        margin-top: 20px;
+    }
+
+    .md\:block {
+        display: block !important;
+    }
+}
+  
 .entry-content figcaption {
     @apply text-sm;
 }

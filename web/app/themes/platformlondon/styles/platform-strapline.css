@@ -13,7 +13,20 @@
 }
 
 .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+    /* Correct row height to center illustration */
+    height: 50vw;
     position: relative;
+}
+
+@screen md {
+    .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+        height: 33vw;
+    }
+}
+
+.home .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+    /* Don't correct height on the home page */
+    height: auto !important;
 }
 
 .platform-strapline .wp-block-heading {
@@ -48,7 +61,7 @@
         margin: 0;
         position: absolute;
         transform: translate(-50%, -50%);
-        top: 50%;
+        top: 33%;
         width: 50vw;
     }
 }

@@ -284,17 +284,15 @@ try {
         displayCategorySvg(null)
     })
 
-    /* Hide search icon when text input */
-    document.querySelectorAll(".wp-block-search__input").forEach(input => {
-        const { backgroundImage } = getComputedStyle(input)
-        input.addEventListener("keydown", () => {
-            input.style.backgroundImage = "none"
-        })
-        input.addEventListener("keyup", () => {
-            if (input.value) {
-                input.style.backgroundImage = "none"
-            } else {
-                input.style.backgroundImage = backgroundImage
+    /* Do search when user clicks search icon */
+    document.querySelectorAll(".wp-block-search").forEach(search => {
+        search.addEventListener("click", (e) => {
+            const { clientX: mouseX } = e
+            const { right } = search.getBoundingClientRect()
+            // Detect if click is in the rightmost 50 pixels of the input
+            // Horrible hack because pseudo-element clicks are not detected in JS
+            if (mouseX < right && mouseX > right - 50) {
+                search.submit()
             }
         })
     })

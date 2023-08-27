@@ -4,10 +4,19 @@
     @apply relative;
 }
 .wp-block-search__input {
-    @apply border border-dark-green rounded-full green-shadow truncate relative z-40 !px-4;
+    @apply border border-dark-green rounded-full green-shadow truncate relative z-40 pl-4 pr-8;
+}
+.wp-block-search::after {
     background: url("/app/themes/platformlondon/assets/img/search.svg");
     background-repeat: no-repeat;
-    background-position: right 16px top 11px;
+    content: "";
+    cursor: pointer;
+    height: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 0.75rem;
+    width: 1rem;
+    z-index: 40;
 }
 
 .wp-block-search__input:hover,.wp-block-search__input:focus {

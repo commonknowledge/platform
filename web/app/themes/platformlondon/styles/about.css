@@ -6,7 +6,7 @@
 }
 
 .platform-category-cards .wp-block-column {
-    @apply p-4 md:min-w-320 md:h-320 md:max-w-320 rounded green-shadow;
+    @apply p-4 md:min-w-320 md:h-auto md:max-w-320 rounded green-shadow;
 }
 
 .platform-category-cards .wp-block-heading {

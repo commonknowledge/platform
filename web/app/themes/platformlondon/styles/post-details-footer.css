@@ -6,6 +6,7 @@
 
 .post-details-footer__label {
     @apply border-dark-green border-t uppercase mb-4;
+    padding-top: 10px;
 }
 
 .post-details-footer__categories,.post-details-footer__terms {

@@ -323,6 +323,7 @@
 
 .wp-block-post.type-pl_member .wp-block-post-title {
     @apply text-xl mb-2;
+    margin-top: 20px;
 }
 
 .wp-block-post.type-pl_member img {

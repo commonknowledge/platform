@@ -1636,10 +1636,6 @@ h2.wp-block-post-title {
   text-transform: uppercase;
 }
 
-figcaption {
-  margin-top: 10px;
-};
-
 @media (min-width: 768px) {
 
   .wp-block-image.size-large>figcaption {
@@ -1656,6 +1652,20 @@ figcaption {
   .wp-block-image.size-medium_large>figcaption {
     margin-left: -4rem;
   }
+}
+
+figcaption {
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    figcaption {
+        margin-top: 20px;
+    }
+
+    .md\:block {
+        display: block !important;
+    }
 }
 
 .entry-content figcaption {
@@ -1848,9 +1858,16 @@ h6 a:hover {
 .platform-stack .wp-block-query {
     box-sizing: border-box;
     display: block;
+    max-width: 1500px !important;
     padding: 100px 0 200px;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 1500px) {
+    .platform-stack .wp-block-query {
+        overflow: visible;
+    }
 }
 
 .platform-stack .wp-block-post.type-pl_project {
@@ -1985,7 +2002,20 @@ h6 a:hover {
 }
 
 .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+    /* Correct row height to center illustration */
+    height: 50vw;
     position: relative;
+}
+
+@media (min-width: 768px) {
+    .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+        height: 33vw;
+    }
+}
+
+.home .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
+    /* Don't correct height on the home page */
+    height: auto !important;
 }
 
 .platform-strapline .wp-block-heading {
@@ -2133,7 +2163,7 @@ h6 a:hover {
         margin: 0;
         position: absolute;
         transform: translate(-50%, -50%);
-        top: 50%;
+        top: 33%;
         width: 50vw;
     }
 }
@@ -2204,7 +2234,7 @@ h6 a:hover {
   --tw-border-opacity: 1;
   border-color: rgb(24 85 0 / var(--tw-border-opacity));
   text-transform: uppercase;
-  padding-top: 10px;
+    padding-top: 10px;
 }
 
 .post-details-footer__categories,.post-details-footer__terms {
@@ -3375,10 +3405,10 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .wp-block-post.type-pl_member .wp-block-post-title {
-  margin-top: 20px;
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
+    margin-top: 20px;
 }
 
 .wp-block-post.type-pl_member img {
@@ -3423,12 +3453,22 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(24 85 0 / var(--tw-border-opacity));
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
+  padding-left: 1rem;
+  padding-right: 2rem;
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
+.wp-block-search::after {
     background: url("/app/themes/platformlondon/assets/img/search.svg");
     background-repeat: no-repeat;
-    background-position: right 16px top 11px;
+    content: "";
+    cursor: pointer;
+    height: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 0.75rem;
+    width: 1rem;
+    z-index: 40;
 }
 
 .wp-block-search__input:hover,.wp-block-search__input:focus {
@@ -3513,9 +3553,9 @@ body.search .wp-block-search {
 
 @media (min-width: 768px) {
 
-  .search-results-count {
-    display: block;
-  }
+    .search-results-count {
+        display: block;
+    }
 }
 
 /* Search Filter */
@@ -3821,10 +3861,6 @@ body .is-layout-constrained .platform-timeline-links {
 }
 
 @media (min-width: 768px) {
-
-  figcaption {
-    margin-top: 20px;
-  };
 
   .md\:block {
     display: block !important;

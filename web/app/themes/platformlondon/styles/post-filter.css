@@ -7,6 +7,12 @@
     @apply flex flex-wrap mb-4;
 }
 
+@media only screen and (max-width: 600px){
+  .post-filter__categories {
+    row-gap: 15px;
+  }
+}
+
 .post-filter__categories li {
     @apply block;
 }
