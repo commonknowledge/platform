@@ -1883,32 +1883,50 @@ h6 a:hover {
 
 .platform-stack .wp-block-post.type-pl_project:first-child {
     position: relative;
+    left: 50px;
     top: 0;
     transform: rotate(-30deg);
     z-index: 30;
 }
 
 .platform-stack .wp-block-post.type-pl_project:nth-child(2) {
-    left: 150px;
+    left: 200px;
     transform: rotate(20deg);
     z-index: 40;
 }
 
 .platform-stack .wp-block-post.type-pl_project:nth-child(3) {
-    left: 300px;
-    z-index: 50;
+    display: none;
 }
 
 .platform-stack .wp-block-post.type-pl_project:nth-child(4) {
-    left: 450px;
-    transform: rotate(5deg);
-    z-index: 40;
+    display: none;
 }
 
 .platform-stack .wp-block-post.type-pl_project:nth-child(5) {
-    left: 600px;
-    transform: rotate(-10deg);
-    z-index: 30;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .platform-stack .wp-block-post.type-pl_project:nth-child(3) {
+        left: 350px;
+        display: block;
+        z-index: 50;
+    }
+
+    .platform-stack .wp-block-post.type-pl_project:nth-child(4) {
+        left: 500px;
+        display: block;
+        transform: rotate(5deg);
+        z-index: 40;
+    }
+
+    .platform-stack .wp-block-post.type-pl_project:nth-child(5) {
+        left: 650px;
+        display: block;
+        transform: rotate(-10deg);
+        z-index: 30;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -1917,19 +1935,19 @@ h6 a:hover {
     }
 
     .platform-stack .wp-block-post.type-pl_project:first-child {
-        left: initial;
+        left: 50px;
     }
 
     .platform-stack .wp-block-post.type-pl_project:nth-child(2) {
-        left: calc(25% - 250px);
+        left: calc(25% - 200px);
     }
 
     .platform-stack .wp-block-post.type-pl_project:nth-child(3) {
-        left: calc(50% - 250px);
+        left: calc(50% - 200px);
     }
 
     .platform-stack .wp-block-post.type-pl_project:nth-child(4) {
-        left: calc(75% - 250px);
+        left: calc(75% - 200px);
     }
 
     .platform-stack .wp-block-post.type-pl_project:nth-child(5) {
