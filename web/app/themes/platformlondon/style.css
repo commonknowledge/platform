@@ -1351,6 +1351,10 @@ footer h6 {
     cursor: pointer;
 }
 
+.gform_confirmation_message {
+    margin-bottom: 4rem;
+}
+
 /* Site Header */
 
 .wp-block-site-logo {
