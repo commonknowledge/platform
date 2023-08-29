@@ -1304,6 +1304,7 @@ footer h6 {
   --tw-border-opacity: 1;
   border-color: rgb(24 85 0 / var(--tw-border-opacity));
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
+    background-color: var(--wp--preset--color--custom-cream);
 }
 
 .gform_footer {

@@ -9,6 +9,7 @@
 
 .gform_fields input {
     @apply border border-dark-green rounded-full green-shadow;
+    background-color: var(--wp--preset--color--custom-cream);
 }
 
 .gform_footer {
