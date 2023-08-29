@@ -3,9 +3,12 @@
 .wp-block-search {
     @apply relative;
 }
+
 .wp-block-search__input {
     @apply border border-dark-green rounded-full green-shadow truncate relative z-40 pl-4 pr-8;
+    background-color: var(--wp--preset--color--custom-cream);
 }
+
 .wp-block-search::after {
     background: url("/app/themes/platformlondon/assets/img/search.svg");
     background-repeat: no-repeat;

@@ -3479,6 +3479,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   padding-left: 1rem;
   padding-right: 2rem;
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
+    background-color: var(--wp--preset--color--custom-cream);
 }
 
 .wp-block-search::after {
