@@ -61,6 +61,10 @@ figcaption {
     @apply flex flex-col items-center;
 }
 
+.platform-image-pair__images img {
+    width: 100%;
+}
+
 .platform-image-pair__images img:first-child {
     @apply mb-4;
 }

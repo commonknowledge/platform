@@ -1694,6 +1694,10 @@ figcaption {
   align-items: center;
 }
 
+.platform-image-pair__images img {
+    width: 100%;
+}
+
 .platform-image-pair__images img:first-child {
   margin-bottom: 1rem;
 }
