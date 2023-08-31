@@ -28,38 +28,31 @@
     @apply text-white pt-4 pr-3;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.wp-block-navigation__responsive-container-content .wp-block-navigation__container {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
     @apply w-full;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.wp-block-navigation__responsive-container-content .wp-block-navigation-item {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item {
     @apply mb-4 w-full;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.wp-block-navigation__responsive-container-content .wp-block-navigation-item a {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-navigation__responsive-container-content .wp-block-navigation-item a {
     @apply w-full !bg-cream shadow-none text-center text-xl hover:!text-dark-green;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.current-menu-item .wp-block-navigation-item__content {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .current-menu-item .wp-block-navigation-item__content {
     @apply !text-dark-green;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.wp-block-search {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-search {
     @apply w-full;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.wp-block-search input {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-search input {
     @apply !bg-cream !text-dark-green text-center text-xl;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open.has-modal-open
-.wp-block-search::after {
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-search::after {
     @apply !text-dark-green;
     top: 1rem;
     z-index: 100;
@@ -69,6 +62,11 @@ header .wp-block-search {
     @apply !mb-0;
 }
 
-header a:focus, header a:hover {
+header a:focus,
+header a:hover {
     background: none;
+}
+
+.has-modal-open .admin-bar .is-menu-open .wp-block-navigation__responsive-dialog {
+    margin-top: 4px;
 }
