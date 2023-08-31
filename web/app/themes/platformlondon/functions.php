@@ -286,3 +286,23 @@ EOF,
 add_action('admin_menu', function () {
     remove_meta_box('postcustom', 'page', 'normal');
 });
+
+
+// Remove uncategorised category when another category is selected when post is saved
+
+function platform_categories_save_post($id, $post, $update)
+{
+    remove_action('save_post', 'platform_categories_save_post', 10, 3);
+    platform_categories_remove_uncategorized_category($id);
+    add_action('save_post', 'platform_categories_save_post', 10, 3);
+}
+add_action('save_post', 'platform_categories_save_post', 10, 3);
+
+function platform_categories_remove_uncategorized_category($id)
+{
+    $categories = get_the_category($id);
+    $default = get_cat_name(get_option('default_category'));
+    if (count($categories) >= 2 && in_category($default, $id)) {
+        wp_remove_object_terms($id, $default, 'category');
+    }
+}
