@@ -984,7 +984,8 @@ nav.platform-tabs {
 /* Post Content Styles */
 
 .entry-content {
-  position: relative; /* Ensure on top of background elements */
+  position: relative;
+    /* Ensure on top of background elements */
 }
 
 .entry-content a {
@@ -1065,12 +1066,12 @@ nav.platform-tabs {
   margin-bottom: 1.5rem;
 }
 
-.wp-block-post-content p + h1,
-.wp-block-post-content p + h2,
-.wp-block-post-content p + h3,
-.wp-block-post-content p + h4,
-.wp-block-post-content p + h5,
-.wp-block-post-content p + h6 {
+.wp-block-post-content p+h1,
+.wp-block-post-content p+h2,
+.wp-block-post-content p+h3,
+.wp-block-post-content p+h4,
+.wp-block-post-content p+h5,
+.wp-block-post-content p+h6 {
   margin-top: 4rem;
   margin-bottom: 1.5rem;
 }
@@ -1088,21 +1089,31 @@ nav.platform-tabs {
   margin-bottom: 1rem;
 }
 
-.wp-block-post-content > .wp-block-image {
+.wp-block-post-content>.wp-block-image {
   margin-top: 4rem;
   margin-bottom: 4rem;
 }
 
-.page .wp-site-blocks > hr {
+.page .wp-site-blocks>hr {
   margin-left: 1rem;
   margin-right: 1rem;
   margin-bottom: 3rem;
+}
+
+.wp-block-pullquote {
+    padding: 2em 0;
 }
 
 /* Gravity Form */
 
 .entry-content .gform_wrapper {
   margin-bottom: 2rem;
+}
+
+/* Remove extra margin on bottom of pullquotes */
+
+.entry-content .wp-block-pullquote {
+    margin-bottom: 0;
 }
 
 /* Cover */

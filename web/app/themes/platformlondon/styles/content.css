@@ -1,6 +1,7 @@
 /* Post Content Styles */
 .entry-content {
-    @apply relative; /* Ensure on top of background elements */
+    @apply relative;
+    /* Ensure on top of background elements */
 }
 
 .entry-content a {
@@ -12,8 +13,7 @@
 .entry-content h3 a,
 .entry-content h4 a,
 .entry-content h5 a,
-.entry-content h6 a
- {
+.entry-content h6 a {
     @apply no-underline;
 }
 
@@ -69,12 +69,12 @@
     @apply mb-6;
 }
 
-.wp-block-post-content p + h1,
-.wp-block-post-content p + h2,
-.wp-block-post-content p + h3,
-.wp-block-post-content p + h4,
-.wp-block-post-content p + h5,
-.wp-block-post-content p + h6 {
+.wp-block-post-content p+h1,
+.wp-block-post-content p+h2,
+.wp-block-post-content p+h3,
+.wp-block-post-content p+h4,
+.wp-block-post-content p+h5,
+.wp-block-post-content p+h6 {
     @apply mt-16 mb-6;
 }
 
@@ -90,15 +90,24 @@
     @apply mb-4;
 }
 
-.wp-block-post-content > .wp-block-image {
+.wp-block-post-content>.wp-block-image {
     @apply my-16;
 }
 
-.page .wp-site-blocks > hr {
+.page .wp-site-blocks>hr {
     @apply mx-4 mb-12;
+}
+
+.wp-block-pullquote {
+    padding: 2em 0;
 }
 
 /* Gravity Form */
 .entry-content .gform_wrapper {
     @apply mb-8;
+}
+
+/* Remove extra margin on bottom of pullquotes */
+.entry-content .wp-block-pullquote {
+    margin-bottom: 0;
 }
