@@ -118,6 +118,7 @@ try {
                 const nextButton = document.createElement("button")
                 nextButton.textContent = `Next: ${next} →`
                 nextButton.style.marginLeft = "auto"
+                nextButton.style.zIndex = "1000"
                 nextButton.setAttribute("type", "button")
                 nextButton.setAttribute("class", "btn-default")
                 nextButton.addEventListener("click", () => {
@@ -462,7 +463,7 @@ try {
     const logo = document.querySelector("header .wp-block-site-logo img")
     const link = document.querySelector("header .wp-block-site-logo a")
     const originalParent = document.querySelector(".wp-block-site-logo")
-    const newParentDiv = document.querySelector(".wp-block-navigation__responsive-dialog"); 
+    const newParentDiv = document.querySelector(".wp-block-navigation__responsive-dialog");
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.target.classList.contains('is-menu-open')) {
@@ -470,7 +471,7 @@ try {
                 logo.style.filter = "brightness(0) invert(1)"
                 newParentDiv.insertBefore(link, newParentDiv.children[1])
                 link.appendChild(logo)
-               
+
             } else {
                 logo.style.filter = ""
                 originalParent.appendChild(logo);
