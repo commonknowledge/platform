@@ -309,6 +309,37 @@ try {
         })
     })
 
+    // Toggle filters display on mobile 
+    const filterButton = document.querySelector('.filters-toggle');
+    const filters = document.querySelector('.search-filter');
+    
+    function adjustFiltersDisplay() {
+      if (window.innerWidth > 600) {
+        filters.style.display = "block";
+        if (filterButton) {
+          filterButton.style.display = "none";
+        }
+      } else {
+        if (filterButton) {
+          filterButton.style.display = "block";
+        }
+      }
+    }
+    
+    if (filterButton) {
+      filterButton.addEventListener('click', function() {
+        if (filters.style.display === "block") {
+          filters.style.display = "none";
+        } else {
+          filters.style.display = "block";
+        }
+      });
+    }
+    
+    adjustFiltersDisplay();
+    window.addEventListener('resize', adjustFiltersDisplay);
+
+
     /* Set up search filter checkboxes */
     const EXCLUSIVE_PARAMS = ["pl_post_type", "pl_resource_type", "pl_project_type"]
     document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbox => {
