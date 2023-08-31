@@ -629,6 +629,11 @@ text {
     font-size: 0.5rem;
 }
 
+.wp-block-navigation__responsive-container-open svg {
+    height: 40px;
+    width: 40px;
+}
+
 /* Components */
 
 /* About Page */
