@@ -3,14 +3,19 @@
     @apply flex uppercase text-sm mt-auto;
 }
 
-.post-details > * {
+.post-details>* {
     @apply truncate;
 }
 
-.post-details > *:not(:last-child) {
+.post-details>*:not(:last-child) {
     @apply mr-4;
 }
 
 .post-details a {
     text-decoration: none;
+}
+
+[rel="tag"] {
+    font-size: 14px;
+    font-family: "styrene-b-trial";
 }
