@@ -12,6 +12,13 @@ select {
     padding-right: 2rem;
 }
 
-select:hover,select:focus {
+select:hover,
+select:focus {
     background-image: url("/app/themes/platformlondon/assets/img/expand-more-inverse.svg");
+}
+
+
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-search input:hover,
+.wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-search input:focus {
+    box-shadow: none;
 }
