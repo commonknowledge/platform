@@ -1,36 +1,97 @@
 <!-- wp:template-part {"slug":"header","theme":"platformlondon","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"platform-strapline","theme":"platformlondon"} /-->
 
-<!-- wp:group {"className":"projects-carousel","layout":{"type":"default"}} -->
-<div class="wp-block-group projects-carousel"><!-- wp:cover {"url":"http://localhost:8082/app/uploads/2023/05/Projects-background-1.png","id":305,"dimRatio":0,"isDark":false} -->
-    <div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><img class="wp-block-cover__image-background wp-image-305" alt="" src="http://localhost:8082/app/uploads/2023/05/Projects-background-1.png" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"projects-carousel","layout":{"type":"default"}} -->
-    <div class="wp-block-group projects-carousel"><!-- wp:post-title {"textAlign":"center","level":1} /-->
+<!-- wp:group {"className":"platform-stack","layout":{"type":"default"}} -->
+<div class="wp-block-group platform-stack"><!-- wp:columns {"className":"banner-link"} -->
+    <div class="wp-block-columns banner-link"><!-- wp:column -->
+    <div class="wp-block-column"><!-- wp:heading {"style":{"typography":{"lineHeight":"1"},"spacing":{"margin":{"top":"0","right":"0","bottom":"var:preset|spacing|30","left":"0"}}},"fontSize":"x-large"} -->
+    <h2 class="wp-block-heading has-x-large-font-size" style="margin-top:0;margin-right:0;margin-bottom:var(--wp--preset--spacing--30);margin-left:0;line-height:1">Highlights</h2>
+    <!-- /wp:heading -->
     
-    <!-- wp:navigation {"ref":294,"overlayMenu":"never"} /-->
+    <!-- wp:paragraph -->
+    <p>Explore highlighted projects, browse the index or visit the timeline.</p>
+    <!-- /wp:paragraph --></div>
+    <!-- /wp:column -->
     
-    <!-- wp:query {"queryId":2,"query":{"perPage":"99","pages":0,"offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":":all","exclude":[],"sticky":"","inherit":false,"parents":[],"taxQuery":null},"displayLayout":{"type":"flex","columns":3}} -->
-    <div class="wp-block-query"><!-- wp:post-template -->
+    <!-- wp:column -->
+    <div class="wp-block-column"><!-- wp:paragraph -->
+    <p><a href="https://stg-platformlondongc-staging.kinsta.cloud/projects/" data-type="page">Browse the index →</a></p>
+    <!-- /wp:paragraph --></div>
+    <!-- /wp:column --></div>
+    <!-- /wp:columns -->
+    
+    <!-- wp:query {"queryId":20,"query":{"perPage":"5","pages":"1","offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[]},"displayLayout":{"type":"flex","columns":3},"className":"home-page projects-carousel"} -->
+    <div class="wp-block-query home-page projects-carousel"><!-- wp:post-template -->
     <!-- wp:carbon-fields/project-dates /-->
     
     <!-- wp:post-title {"isLink":true} /-->
     
-    <!-- wp:post-featured-image {"isLink":true} /-->
+    <!-- wp:post-featured-image {"isLink":true,"align":"wide"} /-->
     
-    <!-- wp:read-more {"content":"View Project →"} /-->
+    <!-- wp:read-more {"content":"View project →\u003ca role=\u0022document\u0022 aria-multiline=\u0022true\u0022 aria-label=\u0022Block: Read More\u0022 tabindex=\u00220\u0022 class=\u0022block-editor-rich-text__editable block-editor-block-list__block wp-block is-selected remove-outline wp-block-read-more rich-text\u0022 id=\u0022block-f574ec38-8999-44bc-9347-b87f422a40d6\u0022 data-block=\u0022f574ec38-8999-44bc-9347-b87f422a40d6\u0022 data-title=\u0022Read More\u0022 style=\u0022background-color: initial; color: var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dcustom-dark-green); min-width: 1px; display: inline !important;\u0022 data-type=\u0022core/read-more\u0022\u003e\u003c/a\u003e"} /-->
     
     <!-- wp:post-terms {"term":"category"} /-->
-    <!-- /wp:post-template --></div>
-    <!-- /wp:query -->
+    <!-- /wp:post-template -->
     
     <!-- wp:html -->
-    <div class="projects-carousel__nav"><button type="button">← Prev</button><button type="button">Next →</button></div>
+       <div class="projects-carousel__nav"><button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+    <mask id="mask0_327_12562" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+    <rect y="0.00473022" width="24" height="24" fill="#D9D9D9"/>
+    </mask>
+    <g mask="url(#mask0_327_12562)">
+    <path d="M9.07499 18.6797L2.39999 12.0047L9.07499 5.32973L10.15 6.37973L5.27499 11.2547H21.425V12.7547H5.27499L10.125 17.6297L9.07499 18.6797Z" fill="#185500"/>
+    </g>
+    </svg></button><button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+            <g id="Icon">
+            <mask id="mask0_1858_11001" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+            <rect id="Bounding box" y="0.390137" width="24" height="24" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_1858_11001)">
+            <path id="east" d="M14.7251 19.0651L13.6751 18.0151L18.5501 13.1401H2.40006V11.6401H18.5501L13.6751 6.76509L14.7251 5.71509L21.4251 12.3901L14.7251 19.0651Z" fill="#185500"/>
+            </g>
+            </g>
+            </svg></button></div>
     <!-- /wp:html --></div>
-    <!-- /wp:group --></div></div>
-    <!-- /wp:cover --></div>
+    <!-- /wp:query --></div>
     <!-- /wp:group -->
     
-    <!-- wp:carbon-fields/post-filter /-->
+    <!-- wp:template-part {"slug":"our-history","theme":"platformlondon"} /-->
     
-    <!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+    <!-- wp:columns {"className":"banner-link"} -->
+    <div class="wp-block-columns banner-link"><!-- wp:column -->
+    <div class="wp-block-column"><!-- wp:heading {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|30"}},"typography":{"lineHeight":"1.5"}},"fontSize":"x-large"} -->
+    <h2 class="wp-block-heading has-x-large-font-size" style="margin-bottom:var(--wp--preset--spacing--30);line-height:1.5">Blog</h2>
+    <!-- /wp:heading -->
     
-    <!-- wp:template-part {"slug":"platform-strapline","theme":"platformlondon"} /-->
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+    <!-- wp:paragraph -->
+    <p>Explore highlighted projects, browse the index or visit the timeline.</p>
+    <!-- /wp:paragraph --></div>
+    <!-- /wp:column -->
+    
+    <!-- wp:column -->
+    <div class="wp-block-column"><!-- wp:paragraph -->
+    <p><a href="https://stg-platformlondongc-staging.kinsta.cloud/blog/" data-type="page">View all blogposts →</a></p>
+    <!-- /wp:paragraph --></div>
+    <!-- /wp:column --></div>
+    <!-- /wp:columns -->
+    
+    <!-- wp:query {"queryId":14,"query":{"perPage":"8","pages":"0","offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false},"displayLayout":{"type":"flex","columns":3}} -->
+    <div class="wp-block-query"><!-- wp:post-template -->
+    <!-- wp:columns {"align":"wide"} -->
+    <div class="wp-block-columns alignwide"><!-- wp:column {"width":"66.66%"} -->
+    <div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:post-featured-image {"isLink":true} /--></div>
+    <!-- /wp:column -->
+    
+    <!-- wp:column {"width":"33.33%"} -->
+    <div class="wp-block-column" style="flex-basis:33.33%"><!-- wp:post-title {"isLink":true} /-->
+    
+    <!-- wp:post-excerpt /-->
+    
+    <!-- wp:carbon-fields/post-details /-->
+    
+    <!-- wp:post-terms {"term":"category"} /--></div>
+    <!-- /wp:column --></div>
+    <!-- /wp:columns -->
+    <!-- /wp:post-template --></div>
+    <!-- /wp:query -->
+    <!-- wp:template-part {"slug":"footer","theme":"platformlondon","tagName":"footer"} /-->
