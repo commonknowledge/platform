@@ -1774,6 +1774,12 @@ select {
     background-position: right 8px top 8px !important;
 }
 
+.filters-open:hover {
+    background: url("/app/themes/platformlondon/assets/img/minus-sign-inverse.svg")!important;
+     background-repeat: no-repeat !important;
+    background-position: right 8px top 8px !important;
+}
+
 select:hover,
 select:focus {
     background-image: url("/app/themes/platformlondon/assets/img/expand-more-inverse.svg");
