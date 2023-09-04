@@ -46,10 +46,22 @@ body.search .wp-block-search {
 
 /* Search Sort */
 .search-sort {
-    @apply !ml-auto;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+ }
+
+
+@screen md {
+    .search-sort {
+        @apply !ml-auto;
+        width: fit-content;
+    }
+    
 }
 
-.search-sort select {
+
+.search-sort select, .search-sort button {
     @apply btn-default-no-padding bg-cream !py-2 !pl-4 !pr-8;
 }
 
@@ -59,6 +71,8 @@ body.search .wp-block-search {
 }
 
 /* Search Filter */
+
+
 .search-filter__section {
     @apply border-dark-green border-t pt-2;
 }

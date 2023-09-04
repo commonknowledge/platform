@@ -1752,6 +1752,28 @@ select {
     padding-right: 2rem;
 }
 
+.filters-toggle {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("/app/themes/platformlondon/assets/img/plus-sign.svg");
+    background-repeat: no-repeat;
+    background-position: right 8px top 8px;
+    padding-right: 2rem;
+}
+
+.filters-toggle:hover {
+    background: url("/app/themes/platformlondon/assets/img/plus-sign-inverse.svg");
+    background-repeat: no-repeat;
+    background-position: right 8px top 8px;
+}
+
+.filters-open {
+    background: url("/app/themes/platformlondon/assets/img/minus-sign.svg")!important;
+     background-repeat: no-repeat !important;
+    background-position: right 8px top 8px !important;
+}
+
 select:hover,
 select:focus {
     background-image: url("/app/themes/platformlondon/assets/img/expand-more-inverse.svg");
@@ -3564,10 +3586,21 @@ body.search .wp-block-search {
 /* Search Sort */
 
 .search-sort {
-  margin-left: auto !important;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+ }
+
+@media (min-width: 768px) {
+    .search-sort {
+    margin-left: auto !important;
+        width: -moz-fit-content;
+        width: fit-content;
+  }
+    
 }
 
-.search-sort select {
+.search-sort select, .search-sort button {
   --tw-bg-opacity: 1;
   background-color: rgb(255 247 229 / var(--tw-bg-opacity));
   padding-top: 0.5rem !important;
@@ -3584,14 +3617,14 @@ body.search .wp-block-search {
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
 }
 
-.search-sort select:hover {
+.search-sort select:hover, .search-sort button:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
-.search-sort select:hover,.search-sort select:focus {
+.search-sort select:hover,.search-sort select:focus, .search-sort button:hover, .search-sort button:focus {
     box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
 }
 

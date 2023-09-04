@@ -12,10 +12,38 @@ select {
     padding-right: 2rem;
 }
 
+.filters-toggle {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("/app/themes/platformlondon/assets/img/plus-sign.svg");
+    background-repeat: no-repeat;
+    background-position: right 8px top 8px;
+    padding-right: 2rem;
+}
+
+.filters-toggle:hover {
+    background: url("/app/themes/platformlondon/assets/img/plus-sign-inverse.svg");
+    background-repeat: no-repeat;
+    background-position: right 8px top 8px;
+}
+
+.filters-open {
+    background: url("/app/themes/platformlondon/assets/img/minus-sign.svg")!important;
+     background-repeat: no-repeat !important;
+    background-position: right 8px top 8px !important;
+}
+
 select:hover,
 select:focus {
     background-image: url("/app/themes/platformlondon/assets/img/expand-more-inverse.svg");
 }
+
+select:hover,
+select:focus {
+    background-image: url("/app/themes/platformlondon/assets/img/expand-more-inverse.svg");
+}
+
 
 
 .wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-search input:hover,

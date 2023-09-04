@@ -26,6 +26,7 @@ Block::make(__('Search Sort'))
         $sort = $_GET["sort"] ?? "";
         ?>
         <div class="search-sort">
+             <button class="filters-toggle">Show Filters</button>
             <!-- onchange handler is in script.js -->
             <select>
                 <option value="desc" <?= $sort !== "asc" ? "selected" : "" ?>>
@@ -146,6 +147,10 @@ Block::make(__('Search Filter'))
         ];
 
         ?>
+
+
+
+     
         <div class="search-filter">
             <?php foreach ($filter_sections as $section) : ?>
                 <div class="search-filter__section">

@@ -312,30 +312,37 @@ try {
     // Toggle filters display on mobile 
     const filterButton = document.querySelector('.filters-toggle');
     const filters = document.querySelector('.search-filter');
-    
+  
+    function hideFilters() {
+      filters.style.display = "none";
+      filterButton.classList.remove('filters-open'); 
+
+    }
+  
     function adjustFiltersDisplay() {
-      if (window.innerWidth > 600) {
+      if (window.innerWidth > 767) {
         filters.style.display = "block";
-        if (filterButton) {
-          filterButton.style.display = "none";
-        }
+        filterButton.style.display = "none"; 
+        filterButton.classList.remove('filters-open'); 
       } else {
-        if (filterButton) {
-          filterButton.style.display = "block";
-        }
+        filterButton.style.display = "block"; 
+        filterButton.classList.add('filters-open'); 
+        hideFilters(); 
       }
     }
-    
+  
     if (filterButton) {
-      filterButton.addEventListener('click', function() {
+      filterButton.addEventListener('click', function () {
         if (filters.style.display === "block") {
           filters.style.display = "none";
+          filterButton.classList.remove('filters-open'); 
         } else {
           filters.style.display = "block";
+          filterButton.classList.add('filters-open');
         }
       });
     }
-    
+  
     adjustFiltersDisplay();
     window.addEventListener('resize', adjustFiltersDisplay);
 
