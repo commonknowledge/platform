@@ -320,15 +320,21 @@ try {
     }
   
     function adjustFiltersDisplay() {
-      if (window.innerWidth > 767) {
-        filters.style.display = "block";
-        filterButton.style.display = "none"; 
-        filterButton.classList.remove('filters-open'); 
-      } else {
-        filterButton.style.display = "block"; 
-        filterButton.classList.add('filters-open'); 
-        hideFilters(); 
-      }
+        try {
+            if (filters) {
+                if (window.innerWidth > 767) {
+                    filters.style.display = "block";
+                    filterButton.style.display = "none";
+                    filterButton.classList.remove('filters-open');
+                } else {
+                    filterButton.style.display = "block";
+                    filterButton.classList.add('filters-open');
+                    hideFilters();
+                }
+            }
+        } catch (error) {
+    
+        }
     }
   
     if (filterButton) {
