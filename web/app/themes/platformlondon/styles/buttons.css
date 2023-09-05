@@ -25,21 +25,21 @@
 }
 
 .btn-default.category-energy {
-    @apply border-0 bg-orange hover:!bg-orange;
+    @apply border-0 bg-orange 
 }
 
 .btn-default.category-community {
-    @apply border-0 bg-yellow hover:!bg-yellow;
+    @apply border-0 bg-yellow 
 }
 
 .btn-default.category-culture {
-    @apply border-0 bg-light-green hover:!bg-light-green;
+    @apply border-0 bg-light-green 
 }
 
 .btn-default.category-economy {
-    @apply border-0 bg-teal hover:!bg-teal;
+    @apply border-0 bg-teal 
 }
 
 .btn-default.category-liberation {
-    @apply border-0 bg-pink hover:!bg-pink;
+    @apply border-0 bg-pink 
 }
