@@ -4,5 +4,5 @@
 }
 
 .banner-link .wp-block-column:nth-child(2) a {
-    @apply btn-default hidden md:inline;
+    @apply md:inline;
 }
