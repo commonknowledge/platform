@@ -1390,6 +1390,10 @@ footer h6 {
   margin-right: 0.5rem;
 }
 
+.wp-block-navigation-item__content a:hover {
+   background-color: inherit;
+}
+
 .current-menu-item .wp-block-navigation-item__content {
   --tw-bg-opacity: 1;
   background-color: rgb(24 85 0 / var(--tw-bg-opacity));

@@ -12,6 +12,10 @@
     @apply btn-default relative z-40;
 }
 
+.wp-block-navigation-item__content a:hover {
+   background-color: inherit;
+}
+
 .current-menu-item .wp-block-navigation-item__content {
     @apply btn-active;
 }
