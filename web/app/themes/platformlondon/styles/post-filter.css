@@ -4,8 +4,22 @@
 }
 
 .post-filter__categories {
-    @apply flex flex-wrap mb-4;
+    @apply flex mb-4;
+    overflow-x: scroll;
 }
+/* Hide scrollbar */
+
+/* For Webkit-based browsers */
+::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  /* For Firefox */
+  scrollbar {
+    width: 0;
+    display: none; /* This hides the track */
+  }
+  
 
 @media only screen and (max-width: 600px){
   .post-filter__categories {
