@@ -309,46 +309,85 @@ try {
         })
     })
 
-    // Toggle filters display on mobile 
-    const filterButton = document.querySelector('.filters-toggle');
+   /* Set up filers accordion */
+
     const filters = document.querySelector('.search-filter');
-  
+    const initialFiltersHeight = filters.clientHeight;
+
+    const closeSearchFilterSection = (section) => {
+    const button = section.querySelector(".search-filter__expand");
+    const optionsList = section.querySelector(".search-filter__options");
+    const closed = button.getAttribute("data-closed");
+    
+    if (closed) {
+        button.removeAttribute("data-closed");
+        optionsList.style.height = optionsList.getAttribute("data-original-height");
+    } else {
+        button.setAttribute("data-closed", true);
+        optionsList.style.height = 0;
+    }
+    };
+
+
+    document.querySelectorAll('.search-filter__section').forEach(section => {
+    const button = section.querySelector(".search-filter__expand");
+    const optionsList = section.querySelector(".search-filter__options");
+
+    const initialOptionsListHeight = optionsList.clientHeight;
+
+    button.addEventListener("click", () => {
+        closeSearchFilterSection(section);
+    });
+
+
+    optionsList.style.height = initialOptionsListHeight + "px";
+    optionsList.setAttribute("data-original-height", optionsList.style.height);
+
+
+    closeSearchFilterSection(section);
+    });
+
+
+   /* Toggle filters display on mobile  */
+
+    const filterButton = document.querySelector('.filters-toggle');
+
     function hideFilters() {
-      filters.style.display = "none";
-      filterButton.classList.remove('filters-open'); 
+    filters.style.display = "none";
+    filterButton.classList.remove('filters-open');
+    }
+
+    function adjustFiltersDisplay() {
+    try {
+        if (filters) {
+        if (window.innerWidth > 767) {
+            filters.style.display = "block";
+            filterButton.style.display = "none";
+            filterButton.classList.remove('filters-open');
+        } else {
+            filterButton.style.display = "block";
+            filterButton.classList.add('filters-open');
+            hideFilters();
+        }
+        }
+    } catch (error) {
 
     }
-  
-    function adjustFiltersDisplay() {
-        try {
-            if (filters) {
-                if (window.innerWidth > 767) {
-                    filters.style.display = "block";
-                    filterButton.style.display = "none";
-                    filterButton.classList.remove('filters-open');
-                } else {
-                    filterButton.style.display = "block";
-                    filterButton.classList.add('filters-open');
-                    hideFilters();
-                }
-            }
-        } catch (error) {
-    
-        }
     }
-  
+
     if (filterButton) {
-      filterButton.addEventListener('click', function () {
+    filterButton.addEventListener('click', function () {
         if (filters.style.display === "block") {
-          filters.style.display = "none";
-          filterButton.classList.remove('filters-open'); 
+        filters.style.display = "none";
+        filterButton.classList.remove('filters-open');
         } else {
-          filters.style.display = "block";
-          filterButton.classList.add('filters-open');
+        filters.style.display = "block";
+        filterButton.classList.add('filters-open');
         }
-      });
+    });
     }
-  
+
+
     adjustFiltersDisplay();
     window.addEventListener('resize', adjustFiltersDisplay);
 
@@ -394,29 +433,9 @@ try {
     })
 
     /* Set up search filter accordion */
-    const closeSearchFilterSection = (section) => {
-        const button = section.querySelector(".search-filter__expand")
-        const optionsList = section.querySelector(".search-filter__options")
-        const closed = button.getAttribute("data-closed")
-        if (closed) {
-            button.removeAttribute("data-closed")
-            optionsList.style.height = optionsList.getAttribute("data-original-height")
-        } else {
-            button.setAttribute("data-closed", true)
-            optionsList.style.height = 0
-        }
-    }
 
-    document.querySelectorAll('.search-filter__section').forEach(section => {
-        const button = section.querySelector(".search-filter__expand")
-        const optionsList = section.querySelector(".search-filter__options")
-        button.addEventListener("click", () => {
-            closeSearchFilterSection(section)
-        })
-        optionsList.style.height = optionsList.clientHeight + "px"
-        optionsList.setAttribute("data-original-height", optionsList.style.height)
-        closeSearchFilterSection(section)
-    })
+
+
 
     /* Set up timeline */
     const timelineEntriesContainer = document.querySelector(".platform-timeline__entries")
