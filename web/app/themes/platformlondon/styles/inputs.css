@@ -18,26 +18,26 @@ select {
     appearance: none;
     background: url("/app/themes/platformlondon/assets/img/plus-sign.svg");
     background-repeat: no-repeat;
-    background-position: right 8px top 8px;
+    background-position: right 12px top 8px;
     padding-right: 2rem;
 }
 
 .filters-toggle:hover {
     background: url("/app/themes/platformlondon/assets/img/plus-sign-inverse.svg");
     background-repeat: no-repeat;
-    background-position: right 8px top 8px;
+    background-position: right 12px top 8px;
 }
 
 .filters-open {
     background: url("/app/themes/platformlondon/assets/img/minus-sign.svg")!important;
-     background-repeat: no-repeat !important;
-    background-position: right 8px top 8px !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px top 8px !important;
 }
 
 .filters-open:hover {
     background: url("/app/themes/platformlondon/assets/img/minus-sign-inverse.svg")!important;
      background-repeat: no-repeat !important;
-    background-position: right 8px top 8px !important;
+    background-position: right 12px top 8px !important;
 }
 
 select:hover,
