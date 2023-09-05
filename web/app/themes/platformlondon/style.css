@@ -1759,6 +1759,10 @@ h6 a:hover {
     box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
 }
 
+.wp-block-query-pagination .page-numbers {
+    text-decoration: none;
+}
+
 .wp-block-query-pagination .page-numbers.current {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
