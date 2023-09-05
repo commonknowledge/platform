@@ -44,5 +44,5 @@ footer h6 {
 }
 
 .footer-links a {
-    @apply block mb-2;
+    @apply inline-block mb-2;
 }

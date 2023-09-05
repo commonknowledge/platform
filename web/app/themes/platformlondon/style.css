@@ -1197,7 +1197,7 @@ footer h6 {
 
 .footer-links a {
   margin-bottom: 0.5rem;
-  display: block;
+  display: inline-block;
 }
 
 /* Gravity Forms */
