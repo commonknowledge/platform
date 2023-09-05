@@ -1281,6 +1281,14 @@ footer h6 {
     cursor: pointer;
 }
 
+.gform_button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 85 0 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+    box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
 .gform_confirmation_message {
     margin-bottom: 4rem;
 }

@@ -21,6 +21,12 @@
     cursor: pointer;
 }
 
+
+.gform_button:hover {
+    @apply bg-dark-green text-white;
+    box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
 .gform_confirmation_message {
     margin-bottom: 4rem;
 }
