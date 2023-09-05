@@ -5,7 +5,18 @@ text {
     font-size: 0.5rem;
 }
 
-.wp-block-navigation__responsive-container-open svg {
-    height: 40px;
-    width: 40px;
+.wp-block-navigation__responsive-container-open svg, .wp-block-navigation__responsive-container-close svg  {
+    width: 31.5px;
+    height: 22px;
+}
+
+@media screen and (max-width: 600px) {
+    .wp-block-site-logo {
+        width: 63px;
+        height: 64px;
+    }
+    .custom-logo-link img{
+        width: 63px;
+        height: 64px;
+    }
 }
