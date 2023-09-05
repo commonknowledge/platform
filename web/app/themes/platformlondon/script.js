@@ -570,5 +570,12 @@ try {
     console.error("Error", e)
 }
 
+/* Apply link to whole of category cards on About page */
+const nestedLink = document.querySelector('.wp-block-heading.stretched-link a');
+  
+const h2Element = nestedLink.parentElement;
+
+h2Element.innerHTML = h2Element.textContent;
+
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"
