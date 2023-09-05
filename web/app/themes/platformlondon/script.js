@@ -312,8 +312,7 @@ try {
    /* Set up filers accordion */
 
     const filters = document.querySelector('.search-filter');
-    const initialFiltersHeight = filters.clientHeight;
-
+    
     const closeSearchFilterSection = (section) => {
     const button = section.querySelector(".search-filter__expand");
     const optionsList = section.querySelector(".search-filter__options");
