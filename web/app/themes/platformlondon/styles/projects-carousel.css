@@ -89,7 +89,8 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .projects-carousel__nav button {
-    @apply mx-4;
+    @apply text-dark-green mx-4;
+ 
 }
 
 .home-page  .projects-carousel__nav {

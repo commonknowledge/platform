@@ -2525,6 +2525,8 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 .projects-carousel__nav button {
   margin-left: 1rem;
   margin-right: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(24 85 0 / var(--tw-text-opacity));
 }
 
 .home-page  .projects-carousel__nav {
