@@ -25,9 +25,7 @@ Block::make(__('Post Header'))
         $download_url = carbon_get_post_meta($post->ID, "pdf");
     ?>
         <div class="post-header">
-            <a href="<?= $post_type_href ?>" class="btn-default">
                 <?= $post_type->labels->singular_name ?>
-            </a>
             <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
             <div class="post-header__details">
                 <?php if ($post_types) : ?>
