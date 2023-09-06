@@ -43,17 +43,6 @@
     @apply z-40;
 }
 
-.platform-stack .wp-block-post.type-pl_project:nth-child(3) {
-    display: none;
-}
-
-.platform-stack .wp-block-post.type-pl_project:nth-child(4) {
-    display: none;
-}
-
-.platform-stack .wp-block-post.type-pl_project:nth-child(5) {
-    display: none;
-}
 
 @screen md {
     .platform-stack .wp-block-post.type-pl_project:nth-child(3) {
