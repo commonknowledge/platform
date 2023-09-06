@@ -2250,10 +2250,6 @@ h6 a:hover {
   
 }
 
-.wp-block-post-terms.taxonomy-category {
-  margin-left: 0.5rem !important;
-}
-
 /* Post Filter on Blog/Resources/Projects Page */
 
 .post-filter {
@@ -3599,6 +3595,7 @@ body.search.search-results .wp-block-post {
 
 body.search.search-results .wp-block-post .wp-block-group {
   margin-bottom: 0.5rem !important;
+    display: block;
 }
 
 body.search.search-results .wp-block-post .wp-block-post-title {

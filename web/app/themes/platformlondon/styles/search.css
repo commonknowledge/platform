@@ -112,6 +112,7 @@ body.search.search-results .wp-block-post {
 
 body.search.search-results .wp-block-post .wp-block-group {
     @apply !mb-2;
+    display: block;
 }
 
 body.search.search-results .wp-block-post .wp-block-post-title {
