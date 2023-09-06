@@ -37,7 +37,7 @@ Block::make(__('Post Details'))
                 <?php render_project_dates(display_active: true); ?>
             <?php else : ?>
                 <span><?= $post_date ?></span>
-                <a class="author-name" href="/?s&author=<?= $author_id ?>">
+                <a  href="/?s&author=<?= $author_id ?>">
                     <?= $author ?>
                 </a>
             <?php endif ?>

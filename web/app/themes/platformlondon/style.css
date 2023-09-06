@@ -2246,13 +2246,10 @@ h6 a:hover {
     text-decoration: none;
 }
 
-.author-name {
-  margin-right: 0.5rem;
-}
-
 [rel="tag"] {
     font-size: 14px;
     font-family: "styrene-b-trial";
+    margin-left: 0.5rem;
 }
 
 /* Post Filter on Blog/Resources/Projects Page */
