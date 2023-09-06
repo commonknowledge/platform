@@ -26,7 +26,7 @@ Block::make(__('Project Header'))
         ?>
         <div class="project-header">
             <div class="project-header__cover <?= $cover_class ?>" style="background-image:url('<?= $image ?>')">
-                <a class="btn-default" href="/projects/">Project</a>
+                Project
                 <h1 class="wp-block-post-title"><?= get_the_title() ?></h1>
                 <div class="project-header__buttons">
                     <?php if (is_project_active()) : ?>
