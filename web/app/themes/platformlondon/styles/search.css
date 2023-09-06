@@ -165,3 +165,8 @@ body.search.search-results .wp-block-post > .wp-block-columns > .wp-block-column
 body.search.search-results .wp-block-post > .wp-block-columns > .wp-block-column:last-child {
     flex-basis: 33.33% !important;
 }
+
+/* Hide selected filters count when drop down is closed */
+.search-filter__expand[data-closed="true"] #count {
+    display: none;
+  }
