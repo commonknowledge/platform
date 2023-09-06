@@ -19,5 +19,9 @@
 [rel="tag"] {
     font-size: 14px;
     font-family: "styrene-b-trial";
+  
+}
+
+.post-details .taxonomy-category {
     @apply ml-2;
 }

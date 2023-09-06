@@ -2249,7 +2249,11 @@ h6 a:hover {
 [rel="tag"] {
     font-size: 14px;
     font-family: "styrene-b-trial";
-    margin-left: 0.5rem;
+  
+}
+
+.post-details .taxonomy-category {
+  margin-left: 0.5rem;
 }
 
 /* Post Filter on Blog/Resources/Projects Page */
