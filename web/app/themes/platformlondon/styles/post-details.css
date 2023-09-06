@@ -16,6 +16,10 @@
     text-decoration: none;
 }
 
+.author-name {
+    @apply mr-2;
+}
+
 [rel="tag"] {
     font-size: 14px;
     font-family: "styrene-b-trial";
