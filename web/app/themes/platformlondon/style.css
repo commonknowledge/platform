@@ -1034,6 +1034,14 @@ nav.platform-tabs {
     margin-bottom: 0;
 }
 
+::-moz-selection {
+    color: #FFEF56;
+  }
+
+::selection {
+    color: #FFEF56;
+  }
+
 /* Cover */
 
 .wp-block-cover h1,

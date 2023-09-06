@@ -111,3 +111,7 @@
 .entry-content .wp-block-pullquote {
     margin-bottom: 0;
 }
+
+::selection {
+    color: #FFEF56;
+  }
