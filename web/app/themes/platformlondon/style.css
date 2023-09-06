@@ -1034,12 +1034,14 @@ nav.platform-tabs {
     margin-bottom: 0;
 }
 
+/* Add background colour to selected text */
+
 ::-moz-selection {
-    color: #FFEF56;
+    background-color: #FFEF56;
   }
 
 ::selection {
-    color: #FFEF56;
+    background-color: #FFEF56;
   }
 
 /* Cover */
