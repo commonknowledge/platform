@@ -152,9 +152,11 @@ Block::make(__('Search Filter'))
 
      
         <div class="search-filter">
+        <?php $sectionCount = 1;?>
             <?php foreach ($filter_sections as $section) : ?>
-                <div class="search-filter__section">
-                    <button class="search-filter__expand"><?= $section['title'] ?></button>
+                <div class="search-filter__section" id="section-<?= $sectionCount ?>">
+                <button class="search-filter__expand"><?= $section['title'] ?><span id="count"> (0)</span>
+                </button>
                     <ul class="search-filter__options">
                         <?php foreach ($section['options'] as $option) {
                             $id = "filter-" . $section['param'] . "-" . $option['value'];
@@ -172,7 +174,8 @@ Block::make(__('Search Filter'))
                         <?php } ?>
                     </ul>
                 </div>
-            <?php endforeach; ?>
+                <?php $sectionCount++;
+            endforeach; ?>
         </div>
         <?php
     });

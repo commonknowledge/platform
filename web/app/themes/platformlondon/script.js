@@ -386,11 +386,42 @@ try {
     });
     }
 
-
     adjustFiltersDisplay();
     window.addEventListener('resize', adjustFiltersDisplay);
 
 
+    //  Show number of selected filters next to filter section heading
+    function updateCheckboxCount(sectionId) {
+        const checkboxes = document.querySelectorAll(`#${sectionId} input[type="checkbox"]`);
+        let selectedCount = 0;
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedCount++;
+            }
+        });
+
+        const countElements = document.querySelectorAll(`#${sectionId} #count`);
+        
+        countElements.forEach(countElement => {
+            countElement.textContent = ` (${selectedCount})`;
+        });
+    }
+
+    const sections = document.querySelectorAll('.search-filter__section');
+    sections.forEach((section, index) => {
+        const sectionId = `section${index + 1}`;
+        section.setAttribute('id', sectionId);
+
+        const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => updateCheckboxCount(sectionId));
+        });
+
+        updateCheckboxCount(sectionId);
+    });
+
+    
     /* Set up search filter checkboxes */
     const EXCLUSIVE_PARAMS = ["pl_post_type", "pl_resource_type", "pl_project_type"]
     document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbox => {
@@ -579,5 +610,7 @@ if (nestedLink) {
     h2Element.innerHTML = h2Element.textContent;
     }
 }
+
+
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"
