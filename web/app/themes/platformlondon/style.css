@@ -3211,11 +3211,18 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 /* Query Loop for Projects */
 
 .wp-block-post.type-pl_project {
-  margin: 1rem !important;
-  padding-top: 1rem;
+    margin: 1rem !important;
+    padding-top: 1rem;
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
     width: calc(100% - 4rem / 3) !important;
 }
+
+@media (max-width: 600px){
+    .wp-block-post.type-pl_project {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+  }
 
 .wp-block-post.type-pl_project:hover {
     box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);

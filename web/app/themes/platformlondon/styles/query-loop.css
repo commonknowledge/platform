@@ -214,7 +214,20 @@
 .wp-block-post.type-pl_project {
     @apply green-shadow !m-4 pt-4;
     width: calc(100% - 4rem / 3) !important;
+  
 }
+.wp-block-post.type-pl_project {
+    @apply green-shadow !m-4 pt-4;
+    width: calc(100% - 4rem / 3) !important;
+    
+}
+@media (max-width: 600px){
+    .wp-block-post.type-pl_project {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+  }
+  
 
 .wp-block-post.type-pl_project:hover {
     @apply yellow-shadow;
