@@ -200,6 +200,68 @@ try {
         cardContainer.style.transform
     })
 
+    /* Set up platform stack movement */
+    document.querySelectorAll(".platform-stack").forEach((stack) => {
+        let currentIndex = 0
+
+        const cardContainer = stack.querySelector(".wp-block-post-template")
+        const cards = stack.querySelectorAll(".wp-block-post")
+        const buttons = stack.querySelectorAll(".platform-stack__nav button")
+        const leftButton = buttons[0]
+        const rightButton = buttons[buttons.length - 1]
+
+        const isLastCardFullyVisible = () => {
+            const lastCard = cards[cards.length - 1]
+            const lastCardRight = lastCard.getBoundingClientRect().right
+            return lastCardRight < window.innerWidth
+        }
+
+        const moveLeft = () => {
+            if (currentIndex <= 0) {
+                return
+            }
+
+            currentIndex -= 1
+            updateStack()
+        }
+
+        const moveRight = () => {
+            currentIndex += 1
+            updateStack()
+        }
+
+        const updateStack = () => {
+            console.log("current position", currentIndex)
+            let totalWidth = 0
+            for (let i = 0; i < currentIndex; i++) {
+                const card = cards[i]
+                const dimensions = card.getBoundingClientRect()
+                totalWidth += dimensions.width
+            }
+
+            cardContainer.style.transform = `translateX(-${totalWidth}px)`
+
+            if (currentIndex === 0) {
+                leftButton.style.visibility = "hidden"
+            } else {
+                leftButton.style.visibility = null
+            }
+        }
+
+        cardContainer.addEventListener("transitionend", () => {
+            if (isLastCardFullyVisible()) {
+                rightButton.style.visibility = "hidden"
+            } else {
+                rightButton.style.visibility = null
+            }
+        })
+
+        updateStack()
+
+        leftButton.addEventListener("click", moveLeft)
+        rightButton.addEventListener("click", moveRight)
+    })
+
     /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
     document.querySelectorAll('.platform-illustration svg').forEach(svg => {
         // Get the bounds of the SVG content
