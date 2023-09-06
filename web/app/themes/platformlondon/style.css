@@ -2252,8 +2252,8 @@ h6 a:hover {
   
 }
 
-.post-details .taxonomy-category {
-  margin-left: 0.5rem;
+.wp-block-post-terms.taxonomy-category {
+  margin-left: 0.5rem !important;
 }
 
 /* Post Filter on Blog/Resources/Projects Page */

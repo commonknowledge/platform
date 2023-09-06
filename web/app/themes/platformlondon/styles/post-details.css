@@ -22,6 +22,6 @@
   
 }
 
-.post-details .taxonomy-category {
-    @apply ml-2;
+.wp-block-post-terms.taxonomy-category {
+    @apply !ml-2;
 }
