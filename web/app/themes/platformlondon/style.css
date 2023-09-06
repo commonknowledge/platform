@@ -634,18 +634,6 @@ text {
     height: 22px;
 }
 
-.custom-logo-link img{
-    width: 63px;
-    height: 64px;
-}
-
-@media screen and (max-width: 600px) {
-    .wp-block-site-logo {
-        width: 63px;
-        height: 64px;
-    }
-}
-
 /* Components */
 
 /* About Page */
