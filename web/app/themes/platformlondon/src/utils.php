@@ -20,8 +20,9 @@ function get_category_svg($slug)
     if (empty(CATEGORY_SVGS[$slug])) {
         return "";
     }
+    $link = "/projects/?category_name=$slug";
     return (
-        '<a href="' . get_category_link($category) . '">' .
+        '<a href="' . $link . '">' .
         CATEGORY_SVGS[$slug] .
         '</a>'
     );
