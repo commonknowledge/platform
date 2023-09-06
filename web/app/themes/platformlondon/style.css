@@ -2225,11 +2225,11 @@ h6 a:hover {
 /* Post Details Block (used in Query Loop Post Templates) */
 
 .post-details {
-  margin-top: auto;
   display: flex;
   font-size: 0.875rem;
   line-height: 1.25rem;
   text-transform: uppercase;
+    margin-top: 10px;
 }
 
 .post-details>* {
