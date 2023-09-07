@@ -210,12 +210,6 @@ try {
         const leftButton = buttons[0]
         const rightButton = buttons[buttons.length - 1]
 
-        const isLastCardFullyVisible = () => {
-            const lastCard = cards[cards.length - 1]
-            const lastCardRight = lastCard.getBoundingClientRect().right
-            return lastCardRight < window.innerWidth
-        }
-
         const moveLeft = () => {
             if (currentIndex <= 0) {
                 return
@@ -230,31 +224,46 @@ try {
             updateStack()
         }
 
+        /**
+         * Detect if the right button should be hidden for a given
+         * container offset. This is done by calculating where this
+         * offset would put the right edge of the last card. If it
+         * is within the window, the button should be hidden.
+         */
+        const shouldHideRightButton = (containerOffsetX) => {
+            const firstCard = cards[0]
+            const lastCard = cards[cards.length - 1]
+            const firstCardLeft = firstCard.getBoundingClientRect().left
+            const lastCardRight = lastCard.getBoundingClientRect().right
+            const stackWidth = lastCardRight - firstCardLeft
+            return (stackWidth - containerOffsetX) < window.innerWidth
+        }
+
         const updateStack = () => {
-            console.log("current position", currentIndex)
-            let totalWidth = 0
+            // Move the container left to display the card at currentIndex.
+            // This is done by finding the total width of cards before the current
+            // card, and moving the container left by this amount.
+            let offsetX = 0
             for (let i = 0; i < currentIndex; i++) {
                 const card = cards[i]
                 const dimensions = card.getBoundingClientRect()
-                totalWidth += dimensions.width
+                offsetX += dimensions.width
             }
 
-            cardContainer.style.transform = `translateX(-${totalWidth}px)`
+            cardContainer.style.transform = `translateX(-${offsetX}px)`
 
             if (currentIndex === 0) {
                 leftButton.style.visibility = "hidden"
             } else {
                 leftButton.style.visibility = null
             }
-        }
 
-        cardContainer.addEventListener("transitionend", () => {
-            if (isLastCardFullyVisible()) {
+            if (shouldHideRightButton(offsetX)) {
                 rightButton.style.visibility = "hidden"
             } else {
                 rightButton.style.visibility = null
             }
-        })
+        }
 
         updateStack()
 
