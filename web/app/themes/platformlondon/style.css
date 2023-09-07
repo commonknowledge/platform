@@ -2621,7 +2621,8 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .wp-block-post-terms a::before {
-    content: "\2022\20";
+    margin-right: 6px;
+    content: url('./assets/img/Dot.svg');
 }
 
 .wp-block-post-terms__separator {
