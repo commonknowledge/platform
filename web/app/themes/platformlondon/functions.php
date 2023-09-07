@@ -129,8 +129,13 @@ add_filter("term_link", function ($termlink, $term, $taxonomy) {
 }, 10, 3);
 
 add_filter("query_loop_block_query_vars", function ($query) {
-    // If the search parameter has the special value ":all", don't filter
-    // This is used in the Carousel block
+    $category_name = get_query_var("category_name");
+    if ($category_name) {
+        $query["category_name"] = $category_name;
+    }
+
+    // If the search parameter has the special value ":all", only filter
+    // by category. This is used in the Carousel block
     if (($query['s'] ?? '') === ':all') {
         $query['s'] = '';
         return $query;
@@ -153,10 +158,6 @@ add_filter("query_loop_block_query_vars", function ($query) {
         $query["post__in"] = $explicitly_related_ids;
         $query["ignore_sticky_posts"] = true;
         return $query;
-    }
-    $category_name = get_query_var("category_name");
-    if ($category_name) {
-        $query["category_name"] = $category_name;
     }
     foreach (["pl_resource_type", "pl_post_type", "pl_project_type"] as $taxonomy) {
         $content_type = get_query_var($taxonomy);
