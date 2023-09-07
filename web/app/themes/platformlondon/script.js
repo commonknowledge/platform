@@ -197,7 +197,13 @@ try {
         buttons[0].addEventListener("click", () => displayCard(currentIndex - 1))
         buttons[1].addEventListener("click", () => displayCard(currentIndex + 1))
 
-        cardContainer.style.transform
+        // Disable 
+        if (cards.length === 1) {
+            const transition = getComputedStyle(cardContainer).transition
+            cardContainer.style.transition = "none"
+            cards[0].style.transition = "none"
+            displayCard(0)
+        }
     })
 
     /* Set up platform stack movement */
