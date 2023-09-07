@@ -3421,7 +3421,7 @@ body.search h1.wp-block-heading {
 body.search .wp-block-search {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
     max-width: 680px;
 }
 
@@ -3494,6 +3494,44 @@ body.search .wp-block-search {
     .search-results-count {
         display: block;
     }
+}
+
+/* Search Selected Filters */
+
+.search-selected-filters {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    max-width: 680px;
+}
+
+.search-selected-filters button {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 85 0 / var(--tw-bg-opacity));
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(24 85 0 / var(--tw-border-opacity));
+    box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
+.search-selected-filters button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(24 85 0 / var(--tw-text-opacity));
 }
 
 /* Search Filter */

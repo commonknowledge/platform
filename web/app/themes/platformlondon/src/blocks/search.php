@@ -147,9 +147,6 @@ Block::make(__('Search Filter'))
         ];
 
         ?>
-
-
-
      
         <div class="search-filter">
         <?php $sectionCount = 1;?>
@@ -177,6 +174,54 @@ Block::make(__('Search Filter'))
                 <?php $sectionCount++;
             endforeach; ?>
         </div>
+        <?php
+    });
+    
+Block::make(__('Search Selected Filters'))
+    ->add_fields(array(
+        Field::make('separator', 'crb_separator', __('Search Selected Filters'))
+    ))
+    ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+        $taxonomies = [
+            "category",
+            "pl_post_type",
+            "pl_resource_type",
+            "pl_project_type",
+            "pl_place",
+            "pl_player",
+            "pl_issue",
+            "pl_collaborator"
+        ];
+        $all_active_terms = [];
+        foreach ($taxonomies as $taxonomy) {
+            $param = $taxonomy === "category" ? "category_name" : $taxonomy;
+            $active_term = $_GET[$param] ?? "";
+            $active_term_slugs = explode(",", $active_term);
+
+            $all_terms = get_terms(["taxonomy" => $taxonomy]);
+            $active_terms = array_values(
+                array_filter($all_terms, function ($term) use ($active_term_slugs) {
+                    return in_array($term->slug, $active_term_slugs);
+                })
+            );
+            $all_active_terms[$param] = $active_terms;
+        }
+        ?>
+        <ul class="search-selected-filters">
+            <?php foreach ($all_active_terms as $param => $terms) : ?>
+                <?php foreach ($terms as $term) : ?>
+                    <li>
+                        <button
+                            type="button"
+                            data-param="<?= $param ?>"
+                            data-value="<?= $term->slug ?>"
+                        >
+                            <?= $term->name ?>
+                        </button>
+                    </li>
+                <?php endforeach ?>
+            <?php endforeach ?>
+        </ul>
         <?php
     });
 

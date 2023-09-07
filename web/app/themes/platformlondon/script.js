@@ -386,81 +386,81 @@ try {
         })
     })
 
-   /* Set up filers accordion */
+    /* Set up filers accordion */
 
     const filters = document.querySelector('.search-filter');
-    
+
     const closeSearchFilterSection = (section) => {
-    const button = section.querySelector(".search-filter__expand");
-    const optionsList = section.querySelector(".search-filter__options");
-    const closed = button.getAttribute("data-closed");
-    
-    if (closed) {
-        button.removeAttribute("data-closed");
-        optionsList.style.height = optionsList.getAttribute("data-original-height");
-    } else {
-        button.setAttribute("data-closed", true);
-        optionsList.style.height = 0;
-    }
+        const button = section.querySelector(".search-filter__expand");
+        const optionsList = section.querySelector(".search-filter__options");
+        const closed = button.getAttribute("data-closed");
+
+        if (closed) {
+            button.removeAttribute("data-closed");
+            optionsList.style.height = optionsList.getAttribute("data-original-height");
+        } else {
+            button.setAttribute("data-closed", true);
+            optionsList.style.height = 0;
+        }
     };
 
 
     document.querySelectorAll('.search-filter__section').forEach(section => {
-    const button = section.querySelector(".search-filter__expand");
-    const optionsList = section.querySelector(".search-filter__options");
+        const button = section.querySelector(".search-filter__expand");
+        const optionsList = section.querySelector(".search-filter__options");
 
-    const initialOptionsListHeight = optionsList.clientHeight;
+        const initialOptionsListHeight = optionsList.clientHeight;
 
-    button.addEventListener("click", () => {
+        button.addEventListener("click", () => {
+            closeSearchFilterSection(section);
+        });
+
+
+        optionsList.style.height = initialOptionsListHeight + "px";
+        optionsList.setAttribute("data-original-height", optionsList.style.height);
+
+
         closeSearchFilterSection(section);
     });
 
 
-    optionsList.style.height = initialOptionsListHeight + "px";
-    optionsList.setAttribute("data-original-height", optionsList.style.height);
-
-
-    closeSearchFilterSection(section);
-    });
-
-
-   /* Toggle filters display on mobile  */
+    /* Toggle filters display on mobile  */
 
     const filterButton = document.querySelector('.filters-toggle');
 
     function hideFilters() {
-    filters.style.display = "none";
-    filterButton.classList.remove('filters-open');
+        filters.style.display = "none";
+        filterButton.classList.remove('filters-open');
     }
 
     function adjustFiltersDisplay() {
-    try {
-        if (filters) {
-        if (window.innerWidth > 767) {
-            filters.style.display = "block";
-            filterButton.style.display = "none";
-            filterButton.classList.remove('filters-open');
-        } else {
-            filterButton.style.display = "block";
-            filterButton.classList.add('filters-open');
-            hideFilters();
-        }
-        }
-    } catch (error) {
+        try {
+            if (filters) {
+                if (window.innerWidth > 767) {
+                    filters.style.display = "block";
+                    filterButton.style.display = "none";
+                    filterButton.classList.remove('filters-open');
+                } else {
+                    filterButton.style.display = "block";
+                    filterButton.classList.add('filters-open');
+                    hideFilters();
+                }
+            }
+        } catch (error) {
 
-    }
+        }
     }
 
     if (filterButton) {
-    filterButton.addEventListener('click', function () {
-        if (filters.style.display === "block") {
-        filters.style.display = "none";
-        filterButton.classList.remove('filters-open');
-        } else {
-        filters.style.display = "block";
-        filterButton.classList.add('filters-open');
-        }
-    });
+        filterButton.addEventListener('click', function () {
+            if (filters.style.display === "block") {
+                filters.style.display = "none";
+                filterButton.classList.remove('filters-open');
+            } else {
+                filters.style.display = "block";
+                filterButton.classList.add('filters-open');
+            }
+        });
     }
 
     adjustFiltersDisplay();
@@ -479,7 +479,7 @@ try {
         });
 
         const countElements = document.querySelectorAll(`#${sectionId} #count`);
-        
+
         countElements.forEach(countElement => {
             countElement.textContent = ` (${selectedCount})`;
         });
@@ -498,7 +498,7 @@ try {
         updateCheckboxCount(sectionId);
     });
 
-    
+
     /* Set up search filter checkboxes */
     const EXCLUSIVE_PARAMS = ["pl_post_type", "pl_resource_type", "pl_project_type"]
     document.querySelectorAll('.search-filter input[type=checkbox]').forEach(checkbox => {
@@ -539,10 +539,25 @@ try {
         })
     })
 
-    /* Set up search filter accordion */
+    /* Set up search active filter buttons */
+    document.querySelectorAll(".search-selected-filters button").forEach(button => {
+        button.addEventListener("click", () => {
+            const param = button.getAttribute("data-param")
+            const value = button.getAttribute("data-value")
 
-
-
+            // Remove the filter from the URL and reload
+            const queryParams = new URLSearchParams(location.search)
+            const currentValue = queryParams.get(param) || ''
+            let currentValues = currentValue.split(",").filter(Boolean)
+            currentValues = currentValues.filter(v => v !== value)
+            if (currentValues.length) {
+                queryParams.set(param, currentValues.join(","))
+            } else {
+                queryParams.delete(param)
+            }
+            location.href = `${location.pathname}?${queryParams}`
+        })
+    })
 
     /* Set up timeline */
     const timelineEntriesContainer = document.querySelector(".platform-timeline__entries")
@@ -680,11 +695,11 @@ try {
 
 /* Apply link to whole of category cards on About page */
 const nestedLink = document.querySelector('.wp-block-heading.stretched-link a');
- 
+
 if (nestedLink) {
     const h2Element = nestedLink.parentElement;
     if (h2Element) {
-    h2Element.innerHTML = h2Element.textContent;
+        h2Element.innerHTML = h2Element.textContent;
     }
 }
 

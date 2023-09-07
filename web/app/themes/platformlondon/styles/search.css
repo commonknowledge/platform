@@ -32,7 +32,7 @@ body.search h1.wp-block-heading {
 }
 
 body.search .wp-block-search {
-    @apply mx-auto mb-16;
+    @apply mx-auto mb-8;
     max-width: 680px;
 }
 
@@ -68,6 +68,21 @@ body.search .wp-block-search {
 /* Search Result Count */
 .search-results-count {
     @apply hidden md:block text-2xl;
+}
+
+/* Search Selected Filters */
+.search-selected-filters {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    max-width: 680px;
+}
+
+.search-selected-filters button {
+    @apply btn-inverse;
 }
 
 /* Search Filter */
