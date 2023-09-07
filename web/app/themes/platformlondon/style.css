@@ -3648,11 +3648,32 @@ body.search.search-results .wp-block-post > .wp-block-columns > .wp-block-column
     flex-basis: 33.33% !important;
 }
 
+body.search.search-results .wp-block-post.type-pl_project h2.wp-block-post-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+@media (min-width: 1024px) {
+
+  body.search.search-results .wp-block-post.type-pl_project h2.wp-block-post-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+body.search.search-results .wp-block-post.type-pl_project h2.wp-block-post-title {
+    height: auto;
+}
+
+body.search.search-results .type-pl_project .wp-block-post-featured-image {
+    aspect-ratio: auto;
+}
+
 /* Hide selected filters count when drop down is closed */
 
 .search-filter__expand[data-closed="true"] #count {
     display: none;
-  }
+}
 
 /* Separator */
 

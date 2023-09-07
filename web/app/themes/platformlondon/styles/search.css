@@ -181,7 +181,16 @@ body.search.search-results .wp-block-post > .wp-block-columns > .wp-block-column
     flex-basis: 33.33% !important;
 }
 
+body.search.search-results .wp-block-post.type-pl_project h2.wp-block-post-title {
+    @apply text-2xl lg:text-3xl;
+    height: auto;
+}
+
+body.search.search-results .type-pl_project .wp-block-post-featured-image {
+    aspect-ratio: auto;
+}
+
 /* Hide selected filters count when drop down is closed */
 .search-filter__expand[data-closed="true"] #count {
     display: none;
-  }
+}
