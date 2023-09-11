@@ -3676,6 +3676,13 @@ body.search.search-results .type-pl_project .wp-block-post-featured-image {
     display: none;
 }
 
+/* Use theme colour for text highlights */
+
+.hilite {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 239 86 / var(--tw-bg-opacity));
+}
+
 /* Separator */
 
 .wp-block-separator {

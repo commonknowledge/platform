@@ -194,3 +194,8 @@ body.search.search-results .type-pl_project .wp-block-post-featured-image {
 .search-filter__expand[data-closed="true"] #count {
     display: none;
 }
+
+/* Use theme colour for text highlights */
+.hilite {
+    @apply bg-yellow;
+}
