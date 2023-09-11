@@ -1813,10 +1813,14 @@ h6 a:hover {
   position: relative;
 }
 
+.platform-stack .wp-block-columns {
+  margin-bottom: 0px !important;
+}
+
 .platform-stack .wp-block-query {
     box-sizing: border-box;
     display: block;
-    padding: 200px 0 200px;
+    padding: 175px 0 200px;
     position: relative;
     overflow: hidden;
 }
@@ -1890,6 +1894,7 @@ h6 a:hover {
 
 .platform-stack__nav {
     margin-top: 0;
+    padding: 0 1rem;
     position: absolute;
     top: 40%;
     width: 100%;
@@ -2072,7 +2077,7 @@ h6 a:hover {
 .platform-illustration {
   z-index: 10;
     height: calc(100vw - 2rem - 1px);
-    margin: -25vw 0;
+    margin: -20vw 0;
     position: relative;
     width: calc(100vw - 2rem - 1px);
 }

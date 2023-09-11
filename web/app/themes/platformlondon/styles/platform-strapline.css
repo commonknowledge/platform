@@ -49,7 +49,7 @@
 .platform-illustration {
     @apply z-10;
     height: calc(100vw - 2rem - 1px);
-    margin: -25vw 0;
+    margin: -20vw 0;
     position: relative;
     width: calc(100vw - 2rem - 1px);
 }

@@ -230,6 +230,13 @@ try {
             updateStack()
         }
 
+        const getStackWidth = () => {
+            const lastCard = cards[cards.length - 1]
+            const containerLeft = cardContainer.getBoundingClientRect().left
+            const lastCardRight = lastCard.getBoundingClientRect().right
+            return lastCardRight - containerLeft
+        }
+
         /**
          * Detect if the right button should be hidden for a given
          * container offset. This is done by calculating where this
@@ -237,23 +244,22 @@ try {
          * is within the window, the button should be hidden.
          */
         const shouldHideRightButton = (containerOffsetX) => {
-            const firstCard = cards[0]
-            const lastCard = cards[cards.length - 1]
-            const firstCardLeft = firstCard.getBoundingClientRect().left
-            const lastCardRight = lastCard.getBoundingClientRect().right
-            const stackWidth = lastCardRight - firstCardLeft
+            const stackWidth = getStackWidth()
             return (stackWidth - containerOffsetX) < window.innerWidth
         }
 
         const updateStack = () => {
-            // Move the container left to display the card at currentIndex.
-            // This is done by finding the total width of cards before the current
-            // card, and moving the container left by this amount.
-            let offsetX = 0
-            for (let i = 0; i < currentIndex; i++) {
-                const card = cards[i]
-                const dimensions = card.getBoundingClientRect()
-                offsetX += dimensions.width
+            // Move the container left to display the card at currentIndex
+            const card = cards[currentIndex]
+            const cardPosition = card.getBoundingClientRect().left
+
+            // Get the position of the card relative to the container and slide the container
+            // left by this amount to display the card
+            let offsetX = cardPosition - cardContainer.getBoundingClientRect().left
+
+            // Don't slide the cards to the right
+            if (offsetX < 0) {
+                offsetX = 0
             }
 
             cardContainer.style.transform = `translateX(-${offsetX}px)`
