@@ -12,14 +12,50 @@ h6 {
     @apply uppercase font-bold;
 }
 
+
+h1 {
+    font-size: 52px;
+}
+
+h3 {
+    font-size: 38px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+@screen md {
+    h1 {
+            font-size: 120px;
+    }
+
+    h2 {
+        font-size: 64px;
+    }
+
+    h3 {
+        font-size: 48px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 14px;
+    }
+}
+
+
 /* Page Main Heading */
 .page h1.wp-block-post-title, .single h1.wp-block-post-title {
-    @apply text-5xl md:text-6xl lg:text-8xl mt-8 mb-24;
+    @apply mt-8 mb-24;
 }
 
 /* Query Loop Headings */
 h2.wp-block-post-title {
-    @apply mb-4 text-2xl lg:text-3xl;
+    @apply mb-4;
     word-break: normal !important;
     word-wrap: normal !important;
 }

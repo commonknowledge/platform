@@ -1473,48 +1473,51 @@ h6 {
   text-transform: uppercase;
 }
 
+h1 {
+    font-size: 52px;
+}
+
+h3 {
+    font-size: 38px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+@media (min-width: 768px) {
+    h1 {
+            font-size: 120px;
+    }
+
+    h2 {
+        font-size: 64px;
+    }
+
+    h3 {
+        font-size: 48px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 14px;
+    }
+}
+
 /* Page Main Heading */
 
 .page h1.wp-block-post-title, .single h1.wp-block-post-title {
   margin-top: 2rem;
   margin-bottom: 6rem;
-  font-size: 3rem;
-  line-height: 1;
-}
-
-@media (min-width: 768px) {
-
-  .page h1.wp-block-post-title, .single h1.wp-block-post-title {
-    font-size: 3.75rem;
-    line-height: 1;
-  }
-}
-
-@media (min-width: 1024px) {
-
-  .page h1.wp-block-post-title, .single h1.wp-block-post-title {
-    font-size: 6rem;
-    line-height: 1;
-  }
 }
 
 /* Query Loop Headings */
 
 h2.wp-block-post-title {
   margin-bottom: 1rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-@media (min-width: 1024px) {
-
-  h2.wp-block-post-title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-}
-
-h2.wp-block-post-title {
     word-break: normal !important;
     word-wrap: normal !important;
 }
