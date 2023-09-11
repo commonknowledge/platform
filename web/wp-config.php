@@ -5,8 +5,13 @@
  * WP is hardcoded to look in its own directory or one directory up for wp-config.php.
  */
 require_once dirname(__DIR__) . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/config/application.php';
-require_once ABSPATH . 'wp-settings.php';
-error_reporting(E_ALL ^ E_DEPRECATED);
+print_execution_time("Autoload");
 
-print_execution_time("WP config");
+require_once dirname(__DIR__) . '/config/application.php';
+print_execution_time("Application");
+
+require_once ABSPATH . 'wp-settings.php';
+print_execution_time("WP Settings");
+
+error_reporting(E_ALL ^ E_DEPRECATED);
+print_execution_time("WP Config");
