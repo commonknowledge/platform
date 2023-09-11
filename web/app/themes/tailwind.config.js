@@ -51,7 +51,7 @@ module.exports = {
     },
     fontFamily: {
       sans: ['pp-mori', ...defaultTheme.fontFamily.sans],
-      styrene:  ['styrene-b-trial', ...defaultTheme.fontFamily.sans]
+      styrene:  ['Styrene B Web', ...defaultTheme.fontFamily.sans]
     }
   }
 }

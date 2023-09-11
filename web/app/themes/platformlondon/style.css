@@ -601,15 +601,23 @@ video {
 }
 
 @font-face {
-    font-family: "styrene-b-trial";
+    font-family: "Styrene B Web";
     font-style: normal;
-    src: url("./assets/fonts/styrene-b-trial_normal_400.otf");
+    font-weight: 400;
+    src: url("./assets/fonts/StyreneB-Regular-Web.woff2");
 }
 
 @font-face {
-    font-family: "styrene-b-trial";
+    font-family: "Styrene B Web";
     font-style: italic;
-    src: url("./assets/fonts/styrene-b-trial_italic_400.otf");
+    src: url("./assets/fonts/StyreneB-Regular-Web.woff2");
+}
+
+@font-face {
+    font-family: "Styrene B Web";
+    font-style: black;
+    font-weight: 900;
+    src: url("./assets/fonts/StyreneB-Black-Web.woff2");
 }
 
 .green-shadow {
@@ -2216,8 +2224,7 @@ h6 a:hover {
 
 [rel="tag"] {
     font-size: 14px;
-    font-family: "styrene-b-trial";
-  
+    font-family: "Styrene B Web";
 }
 
 /* Post Filter on Blog/Resources/Projects Page */
