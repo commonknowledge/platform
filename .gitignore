@@ -17,6 +17,7 @@ web/wp/wp-includes/*
 !web/wp/wp-includes/template-loader.php
 !web/wp/wp-includes/template-canvas.php
 !web/wp/wp-includes/block-template.php
+!web/wp/wp-includes/class-wp-hook.php
 
 web/.htaccess
 

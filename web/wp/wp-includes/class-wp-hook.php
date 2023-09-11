@@ -283,6 +283,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
 	 * @return mixed The filtered value after all hooked functions are applied to it.
 	 */
 	public function apply_filters( $value, $args ) {
+		global $wp_current_filter;
 		if ( ! $this->callbacks ) {
 			return $value;
 		}
@@ -296,7 +297,10 @@ final class WP_Hook implements Iterator, ArrayAccess {
 			$this->current_priority[ $nesting_level ] = current( $this->iterations[ $nesting_level ] );
 			$priority                                 = $this->current_priority[ $nesting_level ];
 
-			foreach ( $this->callbacks[ $priority ] as $the_ ) {
+			foreach ( $this->callbacks[ $priority ] as $k => $the_ ) {
+				if ($wp_current_filter[0] === "plugins_loaded") {
+					print_execution_time("Plugin hook: " . $k);
+				}
 				if ( ! $this->doing_action ) {
 					$args[0] = $value;
 				}
