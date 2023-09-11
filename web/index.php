@@ -11,8 +11,7 @@ echo "<!-- Server time: " . START_TIME . " -->\n";
 function print_execution_time($tag)
 {
     $time = microtime(true) - START_TIME;
-    $seconds = $time / 1000;
-    $str = number_format($seconds, 3);
+    $str = number_format($time, 3);
     echo "<!-- $tag: {$str}s -->\n";
 }
 
