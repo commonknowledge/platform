@@ -48,6 +48,8 @@ require ABSPATH . WPINC . '/error-protection.php';
 require ABSPATH . WPINC . '/default-constants.php';
 require_once ABSPATH . WPINC . '/plugin.php';
 
+print_execution_time("WP Settings: require classes");
+
 /**
  * If not already configured, `$blog_id` will default to 1 in a single site
  * configuration. In multisite, it will be overridden by default in ms-settings.php.
@@ -78,6 +80,8 @@ timer_start();
 
 // Check if WP_DEBUG mode is enabled.
 wp_debug_mode();
+
+print_execution_time("WP Settings: initial functions");
 
 /**
  * Filters whether to enable loading of the advanced-cache.php drop-in.
@@ -115,6 +119,8 @@ require ABSPATH . WPINC . '/class-wp.php';
 require ABSPATH . WPINC . '/class-wp-error.php';
 require ABSPATH . WPINC . '/pomo/mo.php';
 
+print_execution_time("WP Settings: second requires");
+
 /**
  * @global wpdb $wpdb WordPress database abstraction object.
  * @since 0.71
@@ -129,6 +135,8 @@ wp_set_wpdb_vars();
 
 // Start the WordPress object cache, or an external object cache if the drop-in is present.
 wp_start_object_cache();
+
+print_execution_time("WP Settings: setup db");
 
 // Attach the default filters.
 require ABSPATH . WPINC . '/default-filters.php';
@@ -155,6 +163,8 @@ require_once ABSPATH . WPINC . '/l10n.php';
 require_once ABSPATH . WPINC . '/class-wp-textdomain-registry.php';
 require_once ABSPATH . WPINC . '/class-wp-locale.php';
 require_once ABSPATH . WPINC . '/class-wp-locale-switcher.php';
+
+print_execution_time("WP Settings: require i18n");
 
 // Run the installer if WordPress is not installed.
 wp_not_installed();
@@ -346,6 +356,8 @@ require ABSPATH . WPINC . '/style-engine/class-wp-style-engine-css-rule.php';
 require ABSPATH . WPINC . '/style-engine/class-wp-style-engine-css-rules-store.php';
 require ABSPATH . WPINC . '/style-engine/class-wp-style-engine-processor.php';
 
+print_execution_time("WP Settings: require most of wordpress");
+
 $GLOBALS['wp_embed'] = new WP_Embed();
 
 /**
@@ -388,6 +400,8 @@ foreach ( wp_get_mu_plugins() as $mu_plugin ) {
 	do_action( 'mu_plugin_loaded', $mu_plugin );
 }
 unset( $mu_plugin, $_wp_plugin_file );
+
+print_execution_time("WP Settings: mu plugins");
 
 // Load network activated plugins.
 if ( is_multisite() ) {
@@ -435,6 +449,8 @@ require ABSPATH . WPINC . '/vars.php';
 create_initial_taxonomies();
 create_initial_post_types();
 
+print_execution_time("WP Settings: taxonomies and post types");
+
 wp_start_scraping_edited_file_errors();
 
 // Register the default theme directory root.
@@ -461,8 +477,11 @@ foreach ( wp_get_active_and_valid_plugins() as $plugin ) {
 	 * @param string $plugin Full path to the plugin's main file.
 	 */
 	do_action( 'plugin_loaded', $plugin );
+	print_execution_time("WP Settings: loaded plugin " . $plugin);
 }
 unset( $plugin, $_wp_plugin_file );
+
+print_execution_time("WP Settings: loaded plugins");
 
 // Load pluggable functions.
 require ABSPATH . WPINC . '/pluggable.php';
@@ -484,6 +503,9 @@ if ( WP_CACHE && function_exists( 'wp_cache_postload' ) ) {
  * @since 1.5.0
  */
 do_action( 'plugins_loaded' );
+
+print_execution_time("WP Settings: loaded plugins hook done");
+
 
 // Define constants which affect functionality if not already defined.
 wp_functionality_constants();
@@ -547,6 +569,9 @@ $GLOBALS['wp_widget_factory'] = new WP_Widget_Factory();
  */
 $GLOBALS['wp_roles'] = new WP_Roles();
 
+print_execution_time("WP Settings: setup globals");
+
+
 /**
  * Fires before the theme is loaded.
  *
@@ -591,6 +616,9 @@ foreach ( wp_get_active_and_valid_themes() as $theme ) {
 		include $theme . '/functions.php';
 	}
 }
+
+print_execution_time("WP Settings: loaded theme");
+
 unset( $theme );
 
 /**
@@ -609,6 +637,9 @@ WP_Site_Health::get_instance();
 // Set up current user.
 $GLOBALS['wp']->init();
 
+print_execution_time("WP Settings: setup user");
+
+
 /**
  * Fires after WordPress has finished loading but before any headers are sent.
  *
@@ -621,6 +652,8 @@ $GLOBALS['wp']->init();
  * @since 1.5.0
  */
 do_action( 'init' );
+
+print_execution_time("WP Settings: init");
 
 // Check site status.
 if ( is_multisite() ) {
@@ -643,3 +676,6 @@ if ( is_multisite() ) {
  * @since 3.0.0
  */
 do_action( 'wp_loaded' );
+
+print_execution_time("WP Settings: WP loaded");
+

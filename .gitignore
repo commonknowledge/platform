@@ -8,6 +8,16 @@ web/app/uploads/*
 web/app/cache/*
 
 # WordPress
+web/wp/*
+!web/wp/wp-blog-header.php
+!web/wp/wp-settings.php
+!web/wp/wp-includes
+
+web/wp/wp-includes/*
+!web/wp/wp-includes/template-loader.php
+!web/wp/wp-includes/template-canvas.php
+!web/wp/wp-includes/block-template.php
+
 web/.htaccess
 
 # Logs
