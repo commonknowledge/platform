@@ -67,9 +67,13 @@
 
 .wp-block-post-content p {
     @apply mb-6;
-    @apply text-xl;
 }
 
+@screen md {
+    .wp-block-post-content p {
+        @apply text-xl;
+    }
+}
 
 .wp-block-post-content p+h1,
 .wp-block-post-content p+h2,
