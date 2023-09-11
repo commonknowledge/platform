@@ -4,14 +4,16 @@
  */
 define('WP_USE_THEMES', true);
 
-define('START_TIME', microtime(true));
+define('START_TIME', $_SERVER['HTTP_X_START_TIME']);
+
+echo "<!-- Server time: " . START_TIME . " -->\n";
 
 function print_execution_time($tag)
 {
     $time = microtime(true) - START_TIME;
     $seconds = $time / 1000;
     $str = number_format($seconds, 3);
-    echo "<!-- $tag: {$str}s -->";
+    echo "<!-- $tag: {$str}s -->\n";
 }
 
 print_execution_time("Start");
