@@ -970,6 +970,8 @@ nav.platform-tabs {
 
 .wp-block-post-content p {
   margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .wp-block-post-content p+h1,
