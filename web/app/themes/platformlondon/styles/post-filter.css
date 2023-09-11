@@ -1,12 +1,18 @@
 /* Post Filter on Blog/Resources/Projects Page */
-.post-filter {
-    @apply px-4 mt-16 mb-12;
-}
+
 
 .post-filter__categories {
-    @apply flex mb-4;
-    overflow-x: scroll;
+    @apply flex;
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    margin: -48px 0px -48px 0px; /* Add extra padding to avoid cropping box shadow */
+    padding: 48px 20px 48px 20px;
 }
+
+/* Remove negative margin on second lot of filter buttons */
+.post-filter__categories:nth-of-type(2) {
+    margin-bottom: 0;
+}
+
 /* Hide scrollbar */
 
 /* For Webkit-based browsers */
@@ -19,7 +25,7 @@
     width: 0;
     display: none; /* This hides the track */
   }
-  
+
 
 @media only screen and (max-width: 600px){
   .post-filter__categories {
@@ -29,11 +35,12 @@
 
 .post-filter__categories li {
     @apply block;
+
 }
 
 .post-filter__categories li:not(:last-child) {
     @apply mr-2;
-}
+} 
 
 .post-filter__categories .energy {
     @apply bg-orange !border-0;;

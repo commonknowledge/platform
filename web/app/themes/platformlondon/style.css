@@ -2222,17 +2222,17 @@ h6 a:hover {
 
 /* Post Filter on Blog/Resources/Projects Page */
 
-.post-filter {
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+.post-filter__categories {
+  display: flex;
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    margin: -48px 0px -48px 0px; /* Add extra padding to avoid cropping box shadow */
+    padding: 48px 20px 48px 20px;
 }
 
-.post-filter__categories {
-  margin-bottom: 1rem;
-  display: flex;
-    overflow-x: scroll;
+/* Remove negative margin on second lot of filter buttons */
+
+.post-filter__categories:nth-of-type(2) {
+    margin-bottom: 0;
 }
 
 /* Hide scrollbar */
