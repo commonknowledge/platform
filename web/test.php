@@ -1,5 +1,7 @@
 <?php
 
+ob_start();
+
 $start = $_SERVER['HTTP_X_START_TIME'];
 $end = microtime(true);
 
