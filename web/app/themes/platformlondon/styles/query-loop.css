@@ -16,6 +16,10 @@
     @apply font-sans mb-4;
 }
 
+.wp-block-post-excerpt .wp-block-post-excerpt__excerpt {
+    @apply mb-0;
+}
+
 .yellow-drop-shadow {
     filter: drop-shadow(0 0 1rem theme('colors.yellow'));
 }

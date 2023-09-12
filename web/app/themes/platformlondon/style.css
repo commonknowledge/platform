@@ -2545,6 +2545,10 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   font-family: pp-mori, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.wp-block-post-excerpt .wp-block-post-excerpt__excerpt {
+  margin-bottom: 0px;
+}
+
 .yellow-drop-shadow {
     filter: drop-shadow(0 0 1rem #FFEF56);
 }
