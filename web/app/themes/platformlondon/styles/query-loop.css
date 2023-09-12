@@ -13,7 +13,7 @@
 }
 
 .wp-block-post-excerpt {
-    @apply font-sans;
+    @apply font-sans mb-4;
 }
 
 .yellow-drop-shadow {
@@ -150,7 +150,7 @@
 
         .wp-block-post.type-$(type) .wp-block-post-excerpt__excerpt {
             min-height: 0;
-            @apply line-clamp-3 mb-4;
+            @apply line-clamp-3;
         }
     }
 

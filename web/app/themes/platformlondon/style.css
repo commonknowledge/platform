@@ -2213,11 +2213,11 @@ h6 a:hover {
 /* Post Details Block (used in Query Loop Post Templates) */
 
 .post-details {
+  margin-top: auto;
   display: flex;
   font-size: 0.875rem;
   line-height: 1.25rem;
   text-transform: uppercase;
-    margin-top: 10px;
 }
 
 .post-details>* {
@@ -2541,6 +2541,7 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 }
 
 .wp-block-post-excerpt {
+  margin-bottom: 1rem;
   font-family: pp-mori, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -2766,7 +2767,6 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 
         .wp-block-post.type-post .wp-block-post-excerpt__excerpt {
             min-height: 0;
-            margin-bottom: 1rem;
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -2940,7 +2940,6 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 
         .wp-block-post.type-pl_resource .wp-block-post-excerpt__excerpt {
             min-height: 0;
-            margin-bottom: 1rem;
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -3114,7 +3113,6 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 
         .wp-block-post.type-pl_multimedia .wp-block-post-excerpt__excerpt {
             min-height: 0;
-            margin-bottom: 1rem;
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
