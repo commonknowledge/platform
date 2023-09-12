@@ -3613,7 +3613,7 @@ body.search.search-results .wp-block-post .wp-block-group {
 
 body.search.search-results .wp-block-post .wp-block-post-title {
   margin-bottom: 0.5rem !important;
-  margin-bottom: 0px !important;
+  margin-top: 0px !important;
 }
 
 .search-result__details {
