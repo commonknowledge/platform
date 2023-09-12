@@ -216,7 +216,7 @@ Block::make(__('Search Selected Filters'))
                             data-param="<?= $param ?>"
                             data-value="<?= $term->slug ?>"
                         >
-                            <?= $term->name ?>
+                            <?= $term->name ?>&nbsp;&nbsp;&times;
                         </button>
                     </li>
                 <?php endforeach ?>
