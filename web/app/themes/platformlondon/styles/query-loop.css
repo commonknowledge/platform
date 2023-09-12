@@ -17,7 +17,7 @@
 }
 
 .wp-block-post-excerpt .wp-block-post-excerpt__excerpt {
-    @apply mb-0;
+    @apply mb-0 !text-base;
 }
 
 .yellow-drop-shadow {

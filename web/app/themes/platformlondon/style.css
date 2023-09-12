@@ -2547,6 +2547,8 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 
 .wp-block-post-excerpt .wp-block-post-excerpt__excerpt {
   margin-bottom: 0px;
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
 }
 
 .yellow-drop-shadow {
