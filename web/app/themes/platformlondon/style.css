@@ -1835,7 +1835,6 @@ h6 a:hover {
 .platform-stack .wp-block-query {
     box-sizing: border-box;
     display: block;
-    padding: 175px 0 200px;
     position: relative;
     overflow: hidden;
 }
@@ -1857,6 +1856,7 @@ h6 a:hover {
 
 .platform-stack .wp-block-post.type-pl_project:first-child {
     transform: rotate(-30deg);
+    top: -50px;
     z-index: 30;
 }
 
@@ -1932,10 +1932,8 @@ h6 a:hover {
 
 .platform-stack ul {
     overflow-x: scroll;
-    margin-top: -200px;
-    padding-top: 200px;
+    padding-top: 175px;
     padding-bottom: 200px;
-    margin-bottom: -200px;
 }
 
 /* Platform Strapline (big text that appears first on home page, bottom of other pages) */
