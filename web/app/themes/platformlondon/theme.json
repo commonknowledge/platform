@@ -104,40 +104,40 @@
 				{
 					"fontFace": [
 						{
-							"fontFamily": "Styrene B Trial",
+							"fontFamily": "Styrene B Web",
 							"fontStyle": "normal",
 							"fontWeight": "900",
 							"src": [
-								"file:./assets/fonts/styrene-b-trial_normal_900.otf"
+								"file:./assets/fonts/StyreneB-Black-Web.woff2"
 							]
 						},
 						{
-							"fontFamily": "Styrene B Trial",
+							"fontFamily": "Styrene B Web",
 							"fontStyle": "italic",
 							"fontWeight": "900",
 							"src": [
-								"file:./assets/fonts/styrene-b-trial_italic_900.otf"
+								"file:./assets/fonts/StyreneB-Black-Web.woff2"
 							]
 						},
 						{
-							"fontFamily": "Styrene B Trial",
+							"fontFamily": "Styrene B Web",
 							"fontStyle": "normal",
 							"fontWeight": "400",
 							"src": [
-								"file:./assets/fonts/styrene-b-trial_normal_400.otf"
+								"file:./assets/fonts/StyreneB-Regular-Web.woff2"
 							]
 						},
 						{
-							"fontFamily": "Styrene B Trial",
+							"fontFamily": "Styrene B Web",
 							"fontStyle": "italic",
 							"fontWeight": "400",
 							"src": [
-								"file:./assets/fonts/styrene-b-trial_italic_400.otf"
+								"file:./assets/fonts/StyreneB-Regular-Web.woff2"
 							]
 						}
 					],
-					"fontFamily": "Styrene B Trial",
-					"slug": "styrene-b-trial"
+					"fontFamily": "Styrene B Web",
+					"slug": "styrene-b-web"
 				}
 			]
 		},
@@ -163,37 +163,37 @@
 		"elements": {
 			"button": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"h1": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"h2": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"h3": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"h4": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"h5": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"h6": {
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			},
 			"heading": {
@@ -201,7 +201,7 @@
 					"text": "#185500"
 				},
 				"typography": {
-					"fontFamily": "var:preset|font-family|styrene-b-trial"
+					"fontFamily": "var:preset|font-family|styrene-b-web"
 				}
 			}
 		},
@@ -214,7 +214,7 @@
 			}
 		},
 		"typography": {
-			"fontFamily": "var:preset|font-family|styrene-b-trial"
+			"fontFamily": "var:preset|font-family|Styrene B Web"
 		}
 	},
 	"templateParts": [
