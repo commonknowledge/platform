@@ -131,7 +131,7 @@ body.search.search-results .wp-block-post .wp-block-group {
 }
 
 body.search.search-results .wp-block-post .wp-block-post-title {
-    @apply !mb-2;
+    @apply !mb-2 !mb-0;
 }
 
 .search-result__details {
