@@ -207,9 +207,22 @@ try {
     })
 
     /* Set up platform stack movement */
-    document.querySelectorAll(".platform-stack").forEach((stack) => {
-        let currentIndex = 0
+    const scrollLeft = (element, amount) => {
+        let steps = 0
+        const initialPosition = element.scrollLeft
+        const doScroll = () => {
+            window.requestAnimationFrame(() => {
+                steps++
+                element.scrollLeft = initialPosition + amount * steps / 100
+                if (steps < 100) {
+                    doScroll()
+                }
+            })
+        }
+        doScroll()
+    }
 
+    document.querySelectorAll(".platform-stack").forEach((stack) => {
         const cardContainer = stack.querySelector(".wp-block-post-template")
         const cards = stack.querySelectorAll(".wp-block-post")
         const buttons = stack.querySelectorAll(".platform-stack__nav button")
@@ -217,67 +230,12 @@ try {
         const rightButton = buttons[buttons.length - 1]
 
         const moveLeft = () => {
-            if (currentIndex <= 0) {
-                return
-            }
-
-            currentIndex -= 1
-            updateStack()
+            scrollLeft(cardContainer, -200)
         }
 
         const moveRight = () => {
-            currentIndex += 1
-            updateStack()
+            scrollLeft(cardContainer, 200)
         }
-
-        const getStackWidth = () => {
-            const lastCard = cards[cards.length - 1]
-            const containerLeft = cardContainer.getBoundingClientRect().left
-            const lastCardRight = lastCard.getBoundingClientRect().right
-            return lastCardRight - containerLeft
-        }
-
-        /**
-         * Detect if the right button should be hidden for a given
-         * container offset. This is done by calculating where this
-         * offset would put the right edge of the last card. If it
-         * is within the window, the button should be hidden.
-         */
-        const shouldHideRightButton = (containerOffsetX) => {
-            const stackWidth = getStackWidth()
-            return (stackWidth - containerOffsetX) < window.innerWidth
-        }
-
-        const updateStack = () => {
-            // Move the container left to display the card at currentIndex
-            const card = cards[currentIndex]
-            const cardPosition = card.getBoundingClientRect().left
-
-            // Get the position of the card relative to the container and slide the container
-            // left by this amount to display the card
-            let offsetX = cardPosition - cardContainer.getBoundingClientRect().left
-
-            // Don't slide the cards to the right
-            if (offsetX < 0) {
-                offsetX = 0
-            }
-
-            cardContainer.style.transform = `translateX(-${offsetX}px)`
-
-            if (currentIndex === 0) {
-                leftButton.style.visibility = "hidden"
-            } else {
-                leftButton.style.visibility = null
-            }
-
-            if (shouldHideRightButton(offsetX)) {
-                rightButton.style.visibility = "hidden"
-            } else {
-                rightButton.style.visibility = null
-            }
-        }
-
-        updateStack()
 
         leftButton.addEventListener("click", moveLeft)
         rightButton.addEventListener("click", moveRight)
@@ -349,7 +307,7 @@ try {
             } else if (!g.id.endsWith("-base")) {
                 g.style.opacity = 0
             } else {
-                g.style.opacity = category ? 0.1 : 1
+                g.style.opacity = 0.1
             }
         })
         document.querySelectorAll('.platform-illustration svg').forEach(svg => {
@@ -362,11 +320,24 @@ try {
             }
         })
     }
-    window.dc = displayCategorySvg
-    illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
-    illustration?.addEventListener("mouseleave", () => {
-        displayCategorySvg(null)
-    })
+
+    // Only animate on desktop (where position === "absolute").
+    // Not possible to do this using pointer-events: none because the illustration should always be clickable.
+    const shouldAnimateIllustration = illustration && getComputedStyle(illustration).position === "absolute"
+
+    if (shouldAnimateIllustration) {
+        illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
+
+        illustration?.addEventListener("mouseleave", () => {
+            document.querySelectorAll('.platform-illustration g').forEach(g => {
+                g.style.removeProperty("opacity")
+            })
+            document.querySelectorAll('.platform-illustration svg').forEach(svg => {
+                svg.style.removeProperty("zIndex")
+                svg.style.removeProperty("transform")
+            })
+        })
+    }
 
     /* Do search when user clicks search icon */
     document.querySelectorAll(".wp-block-search").forEach(search => {

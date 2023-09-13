@@ -1,7 +1,6 @@
 /* Post Details Block (used in Query Loop Post Templates) */
 .post-details {
-    @apply flex uppercase text-sm;
-    margin-top: 10px;
+    @apply flex uppercase text-sm mt-auto;
 }
 
 .post-details>* {
@@ -18,7 +17,6 @@
 
 [rel="tag"] {
     font-size: 14px;
-    font-family: "styrene-b-trial";
-  
+    font-family: "Styrene B Web";
 }
 

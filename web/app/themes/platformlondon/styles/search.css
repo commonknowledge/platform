@@ -131,7 +131,7 @@ body.search.search-results .wp-block-post .wp-block-group {
 }
 
 body.search.search-results .wp-block-post .wp-block-post-title {
-    @apply !mb-2;
+    @apply !mb-2 !mt-0;
 }
 
 .search-result__details {
@@ -193,4 +193,9 @@ body.search.search-results .type-pl_project .wp-block-post-featured-image {
 /* Hide selected filters count when drop down is closed */
 .search-filter__expand[data-closed="true"] #count {
     display: none;
+}
+
+/* Use theme colour for text highlights */
+.hilite {
+    @apply bg-yellow;
 }
