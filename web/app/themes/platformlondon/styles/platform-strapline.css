@@ -17,14 +17,12 @@
 }
 
 .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
-    /* Correct row height to center illustration */
-    height: 50vw;
     position: relative;
 }
 
-@screen md {
-    .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
-        height: 33vw;
+@screen lg {
+    .platform-strapline {
+        margin-bottom: 6rem;
     }
 }
 
@@ -57,6 +55,7 @@
 }
 
 .platform-illustration {
+    margin-top: 2rem;
     position: relative;
     z-index: 90;
 }

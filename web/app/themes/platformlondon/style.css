@@ -1985,14 +1985,12 @@ h6 a:hover {
 }
 
 .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
-    /* Correct row height to center illustration */
-    height: 50vw;
     position: relative;
 }
 
-@media (min-width: 768px) {
-    .platform-strapline > .wp-block-columns > .wp-block-column:last-child {
-        height: 33vw;
+@media (min-width: 1024px) {
+    .platform-strapline {
+        margin-bottom: 6rem;
     }
 }
 
@@ -2113,6 +2111,7 @@ h6 a:hover {
 }
 
 .platform-illustration {
+    margin-top: 2rem;
     position: relative;
     z-index: 90;
 }
