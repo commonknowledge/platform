@@ -1966,6 +1966,17 @@ h6 a:hover {
     margin-top: -2rem;
     padding-top: 2rem;
   }
+}
+
+.home .platform-strapline {
+  margin-bottom: 0px;
+}
+
+@media (min-width: 768px) {
+
+  .home .platform-strapline {
+    margin-bottom: 4rem;
+  }
 
   .platform-strapline > .wp-block-columns {
     padding-left: 0px;
@@ -2014,6 +2025,12 @@ h6 a:hover {
     font-size: 3.75rem !important;
     line-height: 1 !important;
   }
+}
+
+@media (min-width: 768px) {
+    .platform-strapline .wp-block-heading {
+        min-height: 300px;
+    }
 }
 
 .platform-strapline em {
@@ -2096,11 +2113,42 @@ h6 a:hover {
 }
 
 .platform-illustration {
-  z-index: 10;
-    height: calc(100vw - 2rem - 1px);
-    margin: -20vw 0;
     position: relative;
-    width: calc(100vw - 2rem - 1px);
+    z-index: 90;
+}
+
+.platform-illustration svg {
+    position: relative;
+    transform: translateY(0);
+    transition: all 0.5s ease-in;
+}
+
+.platform-illustration #liberation-svg {
+    left: 31%;
+    width: 37%;
+}
+
+.platform-illustration #community-svg {
+    left: 0%;
+    margin-top: -5vw;
+    width: 46%;
+}
+
+.platform-illustration #economy-svg {
+    left: 33%;
+    width: 58%;
+}
+
+.platform-illustration #energy-svg {
+    left: 39%;
+    margin-top: -25vw;
+    width: 62%;
+}
+
+.platform-illustration #culture-svg {
+    left: 18%;
+    margin-top: -20vw;
+    width: 40%;
 }
 
 @media screen and (min-width: 782px) {
@@ -2108,56 +2156,58 @@ h6 a:hover {
         height: 50vw;
         left: 50%;
         margin: 0;
+        max-height: 700px;
+        max-width: 700px;
+        pointer-events: all;
         position: absolute;
         transform: translate(-50%, -50%);
         top: 33%;
         width: 50vw;
+        z-index: 10;
     }
-}
 
-.platform-illustration svg {
-    position: absolute;
-    transform: translateY(0);
-    transition: all 0.5s ease-in;
-}
-
-.platform-illustration #community-svg {
-    bottom: 29%;
-    left: 0%;
-    width: 46%;
-}
-
-.platform-illustration #economy-svg {
-    bottom: 31%;
-    left: 33%;
-    width: 58%;
-}
-
-.platform-illustration #liberation-svg {
-    bottom: 32%;
-    left: 28%;
-    width: 40%;
-}
-
-.platform-illustration #culture-svg {
-    bottom: 12%;
-    left: 18%;
-    width: 40%;
-}
-
-.platform-illustration #energy-svg {
-    bottom: 18%;
-    right: 0%;
-    width: 62%;
-}
-
-.platform-illustration g {
-    opacity: 0;
-    transition: all 0.5s ease-in;
-}
-
-.platform-illustration g[id$=base] {
-    opacity: 1;
+    .platform-illustration svg {
+        position: absolute;
+    }
+    
+    .platform-illustration #community-svg {
+        bottom: 29%;
+        left: 0%;
+        width: 46%;
+    }
+    
+    .platform-illustration #economy-svg {
+        bottom: 31%;
+        left: 33%;
+        width: 58%;
+    }
+    
+    .platform-illustration #liberation-svg {
+        bottom: 32%;
+        left: 28%;
+        width: 40%;
+    }
+    
+    .platform-illustration #culture-svg {
+        bottom: 12%;
+        left: 18%;
+        width: 40%;
+    }
+    
+    .platform-illustration #energy-svg {
+        bottom: 18%;
+        right: 0%;
+        width: 62%;
+    }
+    
+    .platform-illustration g {
+        opacity: 0;
+        transition: all 0.5s ease-in;
+    }
+    
+    .platform-illustration g[id$=base] {
+        opacity: 1;
+    }
 }
 
 .platform-strapline hr {

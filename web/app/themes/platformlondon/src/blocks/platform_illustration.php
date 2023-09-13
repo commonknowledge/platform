@@ -12,9 +12,9 @@ Block::make(__('Platform Illustration'))
         <div class="platform-illustration">
             <?= get_category_svg("liberation") ?>
             <?= get_category_svg("community") ?>
+            <?= get_category_svg("energy") ?>
             <?= get_category_svg("economy") ?>
             <?= get_category_svg("culture") ?>
-            <?= get_category_svg("energy") ?>
         </div>
         <?php
     });

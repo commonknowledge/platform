@@ -307,7 +307,7 @@ try {
             } else if (!g.id.endsWith("-base")) {
                 g.style.opacity = 0
             } else {
-                g.style.opacity = category ? 0.1 : 1
+                g.style.opacity = 0.1
             }
         })
         document.querySelectorAll('.platform-illustration svg').forEach(svg => {
@@ -320,11 +320,24 @@ try {
             }
         })
     }
-    window.dc = displayCategorySvg
-    illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
-    illustration?.addEventListener("mouseleave", () => {
-        displayCategorySvg(null)
-    })
+
+    // Only animate on desktop (where position === "absolute").
+    // Not possible to do this using pointer-events: none because the illustration should always be clickable.
+    const shouldAnimateIllustration = illustration && getComputedStyle(illustration).position === "absolute"
+
+    if (shouldAnimateIllustration) {
+        illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
+
+        illustration?.addEventListener("mouseleave", () => {
+            document.querySelectorAll('.platform-illustration g').forEach(g => {
+                g.style.removeProperty("opacity")
+            })
+            document.querySelectorAll('.platform-illustration svg').forEach(svg => {
+                svg.style.removeProperty("zIndex")
+                svg.style.removeProperty("transform")
+            })
+        })
+    }
 
     /* Do search when user clicks search icon */
     document.querySelectorAll(".wp-block-search").forEach(search => {
