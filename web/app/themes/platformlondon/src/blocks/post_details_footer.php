@@ -21,6 +21,9 @@ Block::make(__('Post Details Footer'))
         $members = array_map(function ($m) {
             return get_post($m["id"]);
         }, carbon_get_the_post_meta("members") ?? []);
+
+        $extra_members = carbon_get_the_post_meta("external_members") ?? [];
+
         ?>
         <div class="post-details-footer">
             <?php if ($categories) : ?>
@@ -59,7 +62,7 @@ Block::make(__('Post Details Footer'))
                     </ul>
                 <?php endif; ?>
             <?php } ?>
-            <?php if ($members) : ?>
+            <?php if ($members || $extra_members) : ?>
                 <span class="post-details-footer__label">
                     Team
                 </span>
@@ -69,6 +72,11 @@ Block::make(__('Post Details Footer'))
                             <a href="<?= get_permalink($member) ?>">
                                 <?= $member->post_title ?>
                             </a>
+                        </li>
+                    <?php endforeach ?>
+                    <?php foreach ($extra_members as $member) : ?>
+                        <li class="post-details-footer__term">
+                            <?= $member['name'] ?>
                         </li>
                     <?php endforeach ?>
                 </ul>
