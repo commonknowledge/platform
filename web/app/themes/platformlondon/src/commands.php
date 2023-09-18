@@ -40,37 +40,3 @@ function merge_categories($args)
     }
 }
 \WP_CLI::add_command('merge_categories', 'merge_categories');
-
-function fix_missing_images($args)
-{
-    $query_images_args = array(
-        'post_type'      => 'attachment',
-        'post_mime_type' => 'image',
-        'post_status'    => 'inherit',
-        'posts_per_page' => -1,
-    );
-
-    $query_images = new WP_Query($query_images_args);
-
-    foreach ($query_images->posts as $image) {
-        $filepath = get_attached_file($image->ID);
-
-        if (!file_exists($filepath)) {
-            $filepath_parts = preg_split("#web/app/uploads/[0-9]{4}/[0-9]{2}/#", $filepath);
-            $filename = $filepath_parts[1];
-
-            $dir = dirname($filepath);
-
-            $files = file_exists($dir) ? scandir($dir) : [];
-            usort($files, function ($a, $b) use ($filename) {
-                $dist_a = levenshtein($filename, $a);
-                $dist_b = levenshtein($filename, $b);
-                return $dist_a < $dist_b ? -1 : 1;
-            });
-
-            echo "MISSING: " . $filename . "\n";
-            echo "BEST FILE: " . ($files[0] ?? "None") . "\n";
-        }
-    }
-}
-\WP_CLI::add_command('fix_missing_images', 'fix_missing_images');
