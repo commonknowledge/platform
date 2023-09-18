@@ -637,9 +637,10 @@ text {
     font-size: 0.5rem;
 }
 
-.wp-block-navigation__responsive-container-open svg, .wp-block-navigation__responsive-container-close svg  {
-    width: 31.5px;
-    height: 22px;
+.wp-block-navigation__responsive-container-close svg,
+.wp-block-navigation__responsive-container-open svg {
+    height: auto;
+    width: auto;
 }
 
 /* Components */
@@ -1459,10 +1460,6 @@ header .wp-block-search {
 header a:focus,
 header a:hover {
     background: none;
-}
-
-.has-modal-open .admin-bar .is-menu-open .wp-block-navigation__responsive-dialog {
-    margin-top: 4px;
 }
 
 /* Headings */

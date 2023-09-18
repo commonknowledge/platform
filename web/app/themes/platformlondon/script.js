@@ -683,3 +683,101 @@ if (nestedLink) {
 
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"
+
+
+function replaceOpenSVGMobileMenu() {
+    let buttonWithAriaLabel = document.querySelector('button[aria-label="Open menu"]');
+
+    let newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSVG.setAttribute("width", "41"); 
+    newSVG.setAttribute("height", "40"); 
+    newSVG.setAttribute("viewBox", "0 0 41 40"); 
+    newSVG.setAttribute("fill", "none");
+
+  
+    let mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask.setAttribute("id", "mask0_1940_9478");
+    mask.setAttribute("style", "mask-type: alpha");
+    mask.setAttribute("maskUnits", "userSpaceOnUse");
+    mask.setAttribute("x", "0");
+    mask.setAttribute("y", "0");
+    mask.setAttribute("width", "41");
+    mask.setAttribute("height", "40");
+
+    let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", "0.90332");
+    rect.setAttribute("width", "40");
+    rect.setAttribute("height", "40");
+    rect.setAttribute("fill", "#D9D9D9");
+
+    let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    group.setAttribute("mask", "url(#mask0_1940_9478)");
+
+    
+    let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M5.90332 30V27.2223H35.9033V30H5.90332ZM5.90332 21.3889V18.6111H35.9033V21.3889H5.90332ZM5.90332 12.7778V10H35.9033V12.7778H5.90332Z");
+    path.setAttribute("fill", "#185500");
+
+  
+    mask.appendChild(rect);
+    group.appendChild(path);
+    newSVG.appendChild(mask);
+    newSVG.appendChild(group);
+
+
+    if (buttonWithAriaLabel) {
+        let existingSVG = buttonWithAriaLabel.querySelector('svg');
+        if (existingSVG) {
+            existingSVG.parentNode.replaceChild(newSVG, existingSVG);
+        }
+    }
+}
+
+replaceOpenSVGMobileMenu();
+
+function replaceCloseSVGMobileMenu() {
+
+    let buttonWithAriaLabel = document.querySelector('button[aria-label="Close menu"]');
+
+    let newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSVG.setAttribute("width", "40");
+    newSVG.setAttribute("height", "40");
+    newSVG.setAttribute("viewBox", "0 0 40 40");
+    newSVG.setAttribute("fill", "none");
+
+    let mask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    mask.setAttribute("id", "mask0_1940_9487");
+    mask.setAttribute("style", "mask-type: alpha");
+    mask.setAttribute("maskUnits", "userSpaceOnUse");
+    mask.setAttribute("x", "0");
+    mask.setAttribute("y", "0");
+    mask.setAttribute("width", "40");
+    mask.setAttribute("height", "40");
+
+    let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("width", "40");
+    rect.setAttribute("height", "40");
+    rect.setAttribute("fill", "#D9D9D9");
+
+    let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    group.setAttribute("mask", "url(#mask0_1940_9487)");
+
+    let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M10.4722 31.4722L8.52783 29.5278L18.0556 20L8.52783 10.4722L10.4722 8.5278L20 18.0556L29.5278 8.5278L31.4722 10.4722L21.9445 20L31.4722 29.5278L29.5278 31.4722L20 21.9444L10.4722 31.4722Z");
+    path.setAttribute("fill", "#FFF7E5"); 
+
+    mask.appendChild(rect);
+    group.appendChild(path);
+    newSVG.appendChild(mask);
+    newSVG.appendChild(group);
+
+
+    if (buttonWithAriaLabel) {
+        let existingSVG = buttonWithAriaLabel.querySelector('svg');
+        if (existingSVG) {
+            existingSVG.parentNode.replaceChild(newSVG, existingSVG);
+        }
+    }
+}
+
+replaceCloseSVGMobileMenu();
