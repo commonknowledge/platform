@@ -22,6 +22,14 @@
     @apply mb-16 max-w-full;
 }
 
+.entry-content .wp-element-button {
+    @apply btn-default btn-inverse;
+}
+
+.entry-content a.wp-element-button {
+    text-decoration: none !important;
+}
+
 /* Restrict image size to content width (620px) */
 @screen content {
     .entry-content figure {

@@ -26,5 +26,9 @@ Container::make('post_meta', 'Project Metadata')
                     'type'      => 'post',
                     'post_type' => 'pl_member',
                 ]
-            ])
+                ]),
+        Field::make('complex', 'external_members', 'Additional Team Members')
+            ->add_fields([
+                Field::make('text', 'name', 'Name')
+            ]),
     ));

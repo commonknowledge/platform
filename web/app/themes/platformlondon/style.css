@@ -923,6 +923,96 @@ nav.platform-tabs {
   max-width: 100%;
 }
 
+.entry-content .wp-element-button {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(24 85 0 / var(--tw-border-opacity));
+    box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
+.entry-content .wp-element-button:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(24 85 0 / var(--tw-bg-opacity)) !important;
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
+.entry-content .wp-element-button:hover,.entry-content .wp-element-button:focus {
+    box-shadow: 0 0 50px 10px #FFEF56, 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
+.entry-content .wp-element-button {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 85 0 / var(--tw-bg-opacity));
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(24 85 0 / var(--tw-border-opacity));
+    box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);
+}
+
+.entry-content .wp-element-button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(24 85 0 / var(--tw-text-opacity));
+}
+
+.entry-content .wp-element-button.category-energy {
+  border-width: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 168 26 / var(--tw-bg-opacity));
+}
+
+.entry-content .wp-element-button.category-community {
+  border-width: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 239 86 / var(--tw-bg-opacity));
+}
+
+.entry-content .wp-element-button.category-culture {
+  border-width: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(138 225 103 / var(--tw-bg-opacity));
+}
+
+.entry-content .wp-element-button.category-economy {
+  border-width: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(122 215 219 / var(--tw-bg-opacity));
+}
+
+.entry-content .wp-element-button.category-liberation {
+  border-width: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 169 190 / var(--tw-bg-opacity));
+}
+
+.project-header__buttons .entry-content .wp-element-button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.entry-content a.wp-element-button {
+    text-decoration: none !important;
+}
+
 /* Restrict image size to content width (620px) */
 
 @media (min-width: 620px) {
@@ -3260,15 +3350,15 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 @media (min-width: 600px) {
     .wp-block-post.type-pl_project {
     margin-top: 0px !important;
-    margin-right: 1rem !important;
+    margin-right: 2rem !important;
     margin-left: 0px !important;
     margin-bottom: 1rem !important;
-        width: calc(33.33% - 4rem / 3) !important;
+        width: calc(33.33% - 8rem / 3) !important;
   }
     .wp-block-post.type-pl_project:nth-child(3n+1) {
     margin-top: 0px !important;
-    margin-right: 1rem !important;
-    margin-left: 1rem !important;
+    margin-right: 2rem !important;
+    margin-left: 2rem !important;
     margin-bottom: 1rem !important;
   }
 }
