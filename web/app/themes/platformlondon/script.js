@@ -621,30 +621,6 @@ try {
 
     /**
      * Invert site logo and move it inside navbar when mobile navbar is opened
-     */
-    const logo = document.querySelector("header .wp-block-site-logo img")
-    const link = document.querySelector("header .wp-block-site-logo a")
-    const originalParent = document.querySelector(".wp-block-site-logo")
-    const newParentDiv = document.querySelector(".wp-block-navigation__responsive-dialog");
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.target.classList.contains('is-menu-open')) {
-                /* Make an image monochrome with this one weird trick! */
-                logo.style.filter = "brightness(0) invert(1)"
-                newParentDiv.insertBefore(link, newParentDiv.children[1])
-                link.appendChild(logo)
-
-            } else {
-                logo.style.filter = ""
-                originalParent.appendChild(logo);
-            }
-        });
-    });
-
-    observer.observe(document.querySelector('.wp-block-navigation__responsive-container'), {
-        attributes: true,
-        attributeFilter: ['class']
-    });
 
     /**
      * Set up download PDF dropdowns
@@ -680,10 +656,10 @@ if (nestedLink) {
     }
 }
 
-
 // Display content (hidden by pre-script.js)
 document.body.style.visibility = "visible"
 
+// Replace default icons with theme svgs
 
 function replaceOpenSVGMobileMenu() {
     let buttonWithAriaLabel = document.querySelector('button[aria-label="Open menu"]');
@@ -781,3 +757,95 @@ function replaceCloseSVGMobileMenu() {
 }
 
 replaceCloseSVGMobileMenu();
+
+// Generate and insert a container with the light logo and close icon
+
+// Create a container div element with a class name
+const containerDiv = document.createElement("div");
+containerDiv.classList.add("mobile-nav-wrapper");
+
+// Wrap the logo in homepage link
+const logoLink = document.createElement("a");
+logoLink.setAttribute("href", "http://localhost:8082"); 
+
+// Create the  SVG element for the logo
+const logoSvgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+logoSvgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+logoSvgElement.setAttribute("width", "100");
+logoSvgElement.setAttribute("height", "101");
+logoSvgElement.setAttribute("viewBox", "0 0 100 101");
+logoSvgElement.setAttribute("fill", "none");
+
+// Create an image element inside the logo SVG
+const logoImageElement = document.createElementNS("http://www.w3.org/2000/svg", "image");
+logoImageElement.setAttribute("width", "100");
+logoImageElement.setAttribute("height", "101");
+logoImageElement.setAttribute("href", "http://localhost:8082/app/uploads/2023/08/Logo-1.svg");
+
+// Append the image to the logo SVG
+logoSvgElement.appendChild(logoImageElement);
+
+// Append the logo SVG to the link
+logoLink.appendChild(logoSvgElement);
+
+// Create the provided SVG element for the close button
+const closeButtonSvgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+closeButtonSvgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+closeButtonSvgElement.setAttribute("width", "40");
+closeButtonSvgElement.setAttribute("height", "40");
+closeButtonSvgElement.setAttribute("viewBox", "0 0 40 40");
+closeButtonSvgElement.setAttribute("fill", "none");
+
+// Create a mask element
+const maskElement = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+maskElement.setAttribute("id", "mask0_1940_9487");
+maskElement.setAttribute("style", "mask-type: alpha");
+maskElement.setAttribute("maskUnits", "userSpaceOnUse");
+maskElement.setAttribute("x", "0");
+maskElement.setAttribute("y", "0");
+maskElement.setAttribute("width", "40");
+maskElement.setAttribute("height", "40");
+
+// Create a rect element inside the mask
+const rectElement = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+rectElement.setAttribute("width", "40");
+rectElement.setAttribute("height", "40");
+rectElement.setAttribute("fill", "#D9D9D9");
+
+// Append the rect to the mask
+maskElement.appendChild(rectElement);
+
+// Create a path element inside the close button SVG with the updated fill color
+const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+pathElement.setAttribute("d", "M10.4722 31.4722L8.52783 29.5278L18.0556 20L8.52783 10.4722L10.4722 8.5278L20 18.0556L29.5278 8.5278L31.4722 10.4722L21.9445 20L31.4722 29.5278L29.5278 31.4722L20 21.9444L10.4722 31.4722Z");
+pathElement.setAttribute("fill", "#FFF7E5"); // Change the fill color to #FFF7E5
+
+// Append the mask to the path
+pathElement.appendChild(maskElement);
+
+// Append the path to the close button SVG
+closeButtonSvgElement.appendChild(pathElement);
+
+// Create a button element
+const closeButton = document.createElement("button");
+closeButton.setAttribute("aria-label", "Close menu");
+closeButton.setAttribute("data-micromodal-close", "");
+closeButton.classList.add("wp-block-navigation__responsive-container-close");
+
+// Append the close button SVG to the close button
+closeButton.appendChild(closeButtonSvgElement);
+
+// Append the logo and close button to the container div
+containerDiv.appendChild(logoLink);
+containerDiv.appendChild(closeButton);
+
+// Get the parent of the original button element
+const buttonParent = document.querySelector(".wp-block-navigation__responsive-container-close").parentNode;
+
+// Replace the original button with the container div
+buttonParent.replaceChild(containerDiv, document.querySelector(".wp-block-navigation__responsive-container-close"));
+
+// Add a class to the image element
+const logoImage = containerDiv.querySelector('image');
+logoImage.classList.add('image-with-filter');
+

@@ -28,9 +28,6 @@
     @apply !bg-dark-green;
 }
 
-.wp-block-navigation__responsive-container-close {
-    @apply text-white pt-4 pr-3;
-}
 
 .wp-block-navigation__responsive-container.is-menu-open.has-modal-open .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
     @apply w-full;
@@ -69,4 +66,27 @@ header .wp-block-search {
 header a:focus,
 header a:hover {
     background: none;
+}
+
+.mobile-nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4px;
+}
+
+.wp-block-navigation__responsive-container:not(.is-menu-open.has-modal-open) .mobile-nav-wrapper{
+    display: none;
+  }
+
+.has-modal-open .admin-bar .is-menu-open .wp-block-navigation__responsive-dialog{
+    margin-top: 0;
+}
+
+.wp-block-navigation__responsive-container-close {
+    position: relative;
+}
+
+.image-with-filter {
+    filter: brightness(0) invert(1)
 }
