@@ -780,7 +780,7 @@ logoSvgElement.setAttribute("fill", "none");
 const logoImageElement = document.createElementNS("http://www.w3.org/2000/svg", "image");
 logoImageElement.setAttribute("width", "100");
 logoImageElement.setAttribute("height", "101");
-logoImageElement.setAttribute("href", "/app/uploads/2023/08/Logo-1.svg");
+logoImageElement.setAttribute("href", "/app/uploads/2023/08/Logo.svg");
 
 // Append the image to the logo SVG
 logoSvgElement.appendChild(logoImageElement);
