@@ -98,7 +98,7 @@ add_action('after_setup_theme', function () {
 });
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('platformlondon', get_template_directory_uri() . '/style.css', [], "6.3");
+    wp_enqueue_style('platformlondon', get_template_directory_uri() . '/style.css');
     wp_enqueue_script(
         'platformlondon-pre',
         get_template_directory_uri() . '/pre-script.js'
