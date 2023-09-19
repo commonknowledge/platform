@@ -41,36 +41,50 @@ function merge_categories($args)
 }
 \WP_CLI::add_command('merge_categories', 'merge_categories');
 
-function fix_missing_images($args)
+function find_largest_version($filename, $dir)
 {
-    $query_images_args = array(
-        'post_type'      => 'attachment',
-        'post_mime_type' => 'image',
-        'post_status'    => 'inherit',
-        'posts_per_page' => -1,
-    );
+    $largest_filename = null;
+    $largest_width = 0;
+    $filenames = scandir($dir);
+    foreach ($filenames as $file) {
+        $original_filename = preg_replace("#-[0-9]{3,4}x[0-9]{3,4}#", "", $file);
+        if ($original_filename === $filename) {
+            preg_match("#-([0-9]{3,4}x[0-9]{3,4})#", $file, $matches);
+            if (count($matches) > 1) {
+                $dimensions = $matches[1];
+                list($width, $height) = explode("x", $dimensions);
+                if ($width > $largest_width) {
+                    $largest_filename = $file;
+                }
+            }
+        }
+    }
+    return $largest_filename;
+}
 
-    $query_images = new WP_Query($query_images_args);
-
-    foreach ($query_images->posts as $image) {
-        $filepath = get_attached_file($image->ID);
-
-        if (!file_exists($filepath)) {
-            $filepath_parts = preg_split("#web/app/uploads/[0-9]{4}/[0-9]{2}/#", $filepath);
-            $filename = $filepath_parts[1];
-
-            $dir = dirname($filepath);
-
-            $files = file_exists($dir) ? scandir($dir) : [];
-            usort($files, function ($a, $b) use ($filename) {
-                $dist_a = levenshtein($filename, $a);
-                $dist_b = levenshtein($filename, $b);
-                return $dist_a < $dist_b ? -1 : 1;
-            });
-
-            echo "MISSING: " . $filename . "\n";
-            echo "BEST FILE: " . ($files[0] ?? "None") . "\n";
+function fix_small_images($args)
+{
+    $uploads_path = __DIR__ . "/../../../uploads";
+    $years = scandir($uploads_path);
+    foreach ($years as $year) {
+        $months = scandir($uploads_path . "/" . $year);
+        foreach ($months as $month) {
+            $dir = $uploads_path . "/" . $year . "/" . $month;
+            $filenames = scandir($dir);
+            foreach ($filenames as $filename) {
+                $largest_version = find_largest_version($filename, $dir);
+                $largest_filepath = $dir . "/" . $largest_version;
+                $filepath = $dir . '/' . $filename;
+                if ($largest_version) {
+                    list($width, $height, $type, $attr) = getimagesize($filepath);
+                    list($l_width, $height, $type, $attr) = getimagesize($largest_filepath);
+                    if ($l_width > $width) {
+                        echo "REPLACING " . $filename . " WITH " . $largest_version . "\n";
+                        copy($largest_filepath, $filepath);
+                    }
+                }
+            }
         }
     }
 }
-\WP_CLI::add_command('fix_missing_images', 'fix_missing_images');
+\WP_CLI::add_command('fix_small_images', 'fix_small_images');
