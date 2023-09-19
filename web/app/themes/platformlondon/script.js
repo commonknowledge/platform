@@ -766,7 +766,7 @@ containerDiv.classList.add("mobile-nav-wrapper");
 
 // Wrap the logo in homepage link
 const logoLink = document.createElement("a");
-logoLink.setAttribute("href", "http://localhost:8082"); 
+logoLink.setAttribute("href", "/"); 
 
 // Create the  SVG element for the logo
 const logoSvgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -780,7 +780,7 @@ logoSvgElement.setAttribute("fill", "none");
 const logoImageElement = document.createElementNS("http://www.w3.org/2000/svg", "image");
 logoImageElement.setAttribute("width", "100");
 logoImageElement.setAttribute("height", "101");
-logoImageElement.setAttribute("href", "http://localhost:8082/app/uploads/2023/08/Logo-1.svg");
+logoImageElement.setAttribute("href", "/app/uploads/2023/08/Logo-1.svg");
 
 // Append the image to the logo SVG
 logoSvgElement.appendChild(logoImageElement);
