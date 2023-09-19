@@ -258,7 +258,7 @@ try {
 
     const findCategory = (mouseX, mouseY) => {
         for (const category of CATEGORIES) {
-            const svg = document.querySelector(`svg[id=${category}-svg]`)
+            const svg = document.querySelector(`.platform-illustration svg[id=${category}-svg]`)
 
             let point = svg.createSVGPoint()
             point.x = mouseX
