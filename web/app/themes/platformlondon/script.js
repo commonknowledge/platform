@@ -780,7 +780,7 @@ logoSvgElement.setAttribute("fill", "none");
 const logoImageElement = document.createElementNS("http://www.w3.org/2000/svg", "image");
 logoImageElement.setAttribute("width", "100");
 logoImageElement.setAttribute("height", "101");
-logoImageElement.setAttribute("href", "/app/uploads/2023/08/Logo.svg");
+logoImageElement.setAttribute("href", "/app/uploads/2023/09/Logo_light.svg");
 
 // Append the image to the logo SVG
 logoSvgElement.appendChild(logoImageElement);
@@ -845,7 +845,4 @@ const buttonParent = document.querySelector(".wp-block-navigation__responsive-co
 // Replace the original button with the container div
 buttonParent.replaceChild(containerDiv, document.querySelector(".wp-block-navigation__responsive-container-close"));
 
-// Add a class to the image element
-const logoImage = containerDiv.querySelector('image');
-logoImage.classList.add('image-with-filter');
 

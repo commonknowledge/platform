@@ -87,6 +87,3 @@ header a:hover {
     position: relative;
 }
 
-.image-with-filter {
-    filter: brightness(0) invert(1)
-}
