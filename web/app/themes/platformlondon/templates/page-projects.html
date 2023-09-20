@@ -6,10 +6,6 @@
 
 <!-- wp:navigation {"ref":294,"overlayMenu":"never"} /-->
 
-<!-- wp:html -->
-<div><button class="projects-carousel__button" type="button">←</button><button class="projects-carousel__button" type="button">→</button></div>
-<!-- /wp:html -->
-
 <!-- wp:query {"queryId":2,"query":{"perPage":"99","pages":0,"offset":0,"postType":"pl_project","order":"desc","orderBy":"date","author":"","search":":all","exclude":[],"sticky":"","inherit":false,"parents":[],"taxQuery":null},"displayLayout":{"type":"flex","columns":3}} -->
 <div class="wp-block-query"><!-- wp:post-template -->
 <!-- wp:carbon-fields/project-dates /-->
@@ -23,6 +19,9 @@
 <!-- wp:post-terms {"term":"category"} /-->
 <!-- /wp:post-template --></div>
 <!-- /wp:query --></div>
+<!-- wp:html -->
+<div class="projects-carousel__nav"><button type="button">← Prev</button><button type="button">Next →</button></div>
+<!-- /wp:html -->
 <!-- /wp:group --></div></div>
 <!-- /wp:cover --></div>
 <!-- /wp:group -->
