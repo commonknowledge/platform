@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f475ee057e4efab31569eaf3614a104",
+    "content-hash": "ff4d15bb5e59a5da543f6d5b72016f09",
     "packages": [
         {
             "name": "composer/installers",
@@ -352,6 +352,15 @@
                 "source": "https://github.com/htmlburger/carbon-fields"
             },
             "time": "2023-04-04T08:41:31+00:00"
+        },
+        {
+            "name": "kinsta/kinsta-mu-plugins",
+            "version": "2.3.7",
+            "dist": {
+                "type": "zip",
+                "url": "https://kinsta.com/kinsta-tools/kinsta-mu-plugins.zip"
+            },
+            "type": "wordpress-muplugin"
         },
         {
             "name": "mnsami/composer-custom-directory-installer",

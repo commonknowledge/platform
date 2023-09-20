@@ -11,6 +11,18 @@
         "wpackagist-plugin/*",
         "wpackagist-theme/*"
       ]
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "kinsta/kinsta-mu-plugins",
+        "type": "wordpress-muplugin",
+        "version": "2.3.7",
+        "dist": {
+          "url": "https://kinsta.com/kinsta-tools/kinsta-mu-plugins.zip",
+          "type": "zip"
+        }
+      }
     }
   ],
   "require": {
@@ -34,7 +46,8 @@
     "wpackagist-plugin/sticky-posts-switch": "^2.1",
     "wpackagist-plugin/highlight-search-terms": "^1.8",
     "wpackagist-plugin/imagify": "^2.1",
-    "wpackagist-plugin/wordpress-seo": "^21.2"
+    "wpackagist-plugin/wordpress-seo": "^21.2",
+    "kinsta/kinsta-mu-plugins": "^2.3"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.6.2",
