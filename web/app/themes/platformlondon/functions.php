@@ -107,7 +107,7 @@ add_action('wp_enqueue_scripts', function () {
         'platformlondon-post',
         get_template_directory_uri() . '/script-1.js',
         ver: false,
-        in_footer: true
+        args: true
     );
 });
 
