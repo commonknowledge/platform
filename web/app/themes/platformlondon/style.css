@@ -1946,6 +1946,10 @@ h6 a:hover {
   margin-bottom: 2rem;
 }
 
+.platform-history.wp-block-cover {
+    overflow: visible;
+}
+
 .platform-history h2 {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -1962,7 +1966,7 @@ h6 a:hover {
 @media (min-width: 768px) {
 
   .platform-history .wp-block-navigation {
-    top: -1rem;
+    top: -0.75rem;
     left: 66.666667%;
     bottom: auto;
     --tw-translate-x: 0px;
