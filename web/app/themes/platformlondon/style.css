@@ -3412,15 +3412,21 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 @media (min-width: 600px) {
     .wp-block-post.type-pl_project {
     margin-top: 0px !important;
-    margin-right: 2rem !important;
+    margin-right: 1rem !important;
     margin-left: 0px !important;
     margin-bottom: 1rem !important;
-        width: calc(33.33% - 8rem / 3) !important;
+        width: calc(33.33% - 6rem / 3) !important;
   }
     .wp-block-post.type-pl_project:nth-child(3n+1) {
     margin-top: 0px !important;
     margin-right: 2rem !important;
-    margin-left: 2rem !important;
+    margin-left: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+    .wp-block-post.type-pl_project:nth-child(3n+2) {
+    margin-top: 0px !important;
+    margin-right: 2rem !important;
+    margin-left: 0px !important;
     margin-bottom: 1rem !important;
   }
 }

@@ -240,11 +240,14 @@
 
 @screen wpmd {
     .wp-block-post.type-pl_project {
-        @apply !mt-0 !mr-8 !ml-0 !mb-4;
-        width: calc(33.33% - 8rem / 3) !important;
+        @apply !mt-0 !mr-4 !ml-0 !mb-4;
+        width: calc(33.33% - 6rem / 3) !important;
     }
     .wp-block-post.type-pl_project:nth-child(3n+1) {
-        @apply !mt-0 !mr-8 !ml-8 !mb-4;
+        @apply !mt-0 !mr-8 !ml-4 !mb-4;
+    }
+    .wp-block-post.type-pl_project:nth-child(3n+2) {
+        @apply !mt-0 !mr-8 !ml-0 !mb-4;
     }
 }
 
