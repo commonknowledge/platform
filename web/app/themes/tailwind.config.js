@@ -6,6 +6,7 @@ module.exports = {
   important: true,
   plugins: [],
   blocklist: [
+    "grid",
     "sticky"
   ],
   theme: {

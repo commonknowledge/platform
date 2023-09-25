@@ -19,6 +19,10 @@ Container::make('post_meta', 'Related Content')
                 [
                     'type'      => 'post',
                     'post_type' => 'pl_project',
+                ],
+                [
+                    'type'      => 'post',
+                    'post_type' => 'pl_multimedia',
                 ]
             ])
     ));
