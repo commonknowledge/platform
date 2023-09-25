@@ -2736,6 +2736,12 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   row-gap: 3rem !important;
 }
 
+.wp-block-post-template-is-layout-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+
 .wp-block-post {
   display: flex;
   flex-direction: column;

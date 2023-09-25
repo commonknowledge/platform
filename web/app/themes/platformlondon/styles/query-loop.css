@@ -4,6 +4,12 @@
     @apply !gap-x-0 !gap-y-12;
 }
 
+.wp-block-post-template-is-layout-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+}
+
 .wp-block-post {
     @apply p-4 pt-0 flex flex-col;
 }
