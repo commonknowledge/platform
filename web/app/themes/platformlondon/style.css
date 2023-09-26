@@ -3535,16 +3535,16 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
 @media (min-width: 768px) {
 
   .wp-block-post.type-pl_project h2.wp-block-post-title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
   }
 }
 
 @media (min-width: 1024px) {
 
   .wp-block-post.type-pl_project h2.wp-block-post-title {
-    font-size: 3rem;
-    line-height: 1;
+    font-size: 3rem !important;
+    line-height: 1 !important;
   }
 }
 

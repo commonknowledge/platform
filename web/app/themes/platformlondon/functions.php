@@ -101,17 +101,17 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'platformlondon',
         get_template_directory_uri() . '/style.css',
-        ver: "1.6",
+        ver: "1.7",
     );
     wp_enqueue_script(
         'platformlondon-pre',
         get_template_directory_uri() . '/pre-script.js',
-        ver: "1.6",
+        ver: "1.7",
     );
     wp_enqueue_script(
         'platformlondon-post',
         get_template_directory_uri() . '/script.js',
-        ver: "1.6",
+        ver: "1.7",
         args: true
     );
 });
