@@ -675,13 +675,18 @@ text {
 }
 
 .platform-category-cards .wp-block-heading {
-  font-weight: 700;
+  font-size: 3rem !important;
+  line-height: 1 !important;
 }
 
 .platform-category-cards a:hover{ 
     position: relative; /* Position the link relative to the parent */
     box-shadow: 0px 0px 50px 10px #FFEF56, 0px 4px 10px 0px rgba(24, 85, 0, 0.40);
     background-color: inherit;
+}
+
+.platform-category-cards .wp-block-heading a:hover {
+    box-shadow: none;
 }
 
 .stretched-link {
@@ -1609,15 +1614,15 @@ h6 {
 
 h2.wp-block-post-title {
   margin-bottom: 1rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
 }
 
 @media (min-width: 1024px) {
 
   h2.wp-block-post-title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
   }
 }
 

@@ -13,7 +13,6 @@ try {
         newLink.style.height = "100%"
         newLink.style.padding = "1rem"
         newLink.style.textDecoration = "none"
-        header.style.textDecoration = "underline"
         const children = [...col.children]
         for (const child of children) {
             newLink.appendChild(child)
