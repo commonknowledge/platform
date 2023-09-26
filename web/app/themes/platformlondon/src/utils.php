@@ -14,11 +14,13 @@ const CATEGORY_SVGS = [
     "energy" => ENERGY_SVG,
 ];
 
-function get_category_svg($slug)
+function get_category_svg($slug, $link = true)
 {
-    $category = get_category_by_slug($slug);
     if (empty(CATEGORY_SVGS[$slug])) {
         return "";
+    }
+    if (!$link) {
+        return CATEGORY_SVGS[$slug];
     }
     $link = "/projects/?category_name=$slug";
     return (

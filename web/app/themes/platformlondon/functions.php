@@ -35,7 +35,6 @@ add_action('carbon_fields_register_fields', function () {
     require_once("src/fields/background_images.php");
     require_once("src/fields/member.php");
     require_once("src/fields/project.php");
-    require_once("src/fields/projects.php");
     require_once("src/fields/related_content.php");
     require_once("src/fields/resource.php");
     require_once("src/fields/timeline_item.php");
@@ -102,17 +101,17 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'platformlondon',
         get_template_directory_uri() . '/style.css',
-        ver: "1.5",
+        ver: "1.6",
     );
     wp_enqueue_script(
         'platformlondon-pre',
         get_template_directory_uri() . '/pre-script.js',
-        ver: "1.5",
+        ver: "1.6",
     );
     wp_enqueue_script(
         'platformlondon-post',
         get_template_directory_uri() . '/script.js',
-        ver: "1.5",
+        ver: "1.6",
         args: true
     );
 });
@@ -244,6 +243,18 @@ add_filter('rest_prepare_attachment', function ($response, $post, $request) {
     return $response;
 }, 10, 3);
 
+add_filter('the_title', function ($title, $id) {
+    $projects_page_id = get_page_by_path('projects', OBJECT, 'page')->ID;
+    if ($id === $projects_page_id) {
+        $category_name = $_GET['category_name'] ?? "";
+        $category = get_category_by_slug($category_name);
+        if ($category) {
+            return $category->name;
+        }
+    }
+    return $title;
+}, 10, 2);
+
 add_filter('render_block', function ($block_content, $block) {
     // Change navbar icon from two bars to three bars
     if ($block['blockName'] === 'core/navigation' &&
@@ -293,26 +304,20 @@ EOF,
     ) {
         global $post;
         if ($post->post_name === "projects") {
-            $match = preg_match('#<img.*src="(.*)"#', $block_content, $matches);
+            preg_match('#<img.*src="([^"]*)"#', $block_content, $matches);
             if (count($matches) !== 2) {
                 return $block_content;
             }
-            $category_slug = $_GET['category_name'] ?? 'default';
-            $cover_images = carbon_get_post_meta($post->ID, 'cover_images');
-            $default_item = null;
-            $cover_image_item = null;
-            foreach ($cover_images as $cover_image) {
-                if ($cover_image['category'] === $category_slug) {
-                    $cover_image_item = $cover_image;
-                }
-                if ($cover_image['category'] === 'default') {
-                    $default_item = $cover_image;
-                }
-            }
-            $cover_image_item = $cover_image_item ?? $default_item;
-            $cover_image_url = $cover_image['image'] ?? null;
-            if ($cover_image_url) {
-                $block_content = str_replace($matches[1], $cover_image_url, $block_content);
+            $category_slug = $_GET['category_name'] ?? null;
+            if (in_array($category_slug, ['community', 'culture', 'economy', 'energy', 'liberation'])) {
+                $image_url = '/app/themes/platformlondon/assets/img/svg/' . $category_slug . '.svg';
+                $block_content = str_replace($matches[1], $image_url, $block_content);
+                preg_match('#([ "])wp-block-cover([ "])#', $block_content, $cover_matches);
+                $block_content = str_replace(
+                    $cover_matches[0],
+                    $cover_matches[1] . 'wp-block-cover wp-block-cover--' . $category_slug . $cover_matches[2],
+                    $block_content
+                );
             }
             return $block_content;
         }

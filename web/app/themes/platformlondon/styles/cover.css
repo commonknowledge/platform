@@ -13,3 +13,88 @@
 .wp-block-cover .wp-block-navigation-item a {
     @apply !text-dark-green hover:!bg-dark-green hover:!text-white;
 }
+
+.wp-block-cover--community {
+    background-color: #ffdfaf !important;
+}
+
+.wp-block-cover--community .wp-block-navigation-item a {
+    background-color: #ffdfaf !important;
+}
+
+.wp-block-cover--community .wp-block-cover__image-background {
+    height: 50% !important;
+    left: 50% !important;
+    top: 16% !important;
+    min-width: 500px;
+    transform: translateX(-50%);
+    width: 50% !important;
+}
+
+.wp-block-cover--culture {
+    background-color: #def0c1 !important;
+}
+
+.wp-block-cover--culture .wp-block-navigation-item a {
+    background-color: #def0c1 !important;
+}
+
+.wp-block-cover--culture .wp-block-cover__image-background {
+    height: 75% !important;
+    left: 50% !important;
+    top: 16% !important;
+    min-width: 890px;
+    transform: translateX(-50%);
+    width: 50% !important;
+}
+
+.wp-block-cover--economy {
+    background-color: #d8ede1 !important;
+}
+
+.wp-block-cover--economy .wp-block-navigation-item a {
+    background-color: #d8ede1 !important;
+}
+
+.wp-block-cover--economy .wp-block-cover__image-background {
+    height: 65% !important;
+    left: 50% !important;
+    min-width: 850px;
+    transform: translateX(-50%);
+    top: 16% !important;
+    width: 50% !important;
+}
+
+.wp-block-cover--energy {
+    background-color: #ffdfaf !important;
+}
+
+.wp-block-cover--energy .wp-block-navigation-item a {
+    background-color: #ffdfaf !important;
+}
+
+.wp-block-cover--energy .wp-block-cover__image-background {
+    height: 50% !important;
+    left: 50% !important;
+    top: 16% !important;
+    min-width: 870px;
+    transform: translateX(-50%);
+    width: 50% !important;
+}
+
+.wp-block-cover--liberation {
+    background-color: #ffdfd9 !important;
+}
+
+.wp-block-cover--liberation .wp-block-navigation-item a {
+    background-color: #ffdfd9 !important;
+}
+
+.wp-block-cover--liberation .wp-block-cover__image-background {
+    height: 100% !important;
+    left: 50% !important;
+    top: 10% !important;
+    min-width: 660px;
+    transform: translateX(-50%);
+    width: 38% !important;
+}
