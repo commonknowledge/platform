@@ -2062,6 +2062,11 @@ h6 a:hover {
   }
 }
 
+.platform-history .wp-block-navigation a {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 247 229 / var(--tw-bg-opacity));
+}
+
 /* Platform Stacked Cards */
 
 .platform-stack {
