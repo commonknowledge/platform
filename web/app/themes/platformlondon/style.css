@@ -1158,8 +1158,6 @@ nav.platform-tabs {
 }
 
 .wp-block-cover .wp-block-navigation-item a {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 247 229 / var(--tw-bg-opacity)) !important;
   --tw-text-opacity: 1 !important;
   color: rgb(24 85 0 / var(--tw-text-opacity)) !important;
 }

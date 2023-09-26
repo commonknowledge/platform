@@ -35,6 +35,7 @@ add_action('carbon_fields_register_fields', function () {
     require_once("src/fields/background_images.php");
     require_once("src/fields/member.php");
     require_once("src/fields/project.php");
+    require_once("src/fields/projects.php");
     require_once("src/fields/related_content.php");
     require_once("src/fields/resource.php");
     require_once("src/fields/timeline_item.php");
@@ -101,17 +102,17 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'platformlondon',
         get_template_directory_uri() . '/style.css',
-        ver: "1.4",
+        ver: "1.5",
     );
     wp_enqueue_script(
         'platformlondon-pre',
         get_template_directory_uri() . '/pre-script.js',
-        ver: "1.4",
+        ver: "1.5",
     );
     wp_enqueue_script(
         'platformlondon-post',
         get_template_directory_uri() . '/script.js',
-        ver: "1.4",
+        ver: "1.5",
         args: true
     );
 });
@@ -283,6 +284,38 @@ EOF,
         !wp_is_json_request()
     ) {
         $block_content = str_replace('<input type="search"', '<input type="text"', $block_content);
+    }
+
+    // Replace cover image with Projects page metadata images
+    if ($block['blockName'] === 'core/cover' &&
+        !is_admin() &&
+        !wp_is_json_request()
+    ) {
+        global $post;
+        if ($post->post_name === "projects") {
+            $match = preg_match('#<img.*src="(.*)"#', $block_content, $matches);
+            if (count($matches) !== 2) {
+                return $block_content;
+            }
+            $category_slug = $_GET['category_name'] ?? 'default';
+            $cover_images = carbon_get_post_meta($post->ID, 'cover_images');
+            $default_item = null;
+            $cover_image_item = null;
+            foreach ($cover_images as $cover_image) {
+                if ($cover_image['category'] === $category_slug) {
+                    $cover_image_item = $cover_image;
+                }
+                if ($cover_image['category'] === 'default') {
+                    $default_item = $cover_image;
+                }
+            }
+            $cover_image_item = $cover_image_item ?? $default_item;
+            $cover_image_url = $cover_image['image'] ?? null;
+            if ($cover_image_url) {
+                $block_content = str_replace($matches[1], $cover_image_url, $block_content);
+            }
+            return $block_content;
+        }
     }
 
     return $block_content;

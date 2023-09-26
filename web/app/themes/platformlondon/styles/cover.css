@@ -11,5 +11,5 @@
 }
 
 .wp-block-cover .wp-block-navigation-item a {
-    @apply !bg-cream !text-dark-green hover:!bg-dark-green hover:!text-white;
+    @apply !text-dark-green hover:!bg-dark-green hover:!text-white;
 }
