@@ -101,19 +101,25 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'platformlondon',
         get_template_directory_uri() . '/style.css',
-        ver: "1.8",
+        ver: "1.9",
     );
     wp_enqueue_script(
         'platformlondon-pre',
         get_template_directory_uri() . '/pre-script.js',
-        ver: "1.8",
+        ver: "1.9",
     );
     wp_enqueue_script(
         'platformlondon-post',
         get_template_directory_uri() . '/script.js',
-        ver: "1.8",
+        ver: "1.9",
         args: true
     );
+});
+
+add_action('wp_head', function () {
+    ?>
+    <script defer data-domain="platformlondon.org" src="https://plausible.io/js/script.js"></script>
+    <?php
 });
 
 add_filter("the_permalink", function ($termlink, $term, $taxonomy) {
@@ -287,14 +293,6 @@ EOF,
             $block_content = str_replace('<p class="wp-block-post-excerpt__excerpt">', "", $block_content);
             $block_content = preg_replace("#</p></div>$#", "</div>", $block_content);
         }
-    }
-
-    // Remove type="search" from search input so it can be more easily styled
-    if ($block['blockName'] === 'core/search' &&
-        !is_admin() &&
-        !wp_is_json_request()
-    ) {
-        $block_content = str_replace('<input type="search"', '<input type="text"', $block_content);
     }
 
     // Replace cover image with Projects page metadata images

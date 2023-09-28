@@ -845,3 +845,16 @@ const buttonParent = document.querySelector(".wp-block-navigation__responsive-co
 buttonParent.replaceChild(containerDiv, document.querySelector(".wp-block-navigation__responsive-container-close"));
 
 
+// Force nav search to have no button (broken in block editor)
+document.querySelectorAll('.wp-block-navigation__responsive-container-content .wp-block-search').forEach((block) => {
+    block.setAttribute('class', 'wp-block-search')
+    const input = block.querySelector('input')
+    block.appendChild(input)
+    const wrapper = block.querySelector('.wp-block-search__inside-wrapper')
+    if (wrapper) {
+        block.removeChild(wrapper);
+    }
+})
+
+// Remove type="search" from search input so it can be more easily styled
+document.querySelectorAll('.wp-block-search input').forEach(input => input.setAttribute('type', 'text'))
