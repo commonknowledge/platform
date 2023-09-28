@@ -650,7 +650,7 @@ text {
 /* Category Cards */
 
 .platform-category-cards {
-  margin-top: 0px;
+  margin-top: 2rem;
   margin-bottom: 3rem;
   max-width: 1024px !important;
   flex-wrap: wrap !important;

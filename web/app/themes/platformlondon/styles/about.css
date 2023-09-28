@@ -2,7 +2,7 @@
 
 /* Category Cards */
 .platform-category-cards {
-    @apply p-0 !max-w-1024 mt-0 mb-12 !flex-wrap justify-center gap-8;
+    @apply p-0 !max-w-1024 mt-8 mb-12 !flex-wrap justify-center gap-8;
 }
 
 .platform-category-cards .wp-block-column {
