@@ -29,6 +29,13 @@ add_action('init', function () {
         //$text = wp_trim_words($text, 55, "");
         return $text;
     }, 10, 2);
+    add_filter('wp_trim_words', function ($text, $num_words, $more, $original_text) {
+        global $post;
+        if ($post->post_type === "pl_member") {
+            return $original_text;
+        }
+        return $text;
+    }, 10, 4);
 });
 
 add_action('carbon_fields_register_fields', function () {
