@@ -23,10 +23,8 @@ add_action('init', function () {
         $post = get_post($post);
         $text = get_the_content('', false, $post);
         $text = strip_shortcodes($text);
-        $text = excerpt_remove_blocks($text);
         $text = apply_filters('the_content', $text);
         $text = str_replace(']]>', ']]&gt;', $text);
-        //$text = wp_trim_words($text, 55, "");
         return $text;
     }, 10, 2);
     add_filter('wp_trim_words', function ($text, $num_words, $more, $original_text) {
