@@ -39,6 +39,7 @@
 
 .projects-carousel .wp-block-query {
     overflow: hidden;
+    padding-bottom: 1rem;
 }
 
 .projects-carousel .wp-block-post-template {

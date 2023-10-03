@@ -23,12 +23,14 @@
 }
 
 .wp-block-cover--community .wp-block-cover__image-background {
-    height: 50% !important;
+    height: 35% !important;
     left: 50% !important;
-    top: 16% !important;
-    min-width: 500px;
+    object-fit: contain !important;
+    min-height: 430px;
+    min-width: 600px;
+    top: 10% !important;
     transform: translateX(-50%);
-    width: 50% !important;
+    width: 35% !important;
 }
 
 .wp-block-cover--culture {
@@ -40,12 +42,14 @@
 }
 
 .wp-block-cover--culture .wp-block-cover__image-background {
-    height: 75% !important;
+    height: 34% !important;
     left: 50% !important;
-    top: 16% !important;
-    min-width: 890px;
+    object-fit: contain !important;
+    min-height: 420px;
+    min-width: 580px;
+    top: 10% !important;
     transform: translateX(-50%);
-    width: 50% !important;
+    width: 34% !important;
 }
 
 .wp-block-cover--economy {
@@ -57,12 +61,14 @@
 }
 
 .wp-block-cover--economy .wp-block-cover__image-background {
-    height: 65% !important;
+    height: 35% !important;
     left: 50% !important;
-    min-width: 850px;
+    object-fit: contain !important;
+    min-height: 430px;
+    min-width: 600px;
     transform: translateX(-50%);
-    top: 16% !important;
-    width: 50% !important;
+    top: 10% !important;
+    width: 35% !important;
 }
 
 .wp-block-cover--energy {
@@ -74,12 +80,14 @@
 }
 
 .wp-block-cover--energy .wp-block-cover__image-background {
-    height: 50% !important;
+    height: 40% !important;
     left: 50% !important;
-    top: 16% !important;
-    min-width: 870px;
+    object-fit: contain !important;
+    min-height: 495px;
+    min-width: 690px;
+    top: 10% !important;
     transform: translateX(-50%);
-    width: 50% !important;
+    width: 40% !important;
 }
 
 .wp-block-cover--liberation {
@@ -91,10 +99,12 @@
 }
 
 .wp-block-cover--liberation .wp-block-cover__image-background {
-    height: 100% !important;
+    height: 36% !important;
     left: 50% !important;
+    object-fit: contain !important;
     top: 10% !important;
-    min-width: 660px;
+    min-height: 425px;
+    min-width: 620px;
     transform: translateX(-50%);
-    width: 38% !important;
+    width: 36% !important;
 }
