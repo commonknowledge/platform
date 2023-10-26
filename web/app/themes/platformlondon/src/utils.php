@@ -16,6 +16,10 @@ const CATEGORY_SVGS = [
 
 function get_category_svg($slug, $link = true)
 {
+    // Hide illustration from Twitterbot (it's too big)
+    if (str_contains($_SERVER['HTTP_USER_AGENT'], 'Twitterbot')) {
+        return "";
+    }
     if (empty(CATEGORY_SVGS[$slug])) {
         return "";
     }

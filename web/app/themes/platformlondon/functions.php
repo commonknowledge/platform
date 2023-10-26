@@ -326,13 +326,6 @@ EOF,
         }
     }
 
-    // Hide illustration from Twitterbot (it's too big)
-    if ($block['blockName'] === 'carbon-fields/platform-illustration') {
-        if (str_contains($_SERVER['HTTP_USER_AGENT'], 'Twitterbot')) {
-            $block_content = preg_replace('#<svg.*</svg>#s', '', $block_content);
-        }
-    }
-
     return $block_content;
 }, null, 2);
 
