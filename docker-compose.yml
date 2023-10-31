@@ -16,6 +16,7 @@ services:
   mysql:
     image: mariadb
     container_name: platform-mysql
+    command: --general-log=1 --general-log-file=/tmp/mysql.log
     volumes:
       - platform-mysql:/var/lib/mysql
     environment:
