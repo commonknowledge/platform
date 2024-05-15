@@ -1499,6 +1499,16 @@ footer h6 {
     margin-bottom: 4rem;
 }
 
+/*
+Custom overrides for the Press List Signup Gravity Form on https://platformlondon.org/media-press/
+
+This class needs to be set on the form within Gravity Forms itself for this to function.
+*/
+
+.press-list-signup-gravity-form {
+  flex-direction: column;
+}
+
 /* Site Header */
 
 .wp-block-site-logo {
