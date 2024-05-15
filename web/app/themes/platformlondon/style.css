@@ -1419,7 +1419,7 @@ footer h6 {
 
   .gform_wrapper > form {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: baseline;
   }
 }
 
