@@ -106,7 +106,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'platformlondon',
         get_template_directory_uri() . '/style.css',
-        ver: "1.14",
+        ver: "1.15",
     );
     wp_enqueue_script(
         'platformlondon-pre',

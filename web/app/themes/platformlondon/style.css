@@ -1506,14 +1506,7 @@ This class needs to be set on the form within Gravity Forms itself for this to f
 */
 
 .press-list-signup-gravity-form {
-  flex-direction: column;
-}
-
-@media (min-width: 768px) {
-
-  .press-list-signup-gravity-form {
-    flex-direction: column;
-  }
+  flex-direction: column !important;
 }
 
 /* Site Header */
