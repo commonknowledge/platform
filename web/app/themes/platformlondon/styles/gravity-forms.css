@@ -37,5 +37,5 @@ Custom overrides for the Press List Signup Gravity Form on https://platformlondo
 This class needs to be set on the form within Gravity Forms itself for this to function.
 */
 .press-list-signup-gravity-form {
-    @apply flex-col;
+    @apply flex-col md:flex-col;
 }

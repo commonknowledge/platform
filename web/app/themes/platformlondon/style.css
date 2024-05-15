@@ -1509,6 +1509,13 @@ This class needs to be set on the form within Gravity Forms itself for this to f
   flex-direction: column;
 }
 
+@media (min-width: 768px) {
+
+  .press-list-signup-gravity-form {
+    flex-direction: column;
+  }
+}
+
 /* Site Header */
 
 .wp-block-site-logo {
