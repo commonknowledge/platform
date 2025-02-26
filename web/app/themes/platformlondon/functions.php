@@ -116,8 +116,9 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script(
         'platformlondon-post',
         get_template_directory_uri() . '/script.js',
-        ver: "1.11",
-        args: true
+        array(),
+        "1.11",
+        true
     );
 });
 
@@ -126,11 +127,6 @@ add_action('wp_head', function () {
     <script defer data-domain="platformlondon.org" src="https://plausible.io/js/script.js"></script>
     <?php
 });
-
-add_filter("the_permalink", function ($termlink, $term, $taxonomy) {
-    $taxonomy_param = $taxonomy === "category" ? "category_name" : $taxonomy;
-    return "/?s=&$taxonomy_param={$term->slug}";
-}, 10, 3);
 
 add_filter('post_type_link', function ($post_link, $post) {
     if ($post->post_type == 'pl_member') {
