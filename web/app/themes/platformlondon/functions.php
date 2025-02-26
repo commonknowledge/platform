@@ -29,7 +29,7 @@ add_action('init', function () {
     }, 10, 2);
     add_filter('wp_trim_words', function ($text, $num_words, $more, $original_text) {
         global $post;
-        if ($post->post_type === "pl_member") {
+        if (isset($post) && $post->post_type === "pl_member") {
             return $original_text;
         }
         return $text;
@@ -294,7 +294,7 @@ EOF,
         !wp_is_json_request()
     ) {
         global $post;
-        if ($post->post_type === "pl_member") {
+        if (isset($post) && $post->post_type === "pl_member") {
             $block_content = str_replace('<p class="wp-block-post-excerpt__excerpt">', "", $block_content);
             $block_content = preg_replace("#</p></div>$#", "</div>", $block_content);
         }
@@ -306,7 +306,7 @@ EOF,
         !wp_is_json_request()
     ) {
         global $post;
-        if ($post->post_name === "projects") {
+        if (isset($post) && isset($post->post_name) && $post->post_name === "projects") {
             preg_match('#<img.*src="([^"]*)"#', $block_content, $matches);
             if (count($matches) !== 2) {
                 return $block_content;
