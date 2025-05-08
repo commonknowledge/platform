@@ -150,6 +150,13 @@ add_filter("query_loop_block_query_vars", function ($query) {
         $query["ignore_sticky_posts"] = true;
     }
 
+    if (!empty($query["post_type"]) &&
+        !empty($query["posts_per_page"]) &&
+        $query["post_type"] === "pl_project" &&
+        $query["posts_per_page"] === 5) {
+        $query["ignore_sticky_posts"] = true;
+    }
+
     // If the search parameter has the special value ":all", only filter
     // by category. This is used in the Carousel block
     if (($query['s'] ?? '') === ':all') {

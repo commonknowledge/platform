@@ -2110,7 +2110,7 @@ h6 a:hover {
 }
 
 .platform-stack .wp-block-post-template {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
     transition: transform 1.5s;
 }
 
@@ -2121,7 +2121,7 @@ h6 a:hover {
 }
 
 .platform-stack .wp-block-post.type-pl_project:hover {
-  z-index: 60 !important;
+  z-index: 100 !important;
 }
 
 .platform-stack .wp-block-post.type-pl_project:first-child {

@@ -15,7 +15,7 @@
 }
 
 .platform-stack .wp-block-post-template {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
     transition: transform 1.5s;
 }
 
@@ -23,7 +23,7 @@
     min-width: 400px !important;
     position: relative;
     width: 400px !important;
-    @apply hover:!z-60;
+    @apply hover:!z-[100];
 }
 
 .platform-stack .wp-block-post.type-pl_project:first-child {
