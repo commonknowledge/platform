@@ -85,3 +85,18 @@ These are exhaustive manual instructions, but should not be required after initi
 17. In Domains, change the DNS pointed domain to your primary one selecting "Make primary".
 18. WordPress should now work at the site URL. You can login to the administration dashboard with the password you just created.
 19. Repeat steps 7 through 20, but creating a development environment.
+
+
+## Deploying changes
+
+WordPress core and plugins update themselves on the server (minor versions, see
+`web/app/mu-plugins/enable-minor-auto-updates.php`) and can be updated from the admin, so the live
+versions are usually newer than `composer.lock`. `composer install` puts the locked versions back,
+so only run it when `composer.json` or `composer.lock` changed:
+
+```
+cd ~/public
+before=$(git rev-parse HEAD) && git pull && { git diff --quiet "$before" HEAD -- composer.json composer.lock || composer install --no-dev; }
+```
+
+Before changing `composer.lock`, update the WordPress and plugin versions in it to at least what the live site runs.
