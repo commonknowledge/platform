@@ -100,3 +100,39 @@ before=$(git rev-parse HEAD) && git pull && { git diff --quiet "$before" HEAD --
 ```
 
 Before changing `composer.lock`, update the WordPress and plugin versions in it to at least what the live site runs.
+
+## Rate limiting
+
+`web/app/mu-plugins/ck-rate-limit.php` limits how fast pages can be requested, to stop crawlers running up
+the hosting bill. It only sees requests that reach PHP (Kinsta serves cached pages and static files first).
+
+Each request counts against its IP, its IP range (/24 or /48) and, if the user agent names one, its crawler
+(e.g. every `PetalBot` request, whatever the IP). Going over a limit is a strike:
+
+| Strike | Response | For |
+|---|---|---|
+| 1 | 429 Too Many Requests | 10 minutes |
+| 2 | 429 | 1 hour |
+| 3 | 429 | 24 hours |
+| 4+ | 403 Forbidden | 30 days |
+
+Strikes are forgotten after 7 days without a new one. Logged-in users, WP-Cron and Googlebot/Bingbot
+(checked against their published IP ranges, refreshed daily) are never limited.
+
+Default limits (per minute / per hour): IP 20 / 120, range 40 / 240, crawler 10 / 120. Override them in
+`.env` with `RATE_LIMIT_IP_PER_MINUTE`, `RATE_LIMIT_IP_PER_HOUR`, `RATE_LIMIT_RANGE_PER_MINUTE`,
+`RATE_LIMIT_RANGE_PER_HOUR`, `RATE_LIMIT_CRAWLER_PER_MINUTE` and `RATE_LIMIT_CRAWLER_PER_HOUR`.
+`RATE_LIMIT_ENABLED=false` turns it off.
+
+Each new strike is written to the PHP error log as `[ck-rate-limit]`. On the server:
+
+```
+wp ck-ratelimit top              # busiest IPs, ranges and crawlers this hour
+wp ck-ratelimit blocked          # everything blocked now
+wp ck-ratelimit unban 203.0.113.5
+wp ck-ratelimit unban range:203.0.113.0/24
+wp ck-ratelimit ban crawler:examplebot --days=30
+```
+
+Locally, requests come from a private Docker address and are not limited. To test, send
+`-H 'X-Test-Client-IP: 203.0.113.5'` (only honoured when `WP_ENV=development`).
