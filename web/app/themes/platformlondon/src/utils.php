@@ -1,35 +1,29 @@
 <?php
 
-require_once(__DIR__ . "/svgs/community.php");
-require_once(__DIR__ . "/svgs/culture.php");
-require_once(__DIR__ . "/svgs/energy.php");
-require_once(__DIR__ . "/svgs/economy.php");
-require_once(__DIR__ . "/svgs/liberation.php");
+const CATEGORY_SVG_SLUGS = ["community", "economy", "liberation", "culture", "energy"];
 
-const CATEGORY_SVGS = [
-    "community" => COMMUNITY_SVG,
-    "economy" => ECONOMY_SVG,
-    "liberation" => LIBERATION_SVG,
-    "culture" => CULTURE_SVG,
-    "energy" => ENERGY_SVG,
-];
+// Bump when the files in assets/img/illustration change, so browsers fetch the new versions
+const CATEGORY_SVG_VERSION = "1";
 
+/**
+ * Placeholder for a category illustration. The SVGs are several MB each, so script.js
+ * loads them from assets/img/illustration/ when they come into view instead of
+ * inlining them into every page.
+ */
 function get_category_svg($slug, $link = true)
 {
-    // Hide illustration from Twitterbot (it's too big)
-    if (str_contains($_SERVER['HTTP_USER_AGENT'], 'Twitterbot')) {
+    if (!in_array($slug, CATEGORY_SVG_SLUGS, true)) {
         return "";
     }
-    if (empty(CATEGORY_SVGS[$slug])) {
-        return "";
-    }
+    $src = get_template_directory_uri() . "/assets/img/illustration/$slug.svg?ver=" . CATEGORY_SVG_VERSION;
+    $placeholder = '<span class="category-svg-placeholder" data-category-svg="' . esc_attr($src) . '"></span>';
     if (!$link) {
-        return CATEGORY_SVGS[$slug];
+        return $placeholder;
     }
     $link = "/projects/?category_name=$slug";
     return (
         '<a href="' . $link . '">' .
-        CATEGORY_SVGS[$slug] .
+        $placeholder .
         '</a>'
     );
 }
