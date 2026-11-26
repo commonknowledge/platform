@@ -360,3 +360,13 @@ function platform_categories_remove_uncategorized_category($id)
         wp_remove_object_terms($id, $default, 'category');
     }
 }
+
+/**
+ * Ask crawlers not to crawl search URLs. Category, tag and member links are search URLs
+ * (/?s=&category_name=...), and crawlers request every combination of filters and pages,
+ * none of which can be cached. Posts and pages are still found through the sitemap.
+ */
+add_filter('robots_txt', function ($output) {
+    $rules = "User-agent: *\nDisallow: /*?s=\nDisallow: /*&s=\n\n";
+    return $rules . $output;
+}, 100);
