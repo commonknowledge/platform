@@ -240,103 +240,156 @@ try {
         rightButton.addEventListener("click", moveRight)
     })
 
-    /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
-    document.querySelectorAll('.platform-illustration svg').forEach(svg => {
-        // Get the bounds of the SVG content
+    /**
+     * Category illustrations are several MB each, so the server renders an empty
+     * placeholder (see get_category_svg() in src/utils.php) and they are fetched
+     * here when they get close to the viewport.
+     */
+    const categorySvgRequests = {}
+    const fetchCategorySvg = (src) => {
+        if (!categorySvgRequests[src]) {
+            categorySvgRequests[src] = fetch(src).then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${src}: ${response.status}`)
+                }
+                return response.text()
+            })
+        }
+        return categorySvgRequests[src]
+    }
+
+    // Replace every placeholder inside container with its SVG
+    const loadCategorySvgs = (container) => {
+        const placeholders = container.querySelectorAll("[data-category-svg]")
+        return Promise.all([...placeholders].map(placeholder =>
+            fetchCategorySvg(placeholder.dataset.categorySvg).then(svgText => {
+                placeholder.outerHTML = svgText
+            })
+        ))
+    }
+
+    // Run callback once element is near the viewport
+    const whenNearViewport = (element, callback) => {
+        if (!("IntersectionObserver" in window)) {
+            callback()
+            return
+        }
+        const observer = new IntersectionObserver((entries) => {
+            if (entries.some(entry => entry.isIntersecting)) {
+                observer.disconnect()
+                callback()
+            }
+        }, { rootMargin: "500px" })
+        observer.observe(element)
+    }
+
+    // Fit SVG viewbox to the inner content
+    const fitSvgViewBox = (svg) => {
         const bbox = svg.getBBox();
         svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
-    })
-
-    const CATEGORIES = [
-        "community",
-        "economy",
-        "liberation",
-        "culture",
-        "energy",
-    ]
-
-    const findCategory = (mouseX, mouseY) => {
-        for (const category of CATEGORIES) {
-            const svg = document.querySelector(`.platform-illustration svg[id=${category}-svg]`)
-
-            let point = svg.createSVGPoint()
-            point.x = mouseX
-            point.y = mouseY
-            point = point.matrixTransform(svg.getScreenCTM().inverse())
-
-            const paths = document.querySelectorAll(`g[id=${category}-base] path`)
-            for (const path of paths) {
-                if (path.isPointInFill(point) || path.isPointInStroke(point)) {
-                    return category
-                }
-            }
-        }
-        return null
     }
 
-    let focusedCategory
-    const illustration = document.querySelector('.platform-illustration')
-    const handleIllustrationMouseMove = (e) => {
-        const { clientX: mouseX, clientY: mouseY } = e
-        let category = findCategory(mouseX, mouseY)
+    /* Bring illustration element to the top on mouseenter (can't be done in CSS) */
+    const initIllustration = () => {
+        document.querySelectorAll('.platform-illustration svg').forEach(fitSvgViewBox)
 
-        if (category) {
-            if (category !== focusedCategory) {
-                focusedCategory = category
-                displayCategorySvg(focusedCategory)
-            }
-        } else {
-            // If mouse is outside all bounding boxes, hide all illustrations
+        const CATEGORIES = [
+            "community",
+            "economy",
+            "liberation",
+            "culture",
+            "energy",
+        ]
+
+        const findCategory = (mouseX, mouseY) => {
             for (const category of CATEGORIES) {
-                const svg = document.querySelector(`g[id=${category}-base]`)
-                const bbox = svg.getBoundingClientRect()
-                if (bbox.left <= mouseX && bbox.right >= mouseX && bbox.top <= mouseY && bbox.bottom >= mouseY) {
-                    return
+                const svg = document.querySelector(`.platform-illustration svg[id=${category}-svg]`)
+
+                let point = svg.createSVGPoint()
+                point.x = mouseX
+                point.y = mouseY
+                point = point.matrixTransform(svg.getScreenCTM().inverse())
+
+                const paths = document.querySelectorAll(`g[id=${category}-base] path`)
+                for (const path of paths) {
+                    if (path.isPointInFill(point) || path.isPointInStroke(point)) {
+                        return category
+                    }
                 }
             }
-            focusedCategory = null
-            displayCategorySvg(null)
+            return null
         }
-    }
 
-    const displayCategorySvg = (category) => {
-        document.querySelectorAll('.platform-illustration g').forEach(g => {
-            if (g.id.startsWith(category)) {
-                g.style.opacity = 1
-            } else if (!g.id.endsWith("-base")) {
-                g.style.opacity = 0
+        let focusedCategory
+        const illustration = document.querySelector('.platform-illustration')
+        const handleIllustrationMouseMove = (e) => {
+            const { clientX: mouseX, clientY: mouseY } = e
+            let category = findCategory(mouseX, mouseY)
+
+            if (category) {
+                if (category !== focusedCategory) {
+                    focusedCategory = category
+                    displayCategorySvg(focusedCategory)
+                }
             } else {
-                g.style.opacity = 0.1
+                // If mouse is outside all bounding boxes, hide all illustrations
+                for (const category of CATEGORIES) {
+                    const svg = document.querySelector(`g[id=${category}-base]`)
+                    const bbox = svg.getBoundingClientRect()
+                    if (bbox.left <= mouseX && bbox.right >= mouseX && bbox.top <= mouseY && bbox.bottom >= mouseY) {
+                        return
+                    }
+                }
+                focusedCategory = null
+                displayCategorySvg(null)
             }
-        })
-        document.querySelectorAll('.platform-illustration svg').forEach(svg => {
-            if (svg.id.startsWith(category)) {
-                svg.style.zIndex = 99
-                svg.style.transform = `translateY(-50px)`
-            } else {
-                svg.style.zIndex = 10
-                svg.style.transform = `translateY(0)`
-            }
-        })
-    }
+        }
 
-    // Only animate on desktop (where position === "absolute").
-    // Not possible to do this using pointer-events: none because the illustration should always be clickable.
-    const shouldAnimateIllustration = illustration && getComputedStyle(illustration).position === "absolute"
-
-    if (shouldAnimateIllustration) {
-        illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
-
-        illustration?.addEventListener("mouseleave", () => {
+        const displayCategorySvg = (category) => {
             document.querySelectorAll('.platform-illustration g').forEach(g => {
-                g.style.removeProperty("opacity")
+                if (g.id.startsWith(category)) {
+                    g.style.opacity = 1
+                } else if (!g.id.endsWith("-base")) {
+                    g.style.opacity = 0
+                } else {
+                    g.style.opacity = 0.1
+                }
             })
             document.querySelectorAll('.platform-illustration svg').forEach(svg => {
-                svg.style.removeProperty("zIndex")
-                svg.style.removeProperty("transform")
+                if (svg.id.startsWith(category)) {
+                    svg.style.zIndex = 99
+                    svg.style.transform = `translateY(-50px)`
+                } else {
+                    svg.style.zIndex = 10
+                    svg.style.transform = `translateY(0)`
+                }
             })
-        })
+        }
+
+        // Only animate on desktop (where position === "absolute").
+        // Not possible to do this using pointer-events: none because the illustration should always be clickable.
+        const shouldAnimateIllustration = illustration && getComputedStyle(illustration).position === "absolute"
+
+        if (shouldAnimateIllustration) {
+            illustration?.addEventListener("mousemove", handleIllustrationMouseMove)
+
+            illustration?.addEventListener("mouseleave", () => {
+                document.querySelectorAll('.platform-illustration g').forEach(g => {
+                    g.style.removeProperty("opacity")
+                })
+                document.querySelectorAll('.platform-illustration svg').forEach(svg => {
+                    svg.style.removeProperty("zIndex")
+                    svg.style.removeProperty("transform")
+                })
+            })
+        }
     }
+
+    document.querySelectorAll('.platform-illustration').forEach(illustration => {
+        whenNearViewport(illustration, () => {
+            loadCategorySvgs(illustration).then(initIllustration).catch(console.error)
+        })
+    })
 
     /* Do search when user clicks search icon */
     document.querySelectorAll(".wp-block-search").forEach(search => {
@@ -610,12 +663,14 @@ try {
         updateTimeline()
     }
 
-    // Fit SVG viewbox to the inner content. Used in the Project Details Footer block to display just one of the
-    // category SVGs
-    document.querySelectorAll(".post-details-footer svg").forEach((svg) => {
-        // Get the bounds of the SVG content
-        const bbox = svg.getBBox();
-        svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+    // Load the category SVGs in the Project Details Footer block, and fit each viewbox to its content
+    // to display just one of the category SVGs
+    document.querySelectorAll(".post-details-footer__categories").forEach((categories) => {
+        whenNearViewport(categories, () => {
+            loadCategorySvgs(categories).then(() => {
+                categories.querySelectorAll("svg").forEach(fitSvgViewBox)
+            }).catch(console.error)
+        })
     })
 
     /**
