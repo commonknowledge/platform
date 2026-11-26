@@ -3741,6 +3741,8 @@ body.page .projects-carousel .wp-block-post-template .wp-block-post:not(:nth-chi
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(24 85 0 / var(--tw-border-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 2rem;
     box-shadow: 0 4px 10px 0 rgb(24 85 0 / 40%);

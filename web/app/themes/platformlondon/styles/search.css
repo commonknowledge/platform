@@ -5,7 +5,7 @@
 }
 
 .wp-block-search__input {
-    @apply border border-dark-green rounded-full green-shadow truncate relative z-40 pl-4 pr-8;
+    @apply border border-dark-green rounded-full green-shadow truncate relative z-40 pl-4 pr-8 py-2;
     background-color: var(--wp--preset--color--custom-cream);
 }
 
